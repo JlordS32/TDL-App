@@ -10,9 +10,19 @@ const Todo = () => {
 
    const [newTodo, setNewTodo] = useState('');
    const [todos, setTodos] = useState([]);
+   const [todoTitle, setTodoTitle] = useState('');
 
    const handleInputChange = (e) => {
-      setNewTodo(e.target.value);
+      switch (e.target.name) {
+         case 'title':
+            setTodoTitle(e.target.value);
+            break;
+         case 'todo-content':
+            setNewTodo(e.target.value);
+            break;
+         default:
+            return 
+      }
    }
 
    const handleClick = () => {
@@ -33,6 +43,13 @@ const Todo = () => {
                type='text'
                value={newTodo}     
                onChange={handleInputChange}
+               name='todo-content'
+            />
+            <input 
+               type='text'
+               value={todoTitle}     
+               onChange={handleInputChange}
+               name='title'
             />
             <button onClick={handleClick}>Submit</button>
          </div>
