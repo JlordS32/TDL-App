@@ -1,25 +1,18 @@
-* {
-   margin: 0
-}
-
 .app {
    width: 100vw;
    box-sizing: border-box;
    display: flex;
    flex-direction: column;
-   outline: 2px green solid;
+   justify-content: center;
+   align-items: center;
+   height: auto;
 }
 
 .todo-container {
-   outline: 1px red solid;
    display: flex;
    justify-content: center;
    align-items: center;
    width: 80%;
    height: 100%;
    flex-wrap: wrap;
-}
-
-.newtodo-container {
-   outline: red 1px solid;
 }

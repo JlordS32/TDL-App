@@ -1,11 +1,64 @@
-.todo-box-container {
-   outline: 1px blue solid;
-   max-width: 150px;
-   width: 100%;
-   height: 200px;
-   margin: 10px;
+.newtodo-container,
+.todos-wrapper {
+   width: 80%;
+   height: 100%;
+}
+
+.newtodo-container,
+.newtodo-box {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 }
 
 .newtodo-container {
-   height: 100px;
+   outline: 1px red solid;
+   margin: 30px;
+}
+
+.newtodo-box {
+   outline: black solid 2px;
+   margin: 30px;
+   padding: 10px;
+   width: 80%;
+}
+
+.newtodo-title {
+   width: 70%;
+   margin-bottom: 1em;
+   font-size: 25px;
+   padding: 0.5em;
+}
+
+.newtodo-content {
+   font-size: 15px;
+   width: calc(70% + 10px);
+   padding: 0.5em;
+   resize: none;
+   margin-bottom: 10px;
+}
+
+.todos-wrapper {
+   outline: blue 1px solid;
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+}
+
+.todo-container {
+   outline: green 1px solid;
+   width: 30%;
+   height: 175px;
+   margin: 10px;
+   padding: 1.5em;
+   display: flex;
+   overflow-x: hidden;
+}
+
+@media screen and (min-width: 1800px) {
+   .todo-container {
+      width: 20%;
+   }
 }

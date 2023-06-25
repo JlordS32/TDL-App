@@ -1,6 +1,7 @@
 import React, {
    useState,
-   useEffect
+   useEffect,
+   useRef
 } from 'react';
 import Todobox from './TodoBox';
 
@@ -9,13 +10,16 @@ import '../../styles/todo.modules.css';''
 const Todo = () => {
 
    const [newTodo, setNewTodo] = useState('');
+   const [newTodoTitle, setNewTodoTitle] = useState('');
+
    const [todos, setTodos] = useState([]);
-   const [todoTitle, setTodoTitle] = useState('');
+
+   const textareaRef = useRef();
 
    const handleInputChange = (e) => {
       switch (e.target.name) {
          case 'title':
-            setTodoTitle(e.target.value);
+            setNewTodoTitle(e.target.value);
             break;
          case 'todo-content':
             setNewTodo(e.target.value);
@@ -27,35 +31,46 @@ const Todo = () => {
 
    const handleClick = () => {
       if (newTodo.trim() !== '') {
-         setTodos([...todos, newTodo]);
+         const title = newTodoTitle;
+         const content = newTodo;
+
+         setTodos(todos => [...todos, { title, content }]);
          setNewTodo('');
+         setNewTodoTitle('');
       }
    }
 
    useEffect(() => {
-      console.log(todos);
-   }, [todos])
+      textareaRef.current.style.height = "auto";
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight - 10}px`;
+
+   }, [newTodo]);
 
    return (
       <>
          <div className='newtodo-container'>
-            <input 
-               type='text'
-               value={newTodo}     
-               onChange={handleInputChange}
-               name='todo-content'
-            />
-            <input 
-               type='text'
-               value={todoTitle}     
-               onChange={handleInputChange}
-               name='title'
-            />
-            <button onClick={handleClick}>Submit</button>
+            <div className='newtodo-box'>
+               <input 
+                  type='text'
+                  value={newTodoTitle}     
+                  onChange={handleInputChange}
+                  name='title'
+                  className='newtodo-title'
+                  placeholder='Enter title...'
+               />
+               <textarea  
+                  value={newTodo}
+                  ref={textareaRef}     
+                  onChange={handleInputChange}
+                  name='todo-content'
+                  className='newtodo-content'
+               />
+               <button onClick={handleClick} className='newtodo-submit'>Submit</button>
+            </div>
          </div>
-         <div className='todo-container'>
+         <div className='todos-wrapper'>
             {todos.map(todo => {
-               return <Todobox item={todo}/>;
+               return <Todobox todo={todo}/>;
             })}
          </div>
       </>
