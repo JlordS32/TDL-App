@@ -1,0 +1,13 @@
+.app {
+   width: 100vw;
+}
+
+.todolist-container {
+   outline: 1px red solid;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 80%;
+   height: 100%;
+   flex-wrap: wrap;
+}

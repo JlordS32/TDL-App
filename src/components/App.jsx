@@ -2,6 +2,9 @@ import React, {
    useState,
    useEffect
 } from 'react';
+import '../styles/app.modules.css'
+
+import Todobox from './home/TodoBox';
 
 const App = () => {
 
@@ -31,9 +34,9 @@ const App = () => {
             onChange={handleInputChange}
          />
          <button onClick={handleClick}>Submit</button>
-         <div className='todolist'>
+         <div className='todolist-container'>
             {todos.map(todo => {
-               return <div>{todo}</div>;
+               return <Todobox item={todo}/>;
             })}
          </div>
       </div>
