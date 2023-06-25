@@ -1,8 +1,16 @@
-.app {
-   width: 100vw;
+* {
+   margin: 0
 }
 
-.todolist-container {
+.app {
+   width: 100vw;
+   box-sizing: border-box;
+   display: flex;
+   flex-direction: column;
+   outline: 2px green solid;
+}
+
+.todo-container {
    outline: 1px red solid;
    display: flex;
    justify-content: center;
@@ -10,4 +18,8 @@
    width: 80%;
    height: 100%;
    flex-wrap: wrap;
+}
+
+.newtodo-container {
+   outline: red 1px solid;
 }
