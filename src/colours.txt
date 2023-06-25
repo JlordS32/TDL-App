@@ -1,0 +1,12 @@
+base color = #B941EB
+primary color = #B941EB
+secondary color = #CF31D4
+tertiary color = #7631D4
+
+-- Black and white
+
+white = #F0E8F0
+black = #1A191A
+drak gray = #302F30
+gray = #757275
+light grey = #969296
