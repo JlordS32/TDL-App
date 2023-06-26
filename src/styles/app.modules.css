@@ -1,3 +1,11 @@
+* {
+   color: #F0E8F0
+}
+
+body {
+   background-color: #1A191A;
+}
+
 .app {
    width: 100%;
    box-sizing: border-box;

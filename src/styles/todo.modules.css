@@ -15,8 +15,10 @@
 }
 
 .newtodo-container {
-   outline: 1px red solid;
+   outline: 1px #B941EB solid;
    margin: 30px;
+   background-color: #1A191A;
+   border-radius: 5px;
 }
 
 .newtodo-box {
