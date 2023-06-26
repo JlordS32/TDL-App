@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import Todobox from './TodoBox';
 
-import '../../styles/todo.modules.css';''
+import '../../styles/todo.modules.css';
 
 const Todo = () => {
 
@@ -31,7 +31,7 @@ const Todo = () => {
 
    const handleClick = () => {
       if (newTodo.trim() !== '') {
-         const title = newTodoTitle;
+         const title = newTodoTitle.trim() !== '' ? newTodoTitle : 'No Title';
          const content = newTodo;
 
          setTodos(todos => [...todos, { title, content }]);
