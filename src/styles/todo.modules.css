@@ -1,3 +1,17 @@
+:root {
+   --black: #1A191A;
+   --white: #F0E8F0;
+   --dark-gray: #242424;
+   --mid-gray: #302F30;
+   --gray: #757275;
+   --light-grey: #969296;
+
+   --primary-color: #B941EB;
+   --secondary-color: #CF31D4;
+   --tertiary-color: #7631D4;
+}
+
+
 .newtodo-container,
 .todos-wrapper {
    width: 80%;
@@ -14,9 +28,10 @@
 
 .newtodo-container {
    margin: 30px;
-   background-color: #242424;
+   background-color: var(--dark-gray);
    border-radius: 5px;
    position: relative;
+   transition: 1s;
 }
 
 .newtodo-container::before {
@@ -26,9 +41,16 @@
    left: -1px;
    right: -1px;
    bottom: -1px;
-   background: linear-gradient(45deg, #B941EB, #CF31D4, #7631D4);
+   background: linear-gradient(45deg, #B941EB, #CF31D4, #7631D4, #7631D4, #CF31D4, #B941EB);
+   background-size: 200%; /* You'll need to experiment with the right size here */
    border-radius: 5px;
    z-index: -1;
+   transition: background-position 2s;
+   transition: 1s;
+}
+
+.newtodo-container:hover {
+   scale: 1.02;
 }
 
 .newtodo-box {
@@ -37,6 +59,11 @@
    padding: 10px;
    width: 80%;
    height: auto;
+}
+
+.newtodo-title,
+.newtodo-content {
+   color: var(--black);
 }
 
 .newtodo-title {
