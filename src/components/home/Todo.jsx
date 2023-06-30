@@ -2,12 +2,16 @@ import React, { useState, useEffect, useRef } from 'react';
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
 
+import { useAutoAnimate } from '@formkit/auto-animate/react'
+
 const Todo = () => {
   const [newTodo, setNewTodo] = useState('');
   const [newTodoTitle, setNewTodoTitle] = useState('');
   
   const [todos, setTodos] = useState([]);
   const [onBlur, setOnBlur] = useState(true);
+
+  const [parent, enableAnimations] = useAutoAnimate();
 
   const handleInputChange = (e) => {
     switch (e.target.name) {
@@ -55,7 +59,7 @@ const Todo = () => {
         onFocus={handleFocus}
         onBlur={handleBlur}
       >
-        <div className='newtodo-box'>
+        <div className='newtodo-box' ref={parent}>
           {!onBlur && (
             <input
               type='text'
@@ -75,7 +79,7 @@ const Todo = () => {
           />
         </div>
       </div>
-      <div className='todos-wrapper'>
+      <div className='todos-wrapper' ref={parent}>
         {todos.map((todo, index) => (
           <Todobox key={index} todo={todo} />
         ))}
