@@ -37,18 +37,15 @@
    border-radius: 5px;
    position: relative;
    transition: 1s;
+   transition: width 1s;
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (max-width: 1920px){
    .newtodo-container {
       width: 40%;
    }
 }
-@media screen and (min-width: 1000px){
-   .newtodo-container {
-      width: 45%;
-   }
-}
+
 
 .newtodo-container::before {
    content: "";
@@ -62,6 +59,7 @@
    border-radius: 5px;
    z-index: -1;
    transition: background-position 2s;
+   transition: background-size 2s; 
    transition: 1s;
 }
 
@@ -77,9 +75,10 @@
    display: flex;
    box-sizing: border-box;
    transition: 1s;
+   transition: width 1s;
 }
 
-@media screen and (min-width: 420px) {
+@media screen and (max-width: 420px) {
    .newtodo-box {
       width: 35%;
    }
@@ -98,7 +97,7 @@
    border-radius: 10px;
    padding: 20px;
    box-sizing: border-box;
-   transition: 1s;
+   transition: padding 1s, width 1s;
 }
 
 .newtodo-title {
@@ -118,6 +117,8 @@
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
+   transition: 1s;
+   transition: justify-content 1s;
 }
 
 .todo-container {
@@ -130,6 +131,7 @@
    overflow-x: hidden;
    flex-direction: column;
    align-items: center;
+   transition: width 1s;
 }
 
 .title,
