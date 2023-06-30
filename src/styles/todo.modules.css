@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&family=Ysabeau+Infant:wght@200;300&display=swap');
+
 :root {
    --black: #1A191A;
    --white: #F0E8F0;
@@ -9,6 +11,9 @@
    --primary-color: #B941EB;
    --secondary-color: #CF31D4;
    --tertiary-color: #7631D4;
+
+   --default-font:'Montserrat', sans-serif;
+   --ysabeau-infant: 'Ysabeau Infant', sans-serif;
 }
 
 
@@ -42,44 +47,44 @@
    right: -1px;
    bottom: -1px;
    background: linear-gradient(45deg, #B941EB, #CF31D4, #7631D4, #7631D4, #CF31D4, #B941EB);
-   background-size: 200%; /* You'll need to experiment with the right size here */
+   background-size: 500%; /* You'll need to experiment with the right size here */
    border-radius: 5px;
    z-index: -1;
    transition: background-position 2s;
    transition: 1s;
 }
 
-.newtodo-container:hover {
-   scale: 1.02;
+.newtodo-container:hover::before {
+   background-size: 100%;
 }
 
 .newtodo-box {
-   outline: black solid 2px;
-   margin: 30px;
-   padding: 10px;
-   width: 80%;
+   margin: 20px;
+   width: 90%;
    height: auto;
+   display: flex;
 }
 
 .newtodo-title,
 .newtodo-content {
    color: var(--black);
+   border: none;
+   outline: none;
+   font-family: var(--default-font);
+   font-weight: 400;
+   width: 100%;
+   padding: 10px;
+   border-radius: 10px;
 }
 
 .newtodo-title {
-   width: 70%;
-   margin-bottom: 1em;
-   font-size: 25px;
-   padding: 0.5em;
+   font-size: 1.25rem;
+   margin-bottom: 10px;
 }
 
 .newtodo-content {
-   font-size: 15px;
-   width: calc(70% + 10px);
-   padding: 0.5em;
+   font-size: 1rem;
    resize: none;
-   margin-bottom: 10px;
-   height: 100px;
 }
 
 .todos-wrapper {
