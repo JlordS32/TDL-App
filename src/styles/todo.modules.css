@@ -31,7 +31,7 @@
 }
 
 .newtodo-container {
-   margin: 30px;
+   margin: 30px 30px 90px 30px;
    background-color: var(--dark-gray);
    border-radius: 5px;
    position: relative;
@@ -42,10 +42,10 @@
 .newtodo-container::before {
    content: "";
    position: absolute;
-   top: -2px;
-   left: -2px;
-   right: -2px;
-   bottom: -2px;
+   top: -1px;
+   left: -1px;
+   right: -1px;
+   bottom: -1px;
    background: linear-gradient(45deg, #B941EB, #CF31D4, #7631D4, #7631D4, #CF31D4, #B941EB);
    background-size: 500%; /* You'll need to experiment with the right size here */
    border-radius: 5px;
@@ -97,11 +97,11 @@
 }
 
 .todos-wrapper {
-   /* outline: blue 1px solid;  */
+   /* outline: blue 1px solid; */
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
-align-items: center;
+   align-items: center;
    transition: 1s;
    transition: justify-content 1s;
 }
@@ -117,11 +117,30 @@ align-items: center;
    flex-direction: column;
    align-items: center;
    transition: width 1s;
+   position: relative;
 
    /* Colors */
    background-color: var(--mid-gray);
    border-radius: 15px;
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   /* background: linear-gradient(to bottom, rgba(240, 240, 240, 0), rgba(0, 0, 0, 0.1));
+   background-size: 10%; */
+}
+
+.todo-container::after {
+   content: "";
+   position: absolute;
+   bottom: 0;
+   left: 0;
+   width: 100%;
+   height: 150px;
+   opacity: 35%;
+   background: linear-gradient(to bottom, rgba(240, 240, 240, 0), rgb(0, 0, 0));
+}
+
+.todo-container:hover {
+   opacity: .6;
+   cursor: pointer;
 }
 
 .title,
@@ -138,6 +157,15 @@ align-items: center;
    text-overflow: ellipsis; 
    white-space: nowrap;
    margin-bottom: 10px;
+   /* outline: 1px red solid; */
+}
+
+.todo-content {
+   overflow: hidden;
+   height: 80%;
+   /* outline: 1px red solid; */
+   font-size: 0.85rem;
+   width: 113%;
 }
 
 @media screen and (min-width: 1800px) {
@@ -176,6 +204,7 @@ align-items: center;
    .newtodo-container,
    .todos-wrapper {
       width: 80%;
+      margin: 30px;
    }
 
    .newtodo-title {
@@ -188,6 +217,10 @@ align-items: center;
 }
 
 @media screen and (max-width: 420px) {
+   .newtodo-container {
+      margin: 0;
+   }
+
    .newtodo-content {
       height: 60px;
    }
