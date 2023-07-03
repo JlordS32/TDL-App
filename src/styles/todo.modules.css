@@ -17,9 +17,8 @@
 }
 
 
-.newtodo-container,
 .todos-wrapper {
-   width: 80%;
+   width: 50%;
    height: 100%;
 }
 
@@ -39,13 +38,6 @@
    transition: 1s;
    transition: width 1s;
 }
-
-@media screen and (max-width: 1920px){
-   .newtodo-container {
-      width: 40%;
-   }
-}
-
 
 .newtodo-container::before {
    content: "";
@@ -78,13 +70,6 @@
    transition: width 1s;
 }
 
-@media screen and (max-width: 420px) {
-   .newtodo-box {
-      width: 35%;
-   }
-}
-
-
 .newtodo-title,
 .newtodo-content {
    color: var(--black);
@@ -95,7 +80,6 @@
    width: 100%;
    padding: 20px;
    border-radius: 10px;
-   padding: 20px;
    box-sizing: border-box;
    transition: padding 1s, width 1s;
 }
@@ -105,10 +89,11 @@
    margin-bottom: 10px;
 }
 
+
 .newtodo-content {
    font-size: 1rem;
    resize: none;
-   height: 150px;
+   transition: 1s;
 }
 
 .todos-wrapper {
@@ -122,7 +107,7 @@ align-items: center;
 }
 
 .todo-container {
-   outline: green 1px solid;
+   outline: var(--mid-gray) 1px solid;
    width: 30%;
    height: 175px;
    margin: 10px;
@@ -132,6 +117,10 @@ align-items: center;
    flex-direction: column;
    align-items: center;
    transition: width 1s;
+
+   /* Colors */
+   background-color: var(--mid-gray);
+   border-radius: 15px;
 }
 
 .title,
@@ -142,5 +131,61 @@ align-items: center;
 @media screen and (min-width: 1800px) {
    .todo-container {
       width: 20%;
+   }
+}
+
+@media screen and (max-width: 1920px){
+   .newtodo-container {
+      width: 40%;
+   }
+
+   .newtodo-content {
+      height: 100px;
+   }
+
+   .todo-container {
+      width: 12.5%;
+      height: 150px;
+   }
+}
+
+@media screen and (max-width: 1200px) {
+   .todo-container {
+      width: 15%;
+      height: 120px;
+   }
+
+   .todos-wrapper {
+      width: 65%;
+   }
+}
+
+@media screen and (max-width: 768px) {
+   .newtodo-container,
+   .todos-wrapper {
+      width: 80%;
+   }
+
+   .newtodo-title {
+      font-size: 1rem;
+   }
+
+   .newtodo-content {
+      height: 70px;
+   }
+}
+
+@media screen and (max-width: 420px) {
+   .newtodo-content {
+      height: 60px;
+   }
+
+   .newtodo-title {
+      font-size: 1rem;
+   }
+
+   .todo-container {
+      width: 20%;
+      height: 90px;
    }
 }
