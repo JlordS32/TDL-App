@@ -59,18 +59,20 @@ const Todo = () => {
         tabIndex='0'
         onFocus={handleFocus}
         onBlur={handleBlur}
+        ref={parent}
       >
         <div className='newtodo-box' ref={parent}>
-          {!onBlur && (
-            <input
-              type='text'
-              value={newTodoTitle}
-              onChange={handleInputChange}
-              name='title'
-              className='newtodo-title'
-              placeholder='Enter title...'
-            />
-          )}
+          <input
+            type='text'
+            value={newTodoTitle}
+            onChange={handleInputChange}
+            style={{
+              display: `${!onBlur || newTodoTitle.trim() !== '' ? '' : 'none'}`
+            }}
+            name='title'
+            className='newtodo-title'
+            placeholder='Enter title...'
+          />
           <textarea
             value={newTodo}
             placeholder='Type a note...'
