@@ -5,7 +5,10 @@ import '../../styles/nav.modules.css';
 const Nav = () => {
    return (
       <div className='nav-container'>
-         Just some TO DO LIST APP...
+         <div className='clickable-button'></div>
+         <div className='clickable-button'></div>
+         <div className='clickable-button'></div>
+         <div className='clickable-button'></div>
       </div>
    )
 }  

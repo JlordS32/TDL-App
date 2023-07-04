@@ -67,7 +67,7 @@ const Todo = () => {
             value={newTodoTitle}
             onChange={handleInputChange}
             style={{
-              display: `${!onBlur || newTodoTitle.trim() !== '' ? '' : 'none'}`
+              display: !onBlur || newTodoTitle.trim() !== '' ? '' : 'none'
             }}
             name='title'
             className='newtodo-title'
