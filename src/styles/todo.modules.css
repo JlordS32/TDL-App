@@ -118,8 +118,9 @@
 
    /* Display */
    display: grid;
-   grid-template-rows: 2fr 4fr 1fr;
+   grid-template-rows: 2fr 4fr 2fr;
    grid-template-columns: 1fr;
+   gap: 5px;
 
    /* Colors */
    background-color: var(--mid-gray);
@@ -140,16 +141,10 @@
    background: linear-gradient(to bottom, rgba(240, 240, 240, 0), rgb(0, 0, 0));
 }
 
-.todo-container:hover {
-   opacity: .6;
-   cursor: pointer;
-}
 
 .title,
-.todo-content,
-.todo-icons {
+.todo-content {
    font-family: var(--default-font);
-   outline: 1px solid red;
 }
 
 .title {
@@ -165,6 +160,28 @@
    overflow: hidden;
    /* outline: 1px red solid; */
    font-size: 0.85rem;
+}
+
+/* BUTTONS */
+
+.todo-icons {
+   z-index: 2;
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   grid-template-rows: 1fr;
+   align-items: center;
+   justify-content: center;
+}
+
+.todo-icon-item {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.todo-icon-item.delete-btn:hover {
+   cursor: pointer;
+   opacity: .8;
 }
 
 @media screen and (min-width: 1800px) {

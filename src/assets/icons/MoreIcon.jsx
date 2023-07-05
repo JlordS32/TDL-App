@@ -2,7 +2,7 @@ const MoreIcon = ({
    color='white', 
    width = '24', 
    height = '24',
-   strokWidth = '1',
+   strokWidth = '2',
    fill='none'}) => {
    return (
       <svg 

@@ -11,6 +11,11 @@ const Todobox = ({todo}) => {
       content
    } = todo;
 
+   const handleClick = (e) => {
+      alert('Deleted!');
+      console.log(e.target.name);
+   }
+
    return (
       <div className='todo-container'>
          <div className='title'>
@@ -19,9 +24,13 @@ const Todobox = ({todo}) => {
          <div className='todo-content'>
             {content}
          </div>
-         <div className='todo-icons'>
-            <DeleteIcon />
-            <MoreIcon />
+         <div className='todo-icons' onClick={handleClick}>
+            <div className='todo-icon-item delete-btn'> 
+               <DeleteIcon color='white'/>
+            </div>
+            <div className='todo-icon-item more-btn'> 
+               <MoreIcon />
+            </div>
          </div>
       </div>
    )
