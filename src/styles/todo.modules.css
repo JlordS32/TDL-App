@@ -112,12 +112,14 @@
    height: 175px;
    margin: 10px;
    padding: 1.5em;
-   display: flex;
    overflow-x: hidden;
-   flex-direction: column;
-   align-items: center;
    transition: width 1s;
    position: relative;
+
+   /* Display */
+   display: grid;
+   grid-template-rows: 2fr 4fr 1fr;
+   grid-template-columns: 1fr;
 
    /* Colors */
    background-color: var(--mid-gray);
@@ -144,28 +146,25 @@
 }
 
 .title,
-.todo-content {
+.todo-content,
+.todo-icons {
    font-family: var(--default-font);
+   outline: 1px solid red;
 }
 
 .title {
    font-size: 1.25rem;
-   height: 20%;
-   width: 8.5rem;
    text-align: center;
    overflow: hidden;
    text-overflow: ellipsis; 
    white-space: nowrap;
-   margin-bottom: 10px;
    /* outline: 1px red solid; */
 }
 
 .todo-content {
    overflow: hidden;
-   height: 80%;
    /* outline: 1px red solid; */
    font-size: 0.85rem;
-   width: 113%;
 }
 
 @media screen and (min-width: 1800px) {

@@ -2,6 +2,7 @@ import React from 'react';
 import '../../styles/todo.modules.css';
 
 import DeleteIcon from '../../assets/icons/DeleteIcon';
+import MoreIcon from '../../assets/icons/MoreIcon';
 
 const Todobox = ({todo}) => {
 
@@ -20,6 +21,7 @@ const Todobox = ({todo}) => {
          </div>
          <div className='todo-icons'>
             <DeleteIcon />
+            <MoreIcon />
          </div>
       </div>
    )
