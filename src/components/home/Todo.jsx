@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
 
+// SVG Imports
+import deleteIcon from '../../assets/icons/trash.svg'
+
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 const Todo = () => {
@@ -11,7 +14,9 @@ const Todo = () => {
   const [todos, setTodos] = useState([]);
   const [onBlur, setOnBlur] = useState(true);
 
-  const [parent, enableAnimations] = useAutoAnimate();
+  // Destructures the first index for AutoAnimate
+  // It is used as a hook for applicable classes that'll need the soft animation when deleted or appending new items.
+  const [parent] = useAutoAnimate();
 
   const handleInputChange = (e) => {
     switch (e.target.name) {
