@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
+import { v4 as uuidv4 } from 'uuid';
 
 // SVG Imports
 import deleteIcon from '../../assets/icons/trash.svg'
@@ -46,10 +47,15 @@ const Todo = () => {
   useEffect(() => {
     if (onBlur) {
       if (newTodo.trim() !== '') {
-        const title = newTodoTitle.trim() !== '' ? newTodoTitle : 'No Title';
-        const content = newTodo;
 
-        setTodos((todos) => [...todos, { title, content }]);
+        const title = newTodoTitle.trim() !== '' ? newTodoTitle : 'No Title';
+
+        setTodos((todos) => [...todos, { 
+          id: uuidv4(), 
+          title: title, 
+          content: newTodo, 
+          complete: false }]);
+
         setNewTodo('');
         setNewTodoTitle('');
       }
@@ -88,8 +94,8 @@ const Todo = () => {
         </div>
       </div>
       <div className='todos-wrapper' ref={parent}>
-        {todos.map((todo, index) => (
-          <Todobox key={index} todo={todo} />
+        {todos.map(todo => (
+          <Todobox key={todo.id} todo={todo} />
         ))}
       </div>
     </>
