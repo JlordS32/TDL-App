@@ -20,6 +20,7 @@ const Todobox = ({todo, onDelete}) => {
    } = todo;
 
    const handleDelete = () => {
+      console.log(todo);
       onDelete(id);
    }
 

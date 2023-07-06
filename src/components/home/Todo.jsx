@@ -13,7 +13,16 @@ const Todo = () => {
   const [newTodo, setNewTodo] = useState('');
   const [newTodoTitle, setNewTodoTitle] = useState('');
   
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const storedTodos = localStorage.getItem('todos');
+    return storedTodos ? JSON.parse(storedTodos) : [];
+  });
+
+  // Use effect for local localStorage
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
   const [onBlur, setOnBlur] = useState(true);
 
   // Destructures the first index for AutoAnimate
@@ -105,7 +114,8 @@ const Todo = () => {
             <Todobox 
               key={todo.id} 
               todo={todo} 
-              onDelete={handleDelete}/>
+              onDelete={handleDelete}
+              />
           </>
         ))}
       </div>
