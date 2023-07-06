@@ -2,24 +2,25 @@ import React, {
    useContext
 } from 'react';
 import '../../styles/todo.modules.css';
-import { TodoContext } from './Todo';
 
+// SVG Imports
 import DeleteIcon from '../../assets/icons/DeleteIcon';
 import MoreIcon from '../../assets/icons/MoreIcon';
 
-const Todobox = ({todo}) => {
+const Todobox = ({todo, onDelete}) => {
 
    // Using context to access state from Todo component
    // const { setTodos, todos } = useContext(TodoContext);
 
    const {
-      title,
+      id,
       content,
-      id
+      title,
+      complete
    } = todo;
 
    const handleDelete = () => {
-      
+      onDelete(id);
    }
 
    return (
@@ -30,13 +31,13 @@ const Todobox = ({todo}) => {
          <div className='todo-content'>
             {content}
          </div>
-         <div className='todo-icons'>
-            <div className='todo-icon-item delete-btn' onClick={handleDelete}> 
-               <DeleteIcon color='white'/>
-            </div>
-            <div className='todo-icon-item more-btn'> 
-               <MoreIcon />
-            </div>
+         <div className='todo-icons' onClick={() => handleDelete()}>
+              <div className='todo-icon-item delete-btn' onClick={handleDelete}> 
+                <DeleteIcon color='white'/>
+              </div>
+              <div className='todo-icon-item more-btn'> 
+                <MoreIcon />
+              </div>
          </div>
       </div>
    )

@@ -4,7 +4,8 @@ import '../../styles/todo.modules.css';
 import { v4 as uuidv4 } from 'uuid';
 
 // SVG Imports
-import deleteIcon from '../../assets/icons/trash.svg'
+import DeleteIcon from '../../assets/icons/DeleteIcon';
+import MoreIcon from '../../assets/icons/MoreIcon';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 
@@ -62,6 +63,11 @@ const Todo = () => {
     }
   }, [onBlur]);
 
+  const handleDelete = (id) => {
+    const updatedItems = todos.filter(todo => todo.id !== id);
+    setTodos(updatedItems);
+  }
+
   
   return (
     <>
@@ -95,7 +101,12 @@ const Todo = () => {
       </div>
       <div className='todos-wrapper' ref={parent}>
         {todos.map(todo => (
-          <Todobox key={todo.id} todo={todo} />
+          <>
+            <Todobox 
+              key={todo.id} 
+              todo={todo} 
+              onDelete={handleDelete}/>
+          </>
         ))}
       </div>
     </>

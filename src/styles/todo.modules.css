@@ -179,9 +179,14 @@
    align-items: center;
 }
 
+.todo-icon-item.delete-btn {
+   transition: 0.1s;
+}
+
 .todo-icon-item.delete-btn:hover {
    cursor: pointer;
    opacity: .8;
+   transform: scale(1.1);
 }
 
 @media screen and (min-width: 1800px) {
