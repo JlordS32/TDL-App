@@ -28,15 +28,16 @@
    box-shadow: -15px 11px 100px 30px rgba(0,0,0,0.4);
    display: flex;
    align-items: center;
-   justify-content: center;
    flex-direction: column;
+   box-sizing: border-box;
+   padding: 100px 0px 0px 0px;
 }
 
 .clickable-button {
-   width: 50%;
-   height: 4%;
+   width: 40%;
+   height: 3.5%;
    outline: 2px solid var(--white);
-   margin-bottom: 80px;
+   margin-bottom: 30px;
    border-radius: 10px;
    position: relative;
 }
@@ -44,14 +45,14 @@
 .clickable-button:hover {
    opacity: 50%;
    cursor: pointer !important;
+   transform: scale(1.1);
 }
 
 .clickable-button::after {
    position: absolute;
-   top: 40%;
-   right: 0px;
-   left: 40%;
-   bottom: 0px;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
    content: '';
    height: 10px;
    width: 10px;
