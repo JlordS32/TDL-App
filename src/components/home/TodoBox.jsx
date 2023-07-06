@@ -1,6 +1,3 @@
-import React, {
-   useContext
-} from 'react';
 import '../../styles/todo.modules.css';
 
 import { motion } from 'framer-motion';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import '../../styles/header.modules.css';
 
 const Header = () => {

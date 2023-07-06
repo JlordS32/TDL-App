@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles/app.modules.css'
 
 import NewTodo from './home/Todo';

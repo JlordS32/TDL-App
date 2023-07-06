@@ -1,5 +1,3 @@
-import React from 'react';
-
 import '../../styles/nav.modules.css';
 
 const Nav = () => {

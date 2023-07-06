@@ -16,22 +16,26 @@
    --ysabeau-infant: 'Ysabeau Infant', sans-serif;
 }
 
-* {
-   color: #F0E8F0;
-   margin: 0;
+.backdrop-container {
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   background-color: #000000E1 !important;
+   display: flex;
+   align-items: center;
+   justify-self: center;
 }
 
-body {
-   background-color: #242424;
-}
+.modal-container {
+   width: clamp(50%, 700px, 80%);
+   height: min(50%, 300px);
 
-.app {
-   box-sizing: border-box;
+   margin: auto;
+   padding: 0 2rem;
+   border-radius: 10px;
    display: flex;
    flex-direction: column;
-   justify-content: flex-start; 
    align-items: center;
-   min-height: 100vh; 
-   overflow-y: auto;
 }
-
