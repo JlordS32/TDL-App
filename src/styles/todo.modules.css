@@ -38,6 +38,7 @@
    position: relative;
    transition: 1s;
    transition: width 1s;
+   width: clamp(50%, 700px, 90%);
 }
 
 .newtodo-container::before {
@@ -197,10 +198,6 @@
 }
 
 @media screen and (max-width: 1920px){
-   .newtodo-container {
-      width: 40%;
-   }
-
    .newtodo-content {
       height: 100px;
    }
@@ -223,7 +220,6 @@
 }
 
 @media screen and (max-width: 768px) {
-   .newtodo-container,
    .todos-wrapper {
       width: 80%;
       margin: 30px;
