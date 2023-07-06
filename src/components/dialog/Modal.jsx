@@ -3,14 +3,41 @@ import Backdrop from './Backdrop';
 
 import '../../styles/dialog.modules.css';
 
-const Modal = ({handleclose, text}) => {
-   return (
-      <motion.div
-         className='modal-container'
-         onClick={e => e.stopPropagation()}
-      >
+const dropIn = {
+   hidden: {
+      y: '-100vh',
+      opacity: '0',
+   },
+   visible: {
+      y: '0',
+      transition: {
+         duration: 0.2,
+         type: 'spring',
+         damping: 25,
+         stiffness: 500
+      }
+   },
+   exit:{
+      y: '100vh',
+      opacity: '0',
+   }
+};
 
-      </motion.div>
+const Modal = ({handleClose, text}) => {
+   return (
+      <Backdrop onClick={handleClose}>
+         <motion.div
+            className='modal-container'
+            onClick={e => e.stopPropagation()}
+            variants={dropIn}
+            initial='visible'
+            animate='visible'
+            exit='exit'
+         >
+            <p>{text}</p>
+            <button onClick={handleClose}>Close</button>
+         </motion.div>
+      </Backdrop>
    )
 }
 

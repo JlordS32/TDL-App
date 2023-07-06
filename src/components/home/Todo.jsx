@@ -70,6 +70,8 @@ const Todo = () => {
         setNewTodoTitle('');
       }
     }
+
+    console.log(todos);
   }, [onBlur]);
 
   const handleDelete = (id) => {

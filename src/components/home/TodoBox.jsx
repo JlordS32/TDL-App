@@ -1,4 +1,7 @@
 import '../../styles/todo.modules.css';
+import { 
+   useContext
+} from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -6,16 +9,19 @@ import { motion } from 'framer-motion';
 import DeleteIcon from '../../assets/icons/DeleteIcon';
 import MoreIcon from '../../assets/icons/MoreIcon';
 
-const Todobox = ({todo, onDelete}) => {
+// Importing context
+import { ModalContext } from '../App';
 
+const Todobox = ({todo, onDelete}) => {
    // Using context to access state from Todo component
    // const { setTodos, todos } = useContext(TodoContext);
+
+   const { modalOpen, open, close} = useContext(ModalContext);
 
    const {
       id,
       content,
       title,
-      complete
    } = todo;
 
    const handleDelete = () => {
@@ -34,13 +40,13 @@ const Todobox = ({todo, onDelete}) => {
             scale: 1 
          }} 
          transition={{ 
-            duration: 0.25,
+            duration: 0.15,
             ease: 'linear',
-            x: {
-               duration: 1
-            }
          }}
-      >
+
+         onClick={() => (modalOpen ? close() : open())}
+         >
+
          <div className='title'>
             {title}
          </div>
@@ -48,12 +54,12 @@ const Todobox = ({todo, onDelete}) => {
             {content}
          </div>
          <div className='todo-icons' onClick={() => handleDelete()}>
-              <div className='todo-icon-item delete-btn' onClick={handleDelete}>
-                <DeleteIcon color='white'/>
-              </div>
-              <div className='todo-icon-item more-btn'> 
-                <MoreIcon />
-              </div>
+            <div className='todo-icon-item delete-btn' onClick={handleDelete}>
+               <DeleteIcon color='white'/>
+            </div>
+            <div className='todo-icon-item more-btn'> 
+               <MoreIcon />
+            </div>
          </div>
       </motion.div>
    )
