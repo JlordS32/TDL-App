@@ -117,7 +117,7 @@ const Todo = () => {
               key={todo.id} 
               todo={todo} 
               onDelete={handleDelete}
-              />
+            />
           </>
         ))}
       </div>
