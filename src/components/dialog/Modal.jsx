@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
 import Backdrop from './Backdrop';
 
+import { TodoContext } from '../home/Todo';
+
 import '../../styles/dialog.modules.css';
+import { useContext } from 'react';
 
 const dropIn = {
    hidden: {
@@ -24,6 +27,9 @@ const dropIn = {
 };
 
 const Modal = ({handleClose, todo}) => {
+
+   const handleInputChange = useContext(TodoContext);
+
    return (
       <Backdrop onClick={handleClose}>
          <motion.div
@@ -38,6 +44,8 @@ const Modal = ({handleClose, todo}) => {
                type='text'
                value={todo.id}
                className='modal-title-input'
+               name='title'
+               onChange={handleInputChange}
             />
          </motion.div>
       </Backdrop>
