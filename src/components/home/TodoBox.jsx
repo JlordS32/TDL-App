@@ -1,7 +1,6 @@
 import '../../styles/todo.modules.css';
 import { 
-   useContext,
-   createContext
+   useContext
 } from 'react';
 
 import { motion } from 'framer-motion';
@@ -13,13 +12,11 @@ import MoreIcon from '../../assets/icons/MoreIcon';
 // Importing context
 import { ModalContext } from '../App';
 
-export const TodoBoxContext = createContext({ id: undefined });
-
 const Todobox = ({todo, onDelete}) => {
    // Using context to access state from Todo component
    // const { setTodos, todos } = useContext(TodoContext);
 
-   const { modalOpen, open, close} = useContext(ModalContext);
+   const { modalOpen, open, close, setModalTodo } = useContext(ModalContext);
 
    const {
       id,
@@ -32,41 +29,48 @@ const Todobox = ({todo, onDelete}) => {
       onDelete(id);
    }
 
+   const handleClick = () => {
+      setModalTodo(todo);
+      if (!modalOpen) {
+         open();
+      } else {
+         close();
+      }
+   }
+
    return (
-      <TodoBoxContext.Provider value={{id}}>
-         <motion.div className='todo-container'
-            initial={{ 
-               opacity: 0, 
-               scale: 0.7 
-            }} 
-            animate={{ 
-               opacity: 1, 
-               scale: 1 
-            }} 
-            transition={{ 
-               duration: 0.15,
-               ease: 'linear',
-            }}
+      <motion.div className='todo-container'
+         initial={{ 
+            opacity: 0, 
+            scale: 0.7 
+         }} 
+         animate={{ 
+            opacity: 1, 
+            scale: 1 
+         }} 
+         transition={{ 
+            duration: 0.15,
+            ease: 'linear',
+         }}
 
-            onClick={() => (modalOpen ? close() : open())}
-            >
+         onClick={handleClick}
+         >
 
-            <div className='title'>
-               {title}
+         <div className='title'>
+            {title}
+         </div>
+         <div className='todo-content'>
+            {content}
+         </div>
+         <div className='todo-icons' onClick={() => handleDelete()}>
+            <div className='todo-icon-item delete-btn' onClick={handleDelete}>
+               <DeleteIcon color='white'/>
             </div>
-            <div className='todo-content'>
-               {content}
+            <div className='todo-icon-item more-btn'> 
+               <MoreIcon />
             </div>
-            <div className='todo-icons' onClick={() => handleDelete()}>
-               <div className='todo-icon-item delete-btn' onClick={handleDelete}>
-                  <DeleteIcon color='white'/>
-               </div>
-               <div className='todo-icon-item more-btn'> 
-                  <MoreIcon />
-               </div>
-            </div>
-         </motion.div>
-      </TodoBoxContext.Provider>
+         </div>
+      </motion.div>
    )
 }
 

@@ -16,13 +16,12 @@ const App = () => {
 
 
    const [modalOpen, setModalOpen] = useState(false);
-   const [id, setId] = useState('');
+   const [modalTodo, setModalTodo] = useState([]);
 
    // Toggle modal functions 
    const close = () => setModalOpen(false);
    const open = () => {
       setModalOpen(true);
-      console.log(id);
    };
 
    return (
@@ -31,7 +30,7 @@ const App = () => {
             open, 
             close, 
             modalOpen,
-            setId
+            setModalTodo
          }}>
          <div className='app'>
             <Nav />
@@ -41,7 +40,7 @@ const App = () => {
                <Modal   
                   modalOpen={modalOpen} 
                   handleClose={close}
-                  id={id}
+                  todo={modalTodo}
             />}
          </div>
       </ModalContext.Provider>

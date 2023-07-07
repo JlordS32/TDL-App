@@ -1,12 +1,15 @@
 import {
   useState,
-  useEffect
+  useEffect,
+  createContext
 } from 'react';
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
 import { v4 as uuidv4 } from 'uuid';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+
+export const TodoContext = createContext();
 
 const Todo = () => {
   const [newTodo, setNewTodo] = useState('');
@@ -70,8 +73,6 @@ const Todo = () => {
         setNewTodoTitle('');
       }
     }
-
-    console.log(todos);
   }, [onBlur]);
 
   const handleDelete = (id) => {
@@ -79,48 +80,49 @@ const Todo = () => {
     setTodos(updatedItems);
   }
 
-
   return (
     <>
-      <div
-        className='newtodo-container'
-        tabIndex='0'
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        ref={parent}
-      >
-        <div className='newtodo-box' ref={parent}>
-          <input
-            type='text'
-            value={newTodoTitle}
-            onChange={handleInputChange}
-            style={{
-              display: !onBlur || newTodoTitle.trim() !== '' ? '' : 'none'
-            }}
-            name='title'
-            className='newtodo-title'
-            placeholder='Enter title...'
-          />
-          <textarea
-            value={newTodo}
-            placeholder='Type a note...'
-            onChange={handleInputChange}
-            name='todo-content'
-            className='newtodo-content'
-          />
-        </div>
-      </div>
-      <div className='todos-wrapper' ref={parent}>
-        {todos.map(todo => (
-          <>
-            <Todobox
-              key={todo.id}
-              todo={todo}
-              onDelete={handleDelete}
+      <TodoContext.Provider>
+        <div
+          className='newtodo-container'
+          tabIndex='0'
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          ref={parent}
+        >
+          <div className='newtodo-box' ref={parent}>
+            <input
+              type='text'
+              value={newTodoTitle}
+              onChange={handleInputChange}
+              style={{
+                display: !onBlur || newTodoTitle.trim() !== '' ? '' : 'none'
+              }}
+              name='title'
+              className='newtodo-title'
+              placeholder='Enter title...'
             />
-          </>
-        ))}
-      </div>
+            <textarea
+              value={newTodo}
+              placeholder='Type a note...'
+              onChange={handleInputChange}
+              name='todo-content'
+              className='newtodo-content'
+            />
+          </div>
+        </div>
+        <div className='todos-wrapper' ref={parent}>
+          {todos.map(todo => (
+            <>
+              <Todobox
+                key={todo.id}
+                todo={todo}
+                onDelete={handleDelete}
+              />
+            </>
+          ))}
+        </div>
+      </TodoContext.Provider>
     </>
   );
 };

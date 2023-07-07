@@ -23,10 +23,7 @@ const dropIn = {
    }
 };
 
-const Modal = ({handleClose, id}) => {
-     
-   // const { title, content } = todo;
-
+const Modal = ({handleClose, todo}) => {
    return (
       <Backdrop onClick={handleClose}>
          <motion.div
@@ -37,8 +34,11 @@ const Modal = ({handleClose, id}) => {
             animate='visible'
             exit='exit'
          >
-            <p>{id}</p>
-            <button onClick={handleClose}>Close</button>
+            <input 
+               type='text'
+               value={todo.id}
+               className='modal-title-input'
+            />
          </motion.div>
       </Backdrop>
    )
