@@ -31,8 +31,8 @@
 
 .modal-container {
    width: clamp(50%, 700px, 80%);
-   height: min(50%, 300px);
-   background: linear-gradient(to bottom, red, blue);
+   height: min(70%, 700px);
+   background: var(--mid-gray);
 
    margin: auto;
    padding: 0 2rem;

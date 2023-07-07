@@ -1,18 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import {
+  useState,
+  useEffect
+} from 'react';
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
 import { v4 as uuidv4 } from 'uuid';
 
-// SVG Imports
-import DeleteIcon from '../../assets/icons/DeleteIcon';
-import MoreIcon from '../../assets/icons/MoreIcon';
-
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 const Todo = () => {
   const [newTodo, setNewTodo] = useState('');
   const [newTodoTitle, setNewTodoTitle] = useState('');
-  
+
   const [todos, setTodos] = useState(() => {
     const storedTodos = localStorage.getItem('todos');
     return storedTodos ? JSON.parse(storedTodos) : [];
@@ -60,11 +59,12 @@ const Todo = () => {
 
         const title = newTodoTitle.trim() !== '' ? newTodoTitle : 'No Title';
 
-        setTodos((todos) => [...todos, { 
-          id: uuidv4(), 
-          title: title, 
-          content: newTodo, 
-          complete: false }]);
+        setTodos((todos) => [...todos, {
+          id: uuidv4(),
+          title: title,
+          content: newTodo,
+          complete: false
+        }]);
 
         setNewTodo('');
         setNewTodoTitle('');
@@ -79,7 +79,7 @@ const Todo = () => {
     setTodos(updatedItems);
   }
 
-  
+
   return (
     <>
       <div
@@ -113,9 +113,9 @@ const Todo = () => {
       <div className='todos-wrapper' ref={parent}>
         {todos.map(todo => (
           <>
-            <Todobox 
-              key={todo.id} 
-              todo={todo} 
+            <Todobox
+              key={todo.id}
+              todo={todo}
               onDelete={handleDelete}
             />
           </>
