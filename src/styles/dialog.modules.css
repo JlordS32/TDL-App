@@ -112,25 +112,23 @@
 
 /* ADJUSTING SCROLLBAR */
 
-.modal-content-input::-webkit-scrollbar {
+::-webkit-scrollbar {
    width: 7px;
    opacity: 0;
    transition: opacity 0.5s;
-   z-index: 100;
 }
 
-.modal-content-input:hover::-webkit-scrollbar {
+:hover::-webkit-scrollbar {
    opacity: 1;
    cursor: pointer;
 }
 
-.modal-content-input::-webkit-scrollbar-thumb {
-   background-color: rgba(0,0,0, 0.3);
+::-webkit-scrollbar-thumb {
+   background-color: #555;
    border-radius: 5px;
    transition: background-color 0.5s;
 }
 
-.modal-content-input:hover::-webkit-scrollbar-thumb {
-   background-color: #555;
-   cursor: pointer;
+::-webkit-scrollbar-thumb:hover {
+   background-color: #696969;
 }

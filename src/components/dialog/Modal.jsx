@@ -3,7 +3,7 @@ import Backdrop from './Backdrop';
 
 import '../../styles/dialog.modules.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const dropIn = {
    hidden: {
@@ -50,6 +50,10 @@ const Modal = ({handleClose, todo}) => {
    // Default values
    const defaultModalTitle = title;
    const defaultModalContent = content;
+
+   useEffect(() => {
+      console.log(modalContent);
+   }, [modalContent]);
 
    return (
       <Backdrop onClick={handleClose} key={id}>

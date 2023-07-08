@@ -99,6 +99,7 @@ const Todo = () => {
               name='title'
               className='newtodo-title'
               placeholder='Enter title...'
+              key='newtodo-content'
             />
             <textarea
               value={newTodo}
@@ -106,18 +107,17 @@ const Todo = () => {
               onChange={handleInputChange}
               name='todo-content'
               className='newtodo-content'
+              key='newtodo-content'
             />
           </div>
         </div>
-        <div className='todos-wrapper' ref={parent}>
+        <div className='todos-wrapper' ref={parent} key='todos-wrapper'>
           {todos.map(todo => (
-            <>
-              <Todobox
-                key={todo.id}
-                todo={todo}
-                onDelete={handleDelete}
-              />
-            </>
+            <Todobox
+              key={todo.id}
+              todo={todo}
+              onDelete={handleDelete}
+            />
           ))}
         </div>
       </TodoContext.Provider>

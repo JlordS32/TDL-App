@@ -1,8 +1,7 @@
 import '../styles/app.modules.css'
 
 import { 
-   createContext, 
-   useEffect, 
+   createContext,
    useState
 } from 'react';
 
@@ -10,6 +9,8 @@ import Todo from './home/Todo';
 import Header from './header/Header';
 import Nav from './header/Nav';
 import Modal from './dialog/Modal';
+
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const ModalContext = createContext();
 
@@ -34,17 +35,26 @@ const App = () => {
             setModalTodo
          }}>
          <div className='app'>
-            <Nav />
+            {/* <Nav /> */}
             <Header />
             <Todo />
-            {modalOpen && 
-               <Modal   
-                  modalOpen={modalOpen} 
-                  handleClose={close}
-                  todo={modalTodo}
-               />
-            }
-         </div>
+            <AnimatePresence>
+               {modalOpen && (
+                     <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        exit={{ scale: 0 }}
+                     >
+                        <Modal   
+                           modalOpen={modalOpen} 
+                           handleClose={close}
+                           todo={modalTodo}
+                        />
+                     </motion.div>
+                  )
+               }
+            </AnimatePresence>
+         </div> 
       </ModalContext.Provider>
    )
 }
