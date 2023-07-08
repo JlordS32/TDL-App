@@ -82,7 +82,7 @@ const Todo = () => {
 
   return (
     <>
-      <TodoContext.Provider value={{handleInputChange}}>
+      <TodoContext.Provider>
         <div
           className='newtodo-container'
           tabIndex='0'

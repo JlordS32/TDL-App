@@ -2,6 +2,7 @@ import '../styles/app.modules.css'
 
 import { 
    createContext, 
+   useEffect, 
    useState
 } from 'react';
 
@@ -41,7 +42,8 @@ const App = () => {
                   modalOpen={modalOpen} 
                   handleClose={close}
                   todo={modalTodo}
-            />}
+               />
+            }
          </div>
       </ModalContext.Provider>
    )

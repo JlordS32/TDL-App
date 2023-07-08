@@ -53,28 +53,32 @@ const Modal = ({handleClose, todo}) => {
 
    return (
       <Backdrop onClick={handleClose} key={id}>
-         <motion.div
-            className='modal-container'
-            onClick={e => e.stopPropagation()}
-            variants={dropIn}
-            initial='visible'
-            animate='visible'
-            exit='exit'
-         >
-            <input 
-               type='text'
-               className='modal-title-input'
-               name='title'
-               onChange={handleOnChange}
-               defaultValue={defaultModalTitle}
-            />
-            <textarea 
-               
-            />
-            <div>
-               {content}
-            </div>
-         </motion.div>
+         <div className='modal-container-linear-outline'>
+            <motion.div
+               className='modal-container'
+               onClick={e => e.stopPropagation()}
+               variants={dropIn}
+               initial='visible'
+               animate='visible'
+               exit='exit'
+            >
+               <div className='modaltodo-content'>
+                  <input 
+                     defaultValue={defaultModalTitle}
+                     type='text'
+                     className='modal-title-input'
+                     name='title'
+                     onChange={handleOnChange}
+                  />
+                  <textarea 
+                     defaultValue={defaultModalContent}
+                     className='modal-content-input'
+                     name='todo-content'
+                     onChange={handleOnChange}
+                  />
+               </div>
+            </motion.div>
+         </div>
       </Backdrop>
    )
 }

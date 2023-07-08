@@ -30,7 +30,11 @@ const Todobox = ({todo, onDelete}) => {
    };
 
    const handleClick = () => {
+      
+      // Sets Todo for the current selected modal.
       setModalTodo(todo);
+
+      // A conditional statement whether modal is opened or not.
       if (!modalOpen) {
          open();
       } else {
