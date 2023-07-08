@@ -49,7 +49,7 @@
    right: -1px;
    bottom: -1px;
    background: linear-gradient(45deg, #B941EB, #CF31D4, #7631D4, #7631D4, #CF31D4, #B941EB);
-   background-size: 500%; /* You'll need to experiment with the right size here */
+   background-size: 500%; 
    border-radius: 5px;
    z-index: -1;
    transition: background-position 2s;
@@ -64,7 +64,7 @@
 .newtodo-box {
    margin: 20px;
    width: 95%;
-   max-width: 100%; /* Add this line to limit the width */
+   max-width: 100%;
    height: auto;
    display: flex;
    box-sizing: border-box;
@@ -113,14 +113,14 @@
    width: 30%;
    height: 175px;
    margin: 10px;
-   padding: 1.5em;
+   padding: 0.75em;
    overflow-x: hidden;
    transition: width 1s;
    position: relative;
 
    /* Display */
    display: grid;
-   grid-template-rows: 2fr 4fr 2fr;
+   grid-template-rows: 4fr 1fr;
    grid-template-columns: 1fr;
    gap: 5px;
 
@@ -131,7 +131,6 @@
    /* background: linear-gradient(to bottom, rgba(240, 240, 240, 0), rgba(0, 0, 0, 0.1));
    background-size: 10%; */
 }
-
 .todo-container::after {
    content: "";
    position: absolute;
@@ -156,6 +155,7 @@
    text-overflow: ellipsis; 
    white-space: nowrap;
    /* outline: 1px red solid; */
+   margin-bottom: 0.5em;
 }
 
 .todo-content {
@@ -189,6 +189,11 @@
    cursor: pointer;
    opacity: .8;
    transform: scale(1.1);
+}
+
+.todo-content-wrapper {
+   outline: 1px solid red;
+   z-index: 1;
 }
 
 @media screen and (min-width: 1800px) {
@@ -232,6 +237,7 @@
    .newtodo-content {
       height: 70px;
    }
+
 }
 
 @media screen and (max-width: 420px) {
@@ -248,7 +254,7 @@
    }
 
    .todo-container {
-      width: 20%;
-      height: 90px;
+      width: 30%;
+      height: 120px;
    }
 }

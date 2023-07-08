@@ -42,7 +42,6 @@ const Modal = ({handleClose, todo}) => {
          >
             <input 
                type='text'
-               value={todo.id}
                className='modal-title-input'
                name='title'
                onChange={handleInputChange}

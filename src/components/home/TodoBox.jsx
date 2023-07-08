@@ -27,7 +27,7 @@ const Todobox = ({todo, onDelete}) => {
    const handleDelete = () => {
       console.log(todo);
       onDelete(id);
-   }
+   };
 
    const handleClick = () => {
       setModalTodo(todo);
@@ -36,7 +36,7 @@ const Todobox = ({todo, onDelete}) => {
       } else {
          close();
       }
-   }
+   };
 
    return (
       <motion.div className='todo-container'
@@ -52,26 +52,28 @@ const Todobox = ({todo, onDelete}) => {
             duration: 0.15,
             ease: 'linear',
          }}
-
-         onClick={handleClick}
          >
 
-         <div className='title'>
-            {title}
+         <div 
+            onClick={handleClick} className='todo-content-wrapper'>
+            <div className='title'>
+               {title}
+            </div>
+            <div className='todo-content'>
+               {content}
+            </div>
          </div>
-         <div className='todo-content'>
-            {content}
-         </div>
+         
          <div className='todo-icons' onClick={() => handleDelete()}>
             <div className='todo-icon-item delete-btn' onClick={handleDelete}>
-               <DeleteIcon color='white'/>
+               <DeleteIcon color='white' width='17'/>
             </div>
             <div className='todo-icon-item more-btn'> 
-               <MoreIcon />
+               <MoreIcon width='17'/>
             </div>
          </div>
       </motion.div>
    )
-}
+};
 
 export default Todobox;
