@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 import Backdrop from './Backdrop';
 
-import { TodoContext } from '../home/Todo';
-
 import '../../styles/dialog.modules.css';
-import { useContext } from 'react';
+
+import { useState } from 'react';
 
 const dropIn = {
    hidden: {
@@ -28,10 +27,32 @@ const dropIn = {
 
 const Modal = ({handleClose, todo}) => {
 
-   const handleInputChange = useContext(TodoContext);
+   // Destructing passed array from App component
+   const { title, content, id } = todo;
+
+   // STATES
+   const [ modalTitle, setModalTitle] = useState('')
+   const [ modalContent, setModalContent] = useState('')
+
+   const handleOnChange = (e) => {
+      switch (e.target.name) {
+         case 'title':
+            setModalTitle(e.target.value);
+           break;
+         case 'todo-content':
+            setModalContent(e.target.value);
+           break;
+         default:
+           return;
+       }
+   }
+
+   // Default values
+   const defaultModalTitle = title;
+   const defaultModalContent = content;
 
    return (
-      <Backdrop onClick={handleClose}>
+      <Backdrop onClick={handleClose} key={id}>
          <motion.div
             className='modal-container'
             onClick={e => e.stopPropagation()}
@@ -44,8 +65,15 @@ const Modal = ({handleClose, todo}) => {
                type='text'
                className='modal-title-input'
                name='title'
-               onChange={handleInputChange}
+               onChange={handleOnChange}
+               defaultValue={defaultModalTitle}
             />
+            <textarea 
+               
+            />
+            <div>
+               {content}
+            </div>
          </motion.div>
       </Backdrop>
    )
