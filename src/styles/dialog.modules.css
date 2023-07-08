@@ -19,7 +19,7 @@
 }
 
 .backdrop-container {
-   position: absolute;
+   position: fixed;
    top: 0;
    left: 0;
    height: 100%;
@@ -116,11 +116,12 @@
    width: 7px;
    opacity: 0;
    transition: opacity 0.5s;
+   z-index: 100;
 }
 
 .modal-content-input:hover::-webkit-scrollbar {
    opacity: 1;
-   cursor: pointer;;
+   cursor: pointer;
 }
 
 .modal-content-input::-webkit-scrollbar-thumb {

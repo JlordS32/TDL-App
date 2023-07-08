@@ -60,11 +60,9 @@ const Todo = () => {
     if (onBlur) {
       if (newTodo.trim() !== '') {
 
-        const title = newTodoTitle.trim() !== '' ? newTodoTitle : 'No Title';
-
         setTodos((todos) => [...todos, {
           id: uuidv4(),
-          title: title,
+          title: newTodoTitle,
           content: newTodo,
           complete: false
         }]);

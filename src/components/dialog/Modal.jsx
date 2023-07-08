@@ -69,6 +69,7 @@ const Modal = ({handleClose, todo}) => {
                      className='modal-title-input'
                      name='title'
                      onChange={handleOnChange}
+                     placeholder='Enter title...'
                   />
                   <textarea 
                      defaultValue={defaultModalContent}

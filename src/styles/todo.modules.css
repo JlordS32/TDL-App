@@ -71,7 +71,6 @@
 .newtodo-content {
    color: var(--black);
    border: none;
-   outline: none;
    font-family: var(--default-font);
    font-weight: 400;
    width: 100%;
@@ -79,6 +78,11 @@
    border-radius: 10px;
    box-sizing: border-box;
    transition: padding 1s, width 1s;
+}
+
+.newtodo-content:focus,
+.newtodo-title:focus {
+   outline: none;
 }
 
 .newtodo-title {
@@ -94,11 +98,11 @@
 }
 
 .todos-wrapper {
-   /* outline: blue 1px solid; */
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
+
    transition: 1s;
    transition: justify-content 1s;
    width: clamp(70%, 700px, 90%);
@@ -111,7 +115,6 @@
    margin: 10px;
    padding: 0.75em;
    overflow-x: hidden;
-   transition: width 1s;
    position: relative;
 
    /* Display */
@@ -124,9 +127,6 @@
    background-color: var(--mid-gray);
    border-radius: 15px;
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-   /* background: linear-gradient(to bottom, rgba(240, 240, 240, 0), rgba(0, 0, 0, 0.1));
-   background-size: 10%; */
-
    overflow: hidden;
    box-sizing: border-box;
 }
@@ -145,7 +145,6 @@
 .title,
 .todo-content {
    font-family: var(--default-font);
-   outline: 1px red solid;
 }
 
 .title {
@@ -153,14 +152,14 @@
    text-align: center;
    overflow: hidden;
    text-overflow: ellipsis;
-   /* outline: 1px red solid; */
+   white-space: nowrap;
    margin-bottom: 0.5em;
 }
 
 .todo-content {
    overflow: hidden;
-   /* outline: 1px red solid; */
    font-size: 0.85rem;
+   text-overflow: ellipsis;
 }
 
 /* BUTTONS */
@@ -192,13 +191,10 @@
 
 .todo-content-wrapper {
    z-index: 1;
+   overflow: hidden;
+   width: 100%;
 }
 
-@media screen and (min-width: 1800px) {
-   .todo-container {
-      width: 20%;
-   }
-}
 
 @media screen and (max-width: 1920px){
    .newtodo-content {
@@ -213,10 +209,9 @@
 
 @media screen and (max-width: 1200px) {
    .todo-container {
-      width: 15%;
-      height: 120px;
+      width: 20%;
+      height: 200px;
    }
-
 }
 
 @media screen and (max-width: 768px) {
@@ -232,6 +227,10 @@
       height: 70px;
    }
 
+   .todo-container {
+      width: 27.5%;
+      height: 200px;
+   }
 }
 
 @media screen and (max-width: 420px) {
@@ -248,7 +247,7 @@
    }
 
    .todo-container {
-      width: 30%;
-      height: 120px;
+      width: 43%;
+      height: 200px;
    }
 }
