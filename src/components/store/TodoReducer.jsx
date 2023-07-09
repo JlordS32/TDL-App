@@ -7,7 +7,7 @@ const initialStateValue = {
    complete: false,
 }
 
-export const todoSlice = createSlice({
+const todoSlice = createSlice({
    name: 'todoReducer',
    initialState: {
       value: initialStateValue

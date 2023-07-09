@@ -6,10 +6,10 @@ import {
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
 import { v4 as uuidv4 } from 'uuid';
-
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-
 import { ModalContext } from '../App';
+import { useDispatch } from 'react-redux';
+import { updateTodo } from '../store/TodoReducer';
 
 const Todo = () => {
   const [newTodo, setNewTodo] = useState('');
@@ -21,7 +21,6 @@ const Todo = () => {
     const storedTodos = localStorage.getItem('todos');
     return storedTodos ? JSON.parse(storedTodos) : [];
   });
-  setAppTodo(todos);
 
   // Use effect for local localStorage
   useEffect(() => {
@@ -32,8 +31,10 @@ const Todo = () => {
 
   // Destructures the first index for AutoAnimate
   // It is used as a hook for applicable classes that'll need the soft animation when deleted or appending new items.
-
   const [parent] = useAutoAnimate();
+
+  // using Dispatch for redux
+  const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
     switch (e.target.name) {
@@ -71,11 +72,17 @@ const Todo = () => {
           complete: false
         }]);
 
+        dispatch(updateTodo(todos));
+
         setNewTodo('');
         setNewTodoTitle('');
       }
     }
   }, [onBlur]);
+
+  useEffect(() => {
+    setAppTodo(todos);
+  });
 
   const handleDelete = (id) => {
     const updatedItems = todos.filter(todo => todo.id !== id);

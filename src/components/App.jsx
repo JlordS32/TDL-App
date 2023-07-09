@@ -15,6 +15,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export const ModalContext = createContext();
 
+import { useSelector } from 'react-redux';
+
 const App = () => {
 
 
@@ -28,9 +30,11 @@ const App = () => {
       setModalOpen(true);
    };
 
+   const todoRedux = useSelector(state => state.todoReducer.value);
+
    useEffect(() => {
-      console.log(appTodo);
-   }, [appTodo]);
+      console.log(todoRedux);
+   }, [todoRedux]);
 
    return (
       <ModalContext.Provider 
@@ -65,6 +69,6 @@ const App = () => {
          </div> 
       </ModalContext.Provider>
    )
-}
+};
 
 export default App;
