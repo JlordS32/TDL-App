@@ -3,7 +3,7 @@ import Backdrop from './Backdrop';
 
 import '../../styles/dialog.modules.css';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const dropIn = {
    hidden: {
@@ -25,7 +25,7 @@ const dropIn = {
    }
 };
 
-const Modal = ({ handleClose, todo }) => {
+const Modal = ({ handleClose, todo, currentTodo }) => {
 
    // Destructing passed array from App component
    const { title, content, id } = todo;
@@ -52,6 +52,13 @@ const Modal = ({ handleClose, todo }) => {
            return;
        }
    };
+
+   const updatedTodo = currentTodo.map((todo) => {
+      if (todo.id === id) {
+         return {...todo, title: modalTitle, content: modalContent}
+      }
+      return todo;
+   });
 
    return (
       <Backdrop onClick={handleClose} key={id}>
