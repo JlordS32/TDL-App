@@ -26,6 +26,8 @@ const App = () => {
       setModalOpen(true);
    };
 
+   console.log('hello world');
+
    return (
       <ModalContext.Provider 
          value={{
@@ -42,9 +44,8 @@ const App = () => {
                {modalOpen && (
                      <motion.div
                         initial={{scale: 0.5}}
-                        animate={{scale: 1}}
-                        exit={{scale: 0}}
                         animate='open'
+                        exit={{scale: 0}}
                      >
                         <Modal   
                            modalOpen={modalOpen} 
