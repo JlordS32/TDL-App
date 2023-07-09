@@ -25,7 +25,7 @@ const Todobox = ({todo, onDelete}) => {
    } = todo;
 
    const handleDelete = () => {
-      console.log(todo);
+      console.log(`ID: ${todo.id} has been deleted...`);
       onDelete(id);
    };
 
