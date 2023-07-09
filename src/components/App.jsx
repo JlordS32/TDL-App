@@ -2,6 +2,7 @@ import '../styles/app.modules.css'
 
 import { 
    createContext,
+   useEffect,
    useState
 } from 'react';
 
@@ -19,6 +20,7 @@ const App = () => {
 
    const [modalOpen, setModalOpen] = useState(false);
    const [modalTodo, setModalTodo] = useState([]);
+   const [appTodo, setAppTodo] = useState([]);
 
    // Toggle modal functions 
    const close = () => setModalOpen(false);
@@ -26,7 +28,9 @@ const App = () => {
       setModalOpen(true);
    };
 
-   console.log('hello world');
+   useEffect(() => {
+      console.log(appTodo);
+   }, [appTodo]);
 
    return (
       <ModalContext.Provider 
@@ -34,23 +38,25 @@ const App = () => {
             open, 
             close, 
             modalOpen,
-            setModalTodo
+            setModalTodo,
+            setAppTodo
          }}>
          <div className='app'>
             {/* <Nav /> */}
             <Header />
-            <Todo />
+            <Todo/>
             <AnimatePresence>
                {modalOpen && (
                      <motion.div
                         initial={{scale: 0.5}}
-                        animate='open'
+                        animate={{scale: 1}}
                         exit={{scale: 0}}
                      >
                         <Modal   
                            modalOpen={modalOpen} 
                            handleClose={close}
                            todo={modalTodo}
+                           currentTodo={appTodo}
                         />
                      </motion.div>
                   )

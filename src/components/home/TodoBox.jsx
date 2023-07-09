@@ -44,18 +44,21 @@ const Todobox = ({todo, onDelete}) => {
 
    return (
       <motion.div className='todo-container'
-         initial={{ 
-            opacity: 0, 
-            scale: 0.7 
-         }} 
-         animate={{ 
-            opacity: 1, 
-            scale: 1 
-         }} 
-         transition={{ 
-            duration: 0.15,
-            ease: 'linear',
-         }}
+            initial={{ 
+               opacity: 0, 
+               scale: 0.7 
+            }} 
+            animate={{ 
+               opacity: 1, 
+               scale: 1 
+            }} 
+            transition={{ 
+               duration: 0.1,
+               ease: 'linear',
+            }}
+            whileHover={{
+               scale: 1.02
+            }}
          >
 
          <div 

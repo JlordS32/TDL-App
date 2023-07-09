@@ -11,11 +11,11 @@ const MoreIcon = ({
          viewBox="0 0 24 24" 
          fill={fill}
          stroke={color}
-         stroke-width={strokWidth}
-         stroke-linecap="round"
-         stroke-linejoin="round"
+         strokeWidth={strokWidth}
+         strokeLinecap="round"
+         strokeLinejoin="round"
 
-         class="feather feather-more-vertical">
+         className="feather feather-more-vertical">
          <circle cx="12" cy="12" r="1"></circle>
          <circle cx="12" cy="5" r="1"></circle>
          <circle cx="12" cy="19" r="1"></circle>

@@ -3,7 +3,7 @@ import Backdrop from './Backdrop';
 
 import '../../styles/dialog.modules.css';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const dropIn = {
    hidden: {
@@ -25,10 +25,16 @@ const dropIn = {
    }
 };
 
-const Modal = ({handleClose, todo}) => {
+const Modal = ({ handleClose, todo }) => {
 
    // Destructing passed array from App component
    const { title, content, id } = todo;
+
+   // Default values
+   const defaultValue = {
+      title: title,
+      content: content
+   }
 
    // STATES
    const [ modalTitle, setModalTitle] = useState('')
@@ -45,15 +51,7 @@ const Modal = ({handleClose, todo}) => {
          default:
            return;
        }
-   }
-
-   // Default values
-   const defaultModalTitle = title;
-   const defaultModalContent = content;
-
-   useEffect(() => {
-      console.log(modalContent);
-   }, [modalContent]);
+   };
 
    return (
       <Backdrop onClick={handleClose} key={id}>
@@ -68,7 +66,7 @@ const Modal = ({handleClose, todo}) => {
             >
                <div className='modaltodo-content'>
                   <input 
-                     defaultValue={defaultModalTitle}
+                     defaultValue={defaultValue.title}
                      type='text'
                      className='modal-title-input'
                      name='title'
@@ -76,7 +74,7 @@ const Modal = ({handleClose, todo}) => {
                      placeholder='Enter title...'
                   />
                   <textarea 
-                     defaultValue={defaultModalContent}
+                     defaultValue={defaultValue.content}
                      className='modal-content-input'
                      name='todo-content'
                      onChange={handleOnChange}
