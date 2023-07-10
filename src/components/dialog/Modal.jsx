@@ -70,6 +70,9 @@ const Modal = ({ handleClose, todo, currentTodo }) => {
                initial='visible'
                animate='visible'
                exit='exit'
+               style={{
+                  scale: 1
+               }}
             >
                <div className='modaltodo-content'>
                   <input 

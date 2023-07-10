@@ -49,23 +49,17 @@ const App = () => {
             {/* <Nav /> */}
             <Header />
             <Todo/>
-            <AnimatePresence>
-               {modalOpen && (
-                     <motion.div
-                        initial={{scale: 0.5}}
-                        animate={{scale: 1}}
-                        exit={{scale: 0}}
-                     >
-                        <Modal   
-                           modalOpen={modalOpen} 
-                           handleClose={close}
-                           todo={modalTodo}
-                           currentTodo={appTodo}
-                        />
-                     </motion.div>
-                  )
-               }
-            </AnimatePresence>
+            {modalOpen && (
+                  <div>
+                     <Modal   
+                        modalOpen={modalOpen} 
+                        handleClose={close}
+                        todo={modalTodo}
+                        currentTodo={appTodo}
+                     />
+                  </div>
+               )
+            }
          </div> 
       </ModalContext.Provider>
    )
