@@ -21,7 +21,7 @@ const dropIn = {
          stiffness: 500
       }
    },
-   exit:{
+   exit: {
       y: '100vh',
       opacity: '0',
    }
@@ -31,7 +31,7 @@ const Modal = ({ handleClose, selectedTodo }) => {
 
    // Destructing passed array from App component
    const { title, content, id } = selectedTodo;
-   
+
    const dispatch = useDispatch();
 
    // Default values
@@ -41,20 +41,16 @@ const Modal = ({ handleClose, selectedTodo }) => {
    }
 
    // STATES
-   const [ modalTitle, setModalTitle] = useState('')
-   const [ modalContent, setModalContent] = useState('')
+   const [modalTitle, setModalTitle] = useState(selectedTodo.title);
+   const [modalContent, setModalContent] = useState(selectedTodo.content);
 
    const handleOnChange = (e) => {
-      switch (e.target.name) {
-         case 'title':
-            setModalTitle(e.target.value);
-           break;
-         case 'todo-content':
-            setModalContent(e.target.value);
-           break;
-         default:
-           return;
-       }
+      const { name, value } = e.target;
+      if (name === 'title') {
+         setModalTitle(value);
+      } else if (name === 'content') {
+         setModalContent(value);
+      }
    };
 
    const todoRedux = useSelector(state => state.todoReducer.value);
@@ -71,21 +67,12 @@ const Modal = ({ handleClose, selectedTodo }) => {
       return todo;
    });
 
-   const close = () => {
+   useEffect(() => {
       dispatch(updateTodo(updatedTodo));
-      handleClose();
-   };
-
-   useEffect(() => {
-      console.log(updatedTodo);
    }, [modalTitle, modalContent]);
-   
-   useEffect(() => {
-      console.log('Todo Redux', todoRedux);
-   }, [todoRedux]);
 
    return (
-      <Backdrop onClick={close} key={id}>
+      <Backdrop onClick={handleClose} key={id}>
          <div className='modal-container-linear-outline'>
             <motion.div
                className='modal-container'
@@ -99,7 +86,7 @@ const Modal = ({ handleClose, selectedTodo }) => {
                }}
             >
                <div className='modaltodo-content'>
-                  <input 
+                  <input
                      defaultValue={defaultValue.title}
                      type='text'
                      className='modal-title-input'
@@ -107,10 +94,10 @@ const Modal = ({ handleClose, selectedTodo }) => {
                      onChange={handleOnChange}
                      placeholder='Enter title...'
                   />
-                  <textarea 
+                  <textarea
                      defaultValue={defaultValue.content}
                      className='modal-content-input'
-                     name='todo-content'
+                     name='content'
                      onChange={handleOnChange}
                   />
                </div>
