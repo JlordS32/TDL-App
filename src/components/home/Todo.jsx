@@ -25,6 +25,7 @@ const Todo = () => {
   // Use effect for local localStorage
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
+    dispatch(updateTodo(todos));
   }, [todos]);
 
   const [onBlur, setOnBlur] = useState(true);
@@ -72,17 +73,11 @@ const Todo = () => {
           complete: false
         }]);
 
-        dispatch(updateTodo(todos));
-
         setNewTodo('');
         setNewTodoTitle('');
       }
     }
   }, [onBlur]);
-
-  useEffect(() => {
-    setAppTodo(todos);
-  });
 
   const handleDelete = (id) => {
     const updatedItems = todos.filter(todo => todo.id !== id);

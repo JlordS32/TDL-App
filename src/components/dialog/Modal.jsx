@@ -4,6 +4,9 @@ import Backdrop from './Backdrop';
 import '../../styles/dialog.modules.css';
 
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { updateTodo } from '../store/TodoReducer';
 
 const dropIn = {
    hidden: {
@@ -25,10 +28,12 @@ const dropIn = {
    }
 };
 
-const Modal = ({ handleClose, todo, currentTodo }) => {
+const Modal = ({ handleClose, todo }) => {
 
    // Destructing passed array from App component
    const { title, content, id } = todo;
+   
+   const dispatch = useDispatch();
 
    // Default values
    const defaultValue = {
@@ -53,12 +58,27 @@ const Modal = ({ handleClose, todo, currentTodo }) => {
        }
    };
 
-   const updatedTodo = currentTodo.map((todo) => {
+   const todoRedux = useSelector(state => state.todoReducer.value);
+
+   const updatedTodo = todoRedux.map((todo) => {
       if (todo.id === id) {
-         return {...todo, title: modalTitle, content: modalContent}
+         return {
+            ...todo,
+            title: modalTitle,
+            content: modalContent
+         }
       }
+
       return todo;
    });
+
+   useEffect(() => {
+      dispatch(updateTodo(updatedTodo));
+   }, [updateTodo]);
+
+   useEffect(() => {
+      console.log(todoRedux);
+   }, [todoRedux]);
 
    return (
       <Backdrop onClick={handleClose} key={id}>
