@@ -35,6 +35,7 @@ const App = () => {
             {/* <Nav /> */}
             <Header />
             <Todo/>
+<<<<<<< HEAD
             <AnimatePresence>
                {modalOpen && (
                      <motion.div
@@ -50,6 +51,19 @@ const App = () => {
                   )
                }
             </AnimatePresence>
+=======
+            {modalOpen && (
+                  <div>
+                     <Modal   
+                        modalOpen={modalOpen} 
+                        handleClose={close}
+                        todo={modalTodo}
+                        currentTodo={appTodo}
+                     />
+                  </div>
+               )
+            }
+>>>>>>> mybranch
          </div> 
       </ModalContext.Provider>
    )

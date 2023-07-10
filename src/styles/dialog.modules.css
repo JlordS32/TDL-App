@@ -31,6 +31,21 @@
    z-index: 10;
 }
 
+/* .modal-container-linear-outline,
+.modal-container {
+   transform: scale(0);
+} */
+
+@keyframes scaleModal {
+   0% {
+      transform: scale(0);
+   }
+
+   100% {
+      transform: scale(1);
+   }
+}
+
 .modal-container-linear-outline {
    width: clamp(50%, 700px, 80%);
    height: min(70%, 700px);
@@ -39,10 +54,8 @@
    margin: auto;
    border-radius: 10px;
    z-index: 15;
-   transition: background-position 5s;
-   transition: background-size 5s;
-   transition: 1s;
    padding: 1px;
+   animation: scaleModal 0.35s ease-in-out;
 }
 
 .modal-container-linear-outline:hover {
