@@ -13,6 +13,7 @@ export const ModalContext = createContext();
 
 const App = () => {
 
+
    const [modalOpen, setModalOpen] = useState(false);
    const [modalTodo, setModalTodo] = useState([]);
 
@@ -34,21 +35,6 @@ const App = () => {
             {/* <Nav /> */}
             <Header />
             <Todo/>
-            <AnimatePresence>
-               {modalOpen && (
-                     <motion.div
-                        initial={{scale: 0.5}}
-                        animate={{scale: 1}}
-                        exit={{scale: 0}}
-                     >
-                        <Modal
-                           handleClose={close}
-                           todo={modalTodo}
-                        />
-                     </motion.div>
-                  )
-               }
-            </AnimatePresence>
             {modalOpen && (
                   <div>
                      <Modal   

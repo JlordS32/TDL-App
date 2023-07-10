@@ -72,16 +72,21 @@ const Modal = ({ handleClose, todo }) => {
       return todo;
    });
 
-   useEffect(() => {
+   const close = () => {
       dispatch(updateTodo(updatedTodo));
-   }, [updateTodo]);
+      handleClose();
+   };
 
    useEffect(() => {
-      console.log(todoRedux);
+      console.log(updatedTodo);
+   }, [modalTitle, modalContent]);
+   
+   useEffect(() => {
+      console.log('Todo Redux', todoRedux);
    }, [todoRedux]);
 
    return (
-      <Backdrop onClick={handleClose} key={id}>
+      <Backdrop onClick={close} key={id}>
          <div className='modal-container-linear-outline'>
             <motion.div
                className='modal-container'
