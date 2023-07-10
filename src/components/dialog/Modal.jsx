@@ -4,8 +4,7 @@ import Backdrop from './Backdrop';
 import '../../styles/dialog.modules.css';
 
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { updateTodo } from '../store/TodoReducer';
 
 const dropIn = {
@@ -28,10 +27,10 @@ const dropIn = {
    }
 };
 
-const Modal = ({ handleClose, todo }) => {
+const Modal = ({ handleClose, selectedTodo }) => {
 
    // Destructing passed array from App component
-   const { title, content, id } = todo;
+   const { title, content, id } = selectedTodo;
    
    const dispatch = useDispatch();
 

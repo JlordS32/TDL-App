@@ -10,7 +10,7 @@ const initialStateValue = {
 const todoSlice = createSlice({
    name: 'todoReducer',
    initialState: {
-      value: initialStateValue
+      value: [initialStateValue]
    },
    reducers: {
       updateTodo: (state, action) => {

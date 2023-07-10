@@ -16,7 +16,7 @@ const Todobox = ({todo, onDelete}) => {
    // Using context to access state from Todo component
    // const { setTodos, todos } = useContext(TodoContext);
 
-   const { modalOpen, open, close, setModalTodo } = useContext(ModalContext);
+   const { modalOpen, open, close, setSelectedTodo } = useContext(ModalContext);
 
    const {
       id,
@@ -32,7 +32,7 @@ const Todobox = ({todo, onDelete}) => {
    const handleClick = () => {
       
       // Sets Todo for the current selected modal.
-      setModalTodo(todo);
+      setSelectedTodo(todo);
 
       // A conditional statement whether modal is opened or not.
       if (!modalOpen) {

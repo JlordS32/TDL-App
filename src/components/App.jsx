@@ -15,7 +15,7 @@ const App = () => {
 
 
    const [modalOpen, setModalOpen] = useState(false);
-   const [modalTodo, setModalTodo] = useState([]);
+   const [selectedTodo, setSelectedTodo] = useState([]);
 
    // Toggle modal functions 
    const close = () => setModalOpen(false);
@@ -29,7 +29,7 @@ const App = () => {
             open, 
             close, 
             modalOpen,
-            setModalTodo
+            setSelectedTodo
          }}>
          <div className='app'>
             {/* <Nav /> */}
@@ -40,7 +40,7 @@ const App = () => {
                      <Modal   
                         modalOpen={modalOpen} 
                         handleClose={close}
-                        todo={modalTodo}
+                        selectedTodo={selectedTodo}
                      />
                   </div>
                )
