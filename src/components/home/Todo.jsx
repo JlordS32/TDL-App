@@ -4,6 +4,7 @@ import '../../styles/todo.modules.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateTodo } from '../store/TodoReducer';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 const Todo = () => {
    // State to hold the new todo input values
@@ -16,6 +17,8 @@ const Todo = () => {
 
    // State to handle the focus and blur events of the todo input
    const [onBlur, setOnBlur] = useState(true);
+
+   const [parent] = useAutoAnimate();
 
    // Event handler for input change
    const handleInputChange = (e) => {
@@ -120,7 +123,7 @@ const Todo = () => {
                />
             </div>
          </div>
-         <div className='todos-wrapper'>
+         <div className='todos-wrapper' ref={parent}>
             {todoRedux.map(todo => (
                <Todobox
                   key={todo.id}
