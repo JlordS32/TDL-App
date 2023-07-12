@@ -8,7 +8,7 @@ import Todo from './home/Todo';
 import Header from './header/Header';
 import Nav from './header/Nav';
 import Modal from './dialog/Modal';
-import { motion, AnimatePresence } from 'framer-motion';
+import Search from './home/Search';
 export const ModalContext = createContext();
 
 const App = () => {
@@ -34,6 +34,9 @@ const App = () => {
          <div className='app'>
             {/* <Nav /> */}
             <Header />
+
+            {/* Main Home */}
+            <Search />
             <Todo/>
             {modalOpen && (
                   <div>
