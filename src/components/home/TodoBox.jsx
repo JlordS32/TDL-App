@@ -71,11 +71,11 @@ const Todobox = ({todo, onDelete}) => {
             </div>
          </div>
          
-         <div className='todo-icons' onClick={() => handleDelete()}>
+         <div className='todo-icons'>
             <div className='todo-icon-item delete-btn' onClick={handleDelete}>
                <DeleteIcon color='white' width='17'/>
             </div>
-            <div className='todo-icon-item more-btn'> 
+            <div className='todo-icon-item more-btn' onClick={() => alert('hello world')}> 
                <MoreIcon width='17'/>
             </div>
          </div>
