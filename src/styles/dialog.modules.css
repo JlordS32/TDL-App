@@ -49,10 +49,6 @@
       transform: scale(0.4);
    }
 
-   90% {
-      transform: scale(1.1);
-   }
-
    100% {
       transform: scale(1);
    }
@@ -66,7 +62,7 @@
    margin: auto;
    border-radius: 10px;
    z-index: 15;
-   padding: 1px;
+   padding: 2px;
    animation: scaleModal 0.3s ease-out;
    transition: background-size 0.4s ease-out;
 }

@@ -36,18 +36,20 @@ const App = () => {
             <Header />
 
             {/* Main Home */}
-            <Search />
-            <Todo/>
-            {modalOpen && (
-                  <div>
-                     <Modal   
-                        modalOpen={modalOpen} 
-                        handleClose={close}
-                        selectedTodo={selectedTodo}
-                     />
-                  </div>
-               )
-            }
+            <div className='main-container'>
+               <Search />
+               <Todo/>
+               {modalOpen && (
+                     <div>
+                        <Modal   
+                           modalOpen={modalOpen} 
+                           handleClose={close}
+                           selectedTodo={selectedTodo}
+                        />
+                     </div>
+                  )
+               }
+            </div>
          </div> 
       </ModalContext.Provider>
    )

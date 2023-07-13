@@ -34,7 +34,6 @@
    transition: 1s;
    transition: width 1s;
    width: clamp(50%, 700px, 90%);
-
 }
 
 .newtodo-container::before {
@@ -103,10 +102,10 @@
    flex-wrap: wrap;
    justify-content: center;
    align-items: center;
-
    transition: 1s;
    transition: justify-content 1s;
-   width: clamp(70%, 700px, 90%);
+   width: clamp(90%, 700px, 90%);
+   margin-bottom: 70px;
 }
 
 .todo-container {
@@ -180,14 +179,14 @@
    align-items: center;
 }
 
-.todo-icon-item.delete-btn {
+.todo-icon-item > :nth-child(1n) {
    transition: 0.1s;
 }
 
-.todo-icon-item.delete-btn:hover {
+.todo-icon-item > :nth-child(1n):hover {
    cursor: pointer;
    opacity: .8;
-   transform: scale(1.1);
+   transform: scale(1.2);
 }
 
 .todo-content-wrapper {
