@@ -199,6 +199,11 @@
    width: 100%;
 }
 
+.search-container {
+   display: flex;
+   justify-content: center;
+}
+
 .search-container, :is(.search-bar) {
    width: clamp(35%, 500px, 70%);
    padding: 0;
