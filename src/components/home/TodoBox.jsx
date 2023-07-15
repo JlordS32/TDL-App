@@ -11,6 +11,7 @@ import MoreIcon from '../../assets/icons/MoreIcon';
 
 // Importing context
 import { ModalContext } from '../App';
+import LabelIcon from '../../assets/icons/LabelIcon';
 
 const Todobox = ({todo, onDelete}) => {
    // Using context to access state from Todo component
@@ -77,6 +78,9 @@ const Todobox = ({todo, onDelete}) => {
             </div>
             <div className='todo-icon-item more-btn' onClick={() => alert('hello world')}> 
                <MoreIcon width='17'/>
+            </div>
+            <div className='todo-icon-item label-btn' onClick={() => alert('hello world')}> 
+               <LabelIcon width='17'/>
             </div>
          </div>
       </motion.div>

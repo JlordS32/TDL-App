@@ -19,6 +19,24 @@ const todoSlice = createSlice({
    }
 });
 
-export const { updateTodo } = todoSlice.actions;
+const filteredSlice = createSlice({
+   name: 'filteredReducer',
+   initialState: {
+      value: [initialStateValue]
+   },
+   reducers: {
+      updateFilteredTodo: (state, action) => {
+         state.value = action.payload;
+      }
+   }
+});
 
-export default todoSlice.reducer;
+const rootReducer = {
+   todos: todoSlice.reducer,
+   filteredTodo: filteredSlice.reducer
+}
+
+export const { updateTodo } = todoSlice.actions;
+export const { updateFilteredTodo } = todoSlice.actions;
+
+export default rootReducer;

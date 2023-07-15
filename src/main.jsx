@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './components/App';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import TodoReducer from './components/store/TodoReducer';
+import rootReducer from './components/store/TodoReducer';
 
 const store = configureStore({
    reducer: {
-      todoReducer: TodoReducer,
+      todoReducer: rootReducer.todos,
+      filteredReducer: rootReducer.filteredTodo
    }
 });
 
