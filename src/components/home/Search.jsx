@@ -1,11 +1,12 @@
 import '../../styles/todo.modules.css';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateTodo } from '../store/TodoReducer';
+import { updateFilteredTodo } from '../store/TodoReducer';
 
 const Search = () => {
 
-   const todos = useSelector(state => state.todoReducer.value);
+   const todoReducer = useSelector(state => state.todoReducer.value);
+   const filteredTodoReducer = useSelector(state => state.filteredReducer.value);
    const dispatch = useDispatch();
 
    const [searchQuery, setSearchQuery] = useState('');
@@ -14,7 +15,7 @@ const Search = () => {
       setSearchQuery(e.target.value);
    };
 
-   const filteredTodo = todos.filter(todo => {
+   const filteredTodo = todoReducer.filter(todo => {
       const filteredContent = todo.content.toLowerCase().includes(searchQuery.toLowerCase());
 
       const filteredTitle = todo.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -24,10 +25,22 @@ const Search = () => {
       }
    });
 
-   useEffect(() => {
-      dispatch(updateTodo(filteredTodo));
-   }, [searchQuery]);
+   const handleKeyPress = (e) => {
+      if (e.key === 'Enter') {
+         dispatch(updateFilteredTodo(filteredTodo));
+      }
+   };
    
+   // Listens if the todo slate in our redux has changed.
+   useEffect(() => {
+      if (searchQuery === '') {
+         dispatch(updateFilteredTodo(filteredTodo));
+      }
+   }, [todoReducer, searchQuery]);
+   
+   useEffect(() => {
+      console.log(filteredTodoReducer);
+   }, [filteredTodoReducer]);
 
    return (
       <div className='search-container'>
@@ -37,6 +50,7 @@ const Search = () => {
             className='search-bar'
             placeholder='Search'
             onChange={handleChange}
+            onKeyDown={handleKeyPress}
          />
       </div>
    )

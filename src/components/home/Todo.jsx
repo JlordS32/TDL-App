@@ -13,6 +13,7 @@ const Todo = () => {
 
    // Access the todos array from the Redux store
    const todoRedux = useSelector(state => state.todoReducer.value);
+   const filteredTodoRedux = useSelector(state => state.filteredReducer.value);
    const dispatch = useDispatch();
 
    // State to handle the focus and blur events of the todo input
@@ -124,7 +125,7 @@ const Todo = () => {
             </div>
          </div>
          <div className='todos-wrapper' ref={parent}>
-            {todoRedux.map(todo => (
+            {filteredTodoRedux.map(todo => (
                <Todobox
                   key={todo.id}
                   todo={todo}

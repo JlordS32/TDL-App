@@ -26,7 +26,7 @@ const filteredSlice = createSlice({
    },
    reducers: {
       updateFilteredTodo: (state, action) => {
-         state.value = action.payload;
+         state.value = action.payload; 
       }
    }
 });
@@ -37,6 +37,6 @@ const rootReducer = {
 }
 
 export const { updateTodo } = todoSlice.actions;
-export const { updateFilteredTodo } = todoSlice.actions;
+export const { updateFilteredTodo } = filteredSlice.actions;
 
 export default rootReducer;
