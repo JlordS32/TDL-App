@@ -34,7 +34,7 @@ body {
    overflow-y: auto;
 }
 
-.main-container {
+.home-container {
    max-width: clamp(50%, 1200px, 90%);
    width: 100%;
    display: flex;

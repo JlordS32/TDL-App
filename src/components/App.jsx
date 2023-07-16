@@ -23,6 +23,12 @@ const App = () => {
       setModalOpen(true);
    };
 
+   const componentLayer = {
+      headerIndex: 2,
+      navIndex: -1,
+      homeIndex: 1
+   }
+
    return (
       <ModalContext.Provider 
          value={{
@@ -32,11 +38,10 @@ const App = () => {
             setSelectedTodo
          }}>
          <div className='app'>
-            {/* <Nav /> */}
             <Header />
-
             {/* Main Home */}
-            <div className='main-container'>
+            <div className='home-container'>
+               <Nav />
                <Search />
                <Todo/>
                {modalOpen && (
