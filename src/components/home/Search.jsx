@@ -2,17 +2,19 @@ import '../../styles/todo.modules.css';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateFilteredTodo } from '../store/TodoReducer';
+import SearchIcon from '../../assets/icons/SearchIcon';
 
 const Search = () => {
 
    const todoReducer = useSelector(state => state.todoReducer.value);
-   const filteredTodoReducer = useSelector(state => state.filteredReducer.value);
    const dispatch = useDispatch();
 
    const [searchQuery, setSearchQuery] = useState('');
 
-   const handleChange = (e) => {
-      setSearchQuery(e.target.value);
+   const handleSubmit = (e) => {
+      if (e.key === 'Enter') {
+         setSearchQuery(e.target.value);
+      }
    };
 
    const filteredTodo = todoReducer.filter(todo => {
@@ -24,33 +26,23 @@ const Search = () => {
          return todo;
       }
    });
-
-   const handleKeyPress = (e) => {
-      if (e.key === 'Enter') {
-         dispatch(updateFilteredTodo(filteredTodo));
-      }
-   };
    
    // Listens if the todo slate in our redux has changed.
    useEffect(() => {
-      if (searchQuery === '') {
-         dispatch(updateFilteredTodo(filteredTodo));
-      }
+      dispatch(updateFilteredTodo(filteredTodo));
    }, [todoReducer, searchQuery]);
-   
-   useEffect(() => {
-      console.log(filteredTodoReducer);
-   }, [filteredTodoReducer]);
 
    return (
       <div className='search-container'>
+         <div className='input-icons'>
+            <SearchIcon color='#F0E8F0' width='17'/>
+         </div>
          <input 
             type='text'
             name='search-bar'
             className='search-bar'
             placeholder='Search'
-            onChange={handleChange}
-            onKeyDown={handleKeyPress}
+            onKeyDown={handleSubmit}
          />
       </div>
    )

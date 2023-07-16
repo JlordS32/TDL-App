@@ -200,8 +200,14 @@
 }
 
 .search-container {
-   display: flex;
-   justify-content: center;
+   position: relative;
+   margin: 30px 0;
+}
+
+/* Had to manually adjust the position of the icon inside the search bar, will need to be reconfigured later*/
+.input-icons {
+   position: absolute;
+   padding: 12px;
 }
 
 .search-container, :is(.search-bar) {
@@ -214,17 +220,15 @@
    width: 100%;
    font-size: 1rem;
    border-radius: 100px;
-   text-indent: 15px;
-   padding: 15px;
+   text-indent: 40px;
    color: var(--white);
    background-color: var(--mid-gray);
-   margin: 40px 0;
+   padding: 15px 0px;
 }
 
 .search-bar:focus {
    outline: var(--light-grey) 1px solid;
 }
-
 
 @media screen and (max-width: 1920px){
    .newtodo-content {
