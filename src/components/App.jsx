@@ -23,7 +23,7 @@ const App = () => {
    const open = () => {  
       setModalOpen(true);
    };
-   
+
    return (
       <ModalContext.Provider 
          value={{
@@ -35,8 +35,8 @@ const App = () => {
          <div className='app'>
             <Header toggle={() => setToggleNav(toggleNav ? false : true)}/>
             {/* Main Home */}
-            <div className='home-container'>
-               {toggleNav && <Nav />}
+            <div className='home-container' red>
+               <Nav />
                <Search />
                <Todo/>
                {modalOpen && (
