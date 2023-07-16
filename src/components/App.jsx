@@ -16,19 +16,14 @@ const App = () => {
 
    const [modalOpen, setModalOpen] = useState(false);
    const [selectedTodo, setSelectedTodo] = useState([]);
+   const [toggleNav, setToggleNav] = useState(false);
 
    // Toggle modal functions 
    const close = () => setModalOpen(false);
-   const open = () => {
+   const open = () => {  
       setModalOpen(true);
    };
-
-   const componentLayer = {
-      headerIndex: 2,
-      navIndex: -1,
-      homeIndex: 1
-   }
-
+   
    return (
       <ModalContext.Provider 
          value={{
@@ -38,10 +33,10 @@ const App = () => {
             setSelectedTodo
          }}>
          <div className='app'>
-            <Header />
+            <Header toggle={() => setToggleNav(toggleNav ? false : true)}/>
             {/* Main Home */}
             <div className='home-container'>
-               <Nav />
+               {toggleNav && <Nav />}
                <Search />
                <Todo/>
                {modalOpen && (

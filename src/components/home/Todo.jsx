@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
 import { v4 as uuidv4 } from 'uuid';
@@ -125,13 +125,17 @@ const Todo = () => {
             </div>
          </div>
          <div className='todos-wrapper' ref={parent}>
-            {filteredTodoRedux.map(todo => (
-               <Todobox
-                  key={todo.id}
-                  todo={todo}
-                  onDelete={handleDelete}
-               />
-            ))}
+            {useMemo(() => {
+               return (
+                  filteredTodoRedux.map(todo => (
+                     <Todobox
+                        key={todo.id}
+                        todo={todo}
+                        onDelete={handleDelete}
+                     />
+                  ))
+               )
+            })}
          </div>
       </>
    );

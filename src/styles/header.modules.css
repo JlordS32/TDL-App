@@ -24,4 +24,7 @@
    width: 100%;
    padding: 20px 0;
    border-bottom: var(--gray) 1px solid;
+   position: fixed;
+   background-color: var(--dark-gray);
+   z-index: 1000;
 }

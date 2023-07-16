@@ -17,13 +17,17 @@
    --ysabeau-infant: 'Ysabeau Infant', sans-serif;
 }
 
+.home-container {
+   margin-top: 70px;
+   outline: 1px purple solid;
+}
 
 .newtodo-container,
 .newtodo-box {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   align-items: center;
+   align-items: center;;
 }
 
 .newtodo-container {
