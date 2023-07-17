@@ -61,7 +61,7 @@
    background-size: 500%;
    margin: auto;
    border-radius: 10px;
-   z-index: 15;
+   z-index: var(--modal-outline-layer);
    padding: 2px;
    animation: scaleModal 0.25s ease-out;
    transition: background-size 0.4s ease-out;
@@ -96,7 +96,7 @@
    width: 90%;
    height: 90%;
    overflow: hidden;
-   z-index: 22;
+   z-index: 25;
 }
 
 .modal-title-input,

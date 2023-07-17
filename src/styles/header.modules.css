@@ -26,5 +26,5 @@
    border-bottom: var(--gray) 1px solid;
    position: fixed;
    background-color: var(--dark-gray);
-   z-index: 1000;
+   z-index: 5;
 }

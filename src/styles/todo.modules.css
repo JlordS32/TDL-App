@@ -19,7 +19,7 @@
 
 .home-container {
    margin-top: 70px;
-   outline: 1px purple solid;
+   z-index: 3;
 }
 
 .newtodo-container,

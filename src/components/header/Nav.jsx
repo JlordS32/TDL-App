@@ -21,7 +21,7 @@ const Nav = () => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <div className="">
+        <div className="nav-icons-wrapper">
           <div className="nav-icons">
             <LabelIcon width="25" />
           </div>

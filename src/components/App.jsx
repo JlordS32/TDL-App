@@ -35,11 +35,12 @@ const App = () => {
          <div className='app'>
             <Header toggle={() => setToggleNav(toggleNav ? false : true)}/>
             {/* Main Home */}
-            <div className='home-container' red>
+            <div className='home-container'>
                <Nav />
                <Search />
                <Todo/>
-               {modalOpen && (
+            </div>
+            {modalOpen && (
                      <div>
                         <Modal   
                            modalOpen={modalOpen} 
@@ -49,7 +50,6 @@ const App = () => {
                      </div>
                   )
                }
-            </div>
          </div> 
       </ModalContext.Provider>
    )
