@@ -19,31 +19,26 @@ const NavItemTitles = ({ onMouseEnter, onMouseLeave }) => {
 
   return (
     <div
-      className="icon-title"
+      className='icon-title'
       onMouseLeave={onMouseLeave}
-      onMouseEnter={onMouseEnter}
-    >
-      <div className="icon-title-wrapper">
+      onMouseEnter={onMouseEnter}>
+      <div className='icon-title-wrapper'>
         <div
-          className="nav-icon-title todo-group"
-          data-name='React'
+          className='nav-icon-title todo-group'
           onMouseLeave={handleMouseLeave}
-          onMouseEnter={handleMouseEnter}
-        >
+          onMouseEnter={handleMouseEnter}>
           {iconTitle.group}
         </div>
         <div
-          className="nav-icon-title"
+          className='nav-icon-title'
           onMouseLeave={handleMouseLeave}
-          onMouseEnter={handleMouseEnter}
-        >
+          onMouseEnter={handleMouseEnter}>
           {iconTitle.test}
         </div>
         <div
-          className="nav-icon-title"
+          className='nav-icon-title'
           onMouseLeave={handleMouseLeave}
-          onMouseEnter={handleMouseEnter}
-        >
+          onMouseEnter={handleMouseEnter}>
           {iconTitle.test}
         </div>
       </div>
