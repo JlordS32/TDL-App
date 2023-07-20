@@ -124,6 +124,17 @@
    text-align: center;
 }
 
+.nav-items-container {
+   outline: 1px red solid;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   text-align: center;
+   justify-content: center;
+   width: 300px;
+   transform: translateX(-10px);
+}
+
 @media screen and (max-width: 1200px) {
    .nav-icons-container,
    .icon-title {
