@@ -2,16 +2,6 @@ import { useEffect, useState } from "react";
 import "../../styles/nav.modules.css";
 
 const NavItemTitles = ({ onMouseEnter, onMouseLeave }) => {
-  const [mouseEnter, setMouseEnter] = useState(false);
-
-  const handleMouseEnter = () => {
-    setMouseEnter(true);
-  };
-
-  const handleMouseLeave = () => {
-    setMouseEnter(false);
-  };
-
   const iconTitle = {
     group: "Group",
     test: "Test",
@@ -19,26 +9,18 @@ const NavItemTitles = ({ onMouseEnter, onMouseLeave }) => {
 
   return (
     <div
-      className='icon-title'
-      onMouseLeave={onMouseLeave}
-      onMouseEnter={onMouseEnter}>
+      className='icon-title'>
       <div className='icon-title-wrapper'>
         <div
-          className='nav-icon-title todo-group'
-          onMouseLeave={handleMouseLeave}
-          onMouseEnter={handleMouseEnter}>
+          className='nav-icon-title todo-group'>
           {iconTitle.group}
         </div>
         <div
-          className='nav-icon-title'
-          onMouseLeave={handleMouseLeave}
-          onMouseEnter={handleMouseEnter}>
+          className='nav-icon-title'>
           {iconTitle.test}
         </div>
         <div
-          className='nav-icon-title'
-          onMouseLeave={handleMouseLeave}
-          onMouseEnter={handleMouseEnter}>
+          className='nav-icon-title'>
           {iconTitle.test}
         </div>
       </div>

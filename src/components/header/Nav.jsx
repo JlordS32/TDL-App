@@ -5,22 +5,16 @@ import NavItemTitles from "./NavItemTitles";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const Nav = () => {
-  const [mouseEnter, setMouseEnter] = useState(false);
-  const handleMouseEnter = () => {
-    setMouseEnter(true);
-  };
+  const [click, setClick] = useState(false);
 
-  const handleMouseLeave = () => {
-    setMouseEnter(true);
-  };
+  const handleClick = () => {
+    setClick(click ? false : true);
+  }
 
   return (
     <div className="nav-container">
-      <div
-        className="nav-icons-container"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className="nav-icons-container">
+        <button onClick={handleClick}>X</button>
         <div className="nav-icons-wrapper">
           <div className="nav-icons">
             <LabelIcon width="25" />
@@ -34,11 +28,8 @@ const Nav = () => {
         </div>
       </div>
 
-      {mouseEnter && (
-         <NavItemTitles 
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-         />
+      {click && (
+         <NavItemTitles />
       )} 
     </div>
   );

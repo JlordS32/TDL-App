@@ -23,7 +23,7 @@ const App = () => {
    const open = () => {  
       setModalOpen(true);
    };
-
+674776
    return (
       <ModalContext.Provider 
          value={{
