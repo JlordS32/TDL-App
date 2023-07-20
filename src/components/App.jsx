@@ -43,6 +43,10 @@ const App = () => {
 							element={<Home />}
 						/>
 						<Route
+							path='/note/*'
+							element={<Home />}
+						/>
+						<Route
 							path='/*'
 							element={<PageNotFound />}
 						/>
