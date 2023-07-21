@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,6 +13,7 @@ const Todo = () => {
 
    // Access the todos array from the Redux store
    const todoRedux = useSelector(state => state.todoReducer.value);
+   const filteredTodoRedux = useSelector(state => state.filteredReducer.value);
    const dispatch = useDispatch();
 
    // State to handle the focus and blur events of the todo input
@@ -124,13 +125,17 @@ const Todo = () => {
             </div>
          </div>
          <div className='todos-wrapper' ref={parent}>
-            {todoRedux.map(todo => (
-               <Todobox
-                  key={todo.id}
-                  todo={todo}
-                  onDelete={handleDelete}
-               />
-            ))}
+            {useMemo(() => {
+               return (
+                  filteredTodoRedux.map(todo => (
+                     <Todobox
+                        key={todo.id}
+                        todo={todo}
+                        onDelete={handleDelete}
+                     />
+                  ))
+               )
+            })}
          </div>
       </>
    );
