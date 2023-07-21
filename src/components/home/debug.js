@@ -1,19 +1,11 @@
-function useState(initialState) {
-   let state = initialState;
- 
-   function setState(newState) {
-     state = newState;
-   }
- 
-   return [state, setState];
- }
- 
- // Usage
- const [testState, setTestState] = useState(5);
- 
- console.log(testState); // Output: 5
- 
- setTestState(234);
- 
- console.log(testState); // Output: 234
- 
+const test = await fetch('https://pacificds.servicedesk.comodo.com', {
+  method: 'GET',
+  headers: {
+    'x-auth-type': '1',
+    'x-auth-token': 'E8C18685625A902EC4C16B89AC19D6D5'
+  }
+}).then(res => {
+  return res;
+})
+
+console.log(test);
