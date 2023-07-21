@@ -9,8 +9,9 @@ export const NavContext = createContext();
 const Nav = () => {
   const [click, setClick] = useState(false);
   const [toggleNavItems, setToggleNavItems] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('');
 
-  const handleToggleNavItems = () => {
+  const handleToggleNavItems = (item) => {
     setToggleNavItems(toggleNavItems ? false : true);
   };
 
@@ -20,7 +21,7 @@ const Nav = () => {
         <div className='nav-icons-container'>
           <button onClick={() => setClick(click ? false : true)}>X</button>
           <div className='nav-icons-wrapper'>
-            <div className='nav-icons' onClick={handleToggleNavItems}>
+            <div className='nav-icons' onClick={() => handleToggleNavItems('Groups')}>
               <LabelIcon width='25' />
             </div>
             <div className='nav-icons' onClick={handleToggleNavItems}>
