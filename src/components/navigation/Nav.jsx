@@ -7,38 +7,56 @@ import NavItems from './NavItems';
 export const NavContext = createContext();
 
 const Nav = () => {
-  const [click, setClick] = useState(false);
-  const [toggleNavItems, setToggleNavItems] = useState(false);
-  const [selectedItem, setSelectedItem] = useState('');
+	const [toggleIconTitle, setToggleIconTitle] = useState(false);
+	const [mouseEnter, setMouseEnter] = useState(false);
 
-  const handleToggleNavItems = (item) => {
-    setToggleNavItems(toggleNavItems ? false : true);
-  };
+	const handleMouseLeave = () => {
+		setMouseEnter(false);
+	};
 
-  return (
-    <NavContext.Provider value={{handleToggleNavItems}}>
-      <div className='nav-container'>
-        <div className='nav-icons-container'>
-          <button onClick={() => setClick(click ? false : true)}>X</button>
-          <div className='nav-icons-wrapper'>
-            <div className='nav-icons' onClick={() => handleToggleNavItems('Groups')}>
-              <LabelIcon width='25' />
-            </div>
-            <div className='nav-icons' onClick={handleToggleNavItems}>
-              <LabelIcon width='25' />
-            </div>
-            <div className='nav-icons' onClick={handleToggleNavItems}>
-              <LabelIcon width='25' />
-            </div>
-          </div>
-        </div>
+	const handleMouseEnter = () => {
+		setMouseEnter(true);
+	};
 
-        {click && <NavItemTitles />}
+	return (
+		<NavContext.Provider>
+			<div className='nav-container'>
+				<div
+					className='nav-icons-container'
+					onMouseEnter={handleMouseEnter}
+				>
+					<button
+						onClick={() =>
+							setToggleIconTitle(toggleIconTitle ? false : true)
+						}
+					>
+						X
+					</button>
+					<div className='nav-icons-wrapper'>
+						<div className='nav-icons'>
+							<LabelIcon width='25' />
+						</div>
+						<div className='nav-icons'>
+							<LabelIcon width='25' />
+						</div>
+						<div className='nav-icons'>
+							<LabelIcon width='25' />
+						</div>
+					</div>
+				</div>
 
-        {toggleNavItems && <NavItems />}
-      </div>
-    </NavContext.Provider>
-  );
+				{toggleIconTitle && <NavItemTitles />}
+
+				{mouseEnter && (
+					<NavItems
+						mouseEnter={mouseEnter}
+						handleMouseLeave={handleMouseLeave}
+            handleMouseEnter={handleMouseEnter}
+					/>
+				)}
+			</div>
+		</NavContext.Provider>
+	);
 };
 
 export default Nav;
