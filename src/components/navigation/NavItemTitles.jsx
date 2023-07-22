@@ -2,7 +2,7 @@ import '../../styles/nav.modules.css';
 import { useContext } from 'react';
 import { NavContext } from './Nav';
 
-const NavItemTitles = ({ mouseEnter, handleMouseLeave, handleMouseEnter }) => {
+const NavItemTitles = () => {
 	// const { handleToggleNavItems } = useContext(NavContext);
 
 	const iconTitle = {
@@ -12,11 +12,7 @@ const NavItemTitles = ({ mouseEnter, handleMouseLeave, handleMouseEnter }) => {
 	};
 
 	return (
-		<div
-			className={`icon-title ${mouseEnter ? 'show' : 'hide'}`}
-			onMouseLeave={handleMouseLeave}
-      onMouseEnter={handleMouseEnter}
-		>
+		<div className='icon-title'>
 			<div className='icon-title-wrapper'>
 				<div className='nav-icon-title todo-group'>{iconTitle.group}</div>
 				<div className='nav-icon-title todo-group'>{iconTitle.test}</div>
