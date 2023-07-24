@@ -37,6 +37,7 @@
    flex-direction: row;
    background-color: transparent;
    z-index: 4;
+   margin-top: var(--header-height);
 }
 
 .nav-icons-container,
@@ -68,7 +69,6 @@
    font-weight: 500;
 }
 
-.nav-icons-wrapper,
 .icon-title-wrapper {
    display: flex;
    flex-direction: column;
@@ -76,17 +76,6 @@
    justify-content: space-between;
    padding: 10px;
 }
-
-.icon-title-wrapper div:nth-child(1n),
-.nav-icons-wrapper div:nth-child(1n) {
-   height: 30px;
-   text-align: center;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   flex: 1;
-}
-
 .nav-icons-container {
    background-color: var(--dark-gray);
    z-index: 1;
