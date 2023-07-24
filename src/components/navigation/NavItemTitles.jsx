@@ -1,6 +1,4 @@
 import '../../styles/nav.modules.css';
-import { useContext } from 'react';
-import { NavContext } from './Nav';
 
 const NavItemTitles = () => {
 	// const { handleToggleNavItems } = useContext(NavContext);

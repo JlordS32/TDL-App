@@ -8,49 +8,53 @@ export const NavContext = createContext();
 
 const Nav = () => {
 	const [toggleIconTitle, setToggleIconTitle] = useState(false);
-	const [mouseEnter, setMouseEnter] = useState(false);
-  const [item, setItem] = useState('No Item');
+	const [toggleItem, setToggleItem] = useState(false);
+	const [item, setItem] = useState('No Item');
 
-	const handleMouseLeave = () => {
-		setMouseEnter(false);
-	};
-
-	const handleMouseEnter = () => {
-		setMouseEnter(true);
+	const handleToggleItem = (item) => {
+		setToggleItem(true);
+		setItem(item);
 	};
 
 	return (
-		<NavContext.Provider>
-			<div
-				className='nav-container'
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
-			>
-				<div className='nav-icons-container'>
-					<button
-						onClick={() =>
-							setToggleIconTitle(toggleIconTitle ? false : true)
-						}
+		<div className='nav-container'>
+			<div className='nav-icons-container'>
+				<button
+					onClick={() =>
+						setToggleIconTitle(toggleIconTitle ? false : true)
+					}
+				></button>
+				<div className='nav-icons-wrapper'>
+					<div
+						className='nav-icons'
+						onClick={() => handleToggleItem('Groups')}
 					>
-					</button>
-					<div className='nav-icons-wrapper'>
-						<div className='nav-icons' onMouseEnter={() => setItem('Groups')}>
-							<LabelIcon width='25' />
-						</div>
-						<div className='nav-icons' onMouseEnter={() => setItem('Test')}>
-							<LabelIcon width='25' />
-						</div>
-						<div className='nav-icons' onMouseEnter={() => setItem('Test 2')}>
-							<LabelIcon width='25' />
-						</div>
+						<LabelIcon width='25' />
+					</div>
+					<div
+						className='nav-icons'
+						onClick={() => handleToggleItem('Test')}
+					>
+						<LabelIcon width='25' />
+					</div>
+					<div
+						className='nav-icons'
+						onClick={() => handleToggleItem('Test 2')}
+					>
+						<LabelIcon width='25' />
 					</div>
 				</div>
-
-				{toggleIconTitle && <NavItemTitles />}
-
-				{mouseEnter && <NavItems mouseEnter={mouseEnter} item={item}/>}
 			</div>
-		</NavContext.Provider>
+
+			{toggleIconTitle && <NavItemTitles />}
+
+			{toggleItem && (
+				<NavItems
+					toggleItem={toggleItem}
+					item={item}
+				/>
+			)}
+		</div>
 	);
 };
 
