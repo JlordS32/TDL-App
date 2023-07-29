@@ -21,20 +21,28 @@ const Nav = () => {
 					className='nav-icons'
 					onClick={() => handleToggleItem('Groups')}
 				>
-					<LabelIcon width='25' />
+					<div>
+						<LabelIcon width='25' />
+					</div>
+					<span className='nav-icons-text'>Hello</span>
 				</div>
 				<div
 					className='nav-icons'
 					onClick={() => handleToggleItem('Test')}
 				>
-					<LabelIcon width='25' />
-					<p>Hello world</p>
+					<div>
+						<LabelIcon width='25' />
+					</div>
+					<span className='nav-icons-text'>Hello</span>
 				</div>
 				<div
 					className='nav-icons'
 					onClick={() => handleToggleItem('Test 2')}
 				>
-					<LabelIcon width='25' />
+					<div>
+						<LabelIcon width='25' />
+					</div>
+					<span className='nav-icons-text'>Hello</span>
 				</div>
 			</div>
 

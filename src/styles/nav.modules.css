@@ -30,10 +30,7 @@
    top: 0;
    left: 0;
    height: 100vh;
-   text-align: center;
    display: flex;
-   justify-content: center;
-   align-items: center;
    flex-direction: row;
    background-color: transparent;
    z-index: 4;
@@ -81,15 +78,37 @@
    z-index: 1;
    box-shadow: 30px 0px 56px 0px rgba(0,0,0,0.15);
    border-right: var(--gray) solid 1px;
-   width: 60px;
+   width: 3.5rem;
+   gap: 1rem;
+   overflow: hidden;
+   transition: width 200ms ease;
 }
+
+.nav-icons-container:hover {
+   width: 7.5rem;
+
+   & .nav-icons-text {
+      display: block;
+   }
+} 
 
 .nav-icons {
    display: flex;
-   justify-content: center;
    align-items: center;
    z-index: 2;
+   overflow: hidden;
+   padding: 0.5rem 0;
 }
+
+.nav-icons > div {
+   margin-left: 1rem;
+}
+
+.nav-icons-text {
+   display: none;
+   margin-left: 1rem;
+}
+
 
 .icon-title-wrapper div:nth-child(1n):hover {
    cursor: pointer;
@@ -100,13 +119,17 @@
    cursor: pointer;
    transform: scale(1.1);
    background-color: rgba(1, 1, 1, 0.1);
-   border-radius: 100px;
 }
 
 .nav-icons-container,
 .icon-title {
    transform: 0.5s;
    display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+.icon-title {
    flex-direction: column;
    justify-content: center;
    align-items: center;
