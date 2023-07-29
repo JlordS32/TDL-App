@@ -44,6 +44,15 @@ const Nav = () => {
 					</div>
 					<span className='nav-icons-text'>Hello</span>
 				</div>
+				<div
+					className='nav-icons'
+					onClick={() => handleToggleItem('Test 2')}
+				>
+					<div>
+						<LabelIcon width='25' />
+					</div>
+					<span className='nav-icons-text'>Settings</span>
+				</div>
 			</div>
 
 			{toggleItem && (

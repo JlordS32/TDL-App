@@ -14,7 +14,7 @@
 
    --default-font:'Montserrat', sans-serif;
    --ysabeau-infant: 'Ysabeau Infant', sans-serif;
-   --header-height: 4rem;
+   --header-height: 2rem;
 }
 
 .header-container {
@@ -29,4 +29,8 @@
    position: fixed;
    background-color: var(--dark-gray);
    z-index: 5;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   display: none;
 }
