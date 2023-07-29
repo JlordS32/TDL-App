@@ -14,6 +14,10 @@ const Nav = () => {
 		setItem(item);
 	};
 
+	const handleCloseItem = () => {
+		setToggleItem(false);
+	}
+
 	return (
 		<div className='nav-container'>
 			<div className='nav-icons-container'>
@@ -59,6 +63,7 @@ const Nav = () => {
 				<NavItems
 					toggleItem={toggleItem}
 					item={item}
+					close={handleCloseItem}
 				/>
 			)}
 		</div>
