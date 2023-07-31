@@ -37,7 +37,7 @@ const Nav = () => {
 					<div>
 						<LabelIcon width='25' />
 					</div>
-					<span className='nav-icons-text'>Hello</span>
+					<div className='nav-icons-text'>Hello</div>
 				</div>
 				<div
 					className='nav-icons'
@@ -46,7 +46,7 @@ const Nav = () => {
 					<div>
 						<LabelIcon width='25' />
 					</div>
-					<span className='nav-icons-text'>Hello</span>
+					<div className='nav-icons-text'>Hello</div>
 				</div>
 				<div
 					className='nav-icons'
@@ -55,7 +55,7 @@ const Nav = () => {
 					<div>
 						<LabelIcon width='25' />
 					</div>
-					<span className='nav-icons-text'>Settings</span>
+					<div className='nav-icons-text'>Settings</div>
 				</div>
 			</div>
 

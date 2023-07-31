@@ -105,7 +105,7 @@
    overflow: hidden;
    padding: 0.5rem 0;
 
-   & span {
+   & .nav-icons-text {
       color: var(--white);
    }
 }
@@ -123,7 +123,7 @@
 }
 
 .nav-icons-text {
-   display: none;
+   display: inline;
    margin-left: 1rem;
 }
 
@@ -171,11 +171,11 @@
    margin-top: 6rem;
    margin-right: 1rem;
    padding: 10px;
+}
 
-   & :hover {
-      cursor: pointer;
-      transform: scale(1.1);
-   }
+.close-item:hover {
+   cursor: pointer;
+   transform: scale(1.1);
 }
 
 @media screen and (max-width: 1020px) {
