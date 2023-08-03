@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { stringify, v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateGroupLabels } from '../../store/TodoReducer';
 
@@ -11,6 +11,16 @@ const Groups = () => {
 	// Access the 'value' property from the groupLabelReducer in Redux store
 	const groupRedux = useSelector((state) => state.groupLabelReducer.value);
 	const dispatch = useDispatch();
+
+   // UseEffect Hook used for localising the redux states
+   useEffect(() => {
+      const savedGroups = localStorage.getItem('groups'); // Get localStorage
+
+      // use useDispatch hook for rendering
+      if (savedGroups) {
+         dispatch(updateGroupLabels(JSON.parse(savedGroups)));
+      }
+   }, [dispatch])
 
 	// Function to handle the 'Submit' button click
 	const handleClick = () => {
@@ -25,6 +35,9 @@ const Groups = () => {
 
 		// Dispatch the action to update the group labels in Redux store
 		dispatch(updateGroupLabels(updatedGroups));
+
+      // creates localStorage
+      localStorage.setItem('groups', JSON.stringify(updatedGroups));
 
 		// Clear the input field value after adding the new group
 		setNewGroup('');
