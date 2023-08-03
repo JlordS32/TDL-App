@@ -168,14 +168,25 @@
    position: absolute;
    top: 0;
    right: 0;
-   margin-top: 6rem;
-   margin-right: 1rem;
+   margin-top: 5rem;
+   margin-right: 0.5rem;
    padding: 10px;
 }
 
 .close-item:hover {
    cursor: pointer;
    transform: scale(1.1);
+}
+
+.groups-container {
+   width: 90%;
+   margin-left: 10px;
+   margin-top: 7rem;
+   height: 83%;
+}
+
+.groups-container > h3 {
+   position: absolute;
 }
 
 @media screen and (max-width: 1020px) {

@@ -2,6 +2,7 @@ import React from 'react';
 import XIcon from '../../assets/icons/XIcon';
 import Groups from './navItems/Groups';
 import Test from './navItems/Test';
+import '../../styles/nav.modules.css';
 
 const NavItems = ({ toggleItem, item, close }) => {
 	const componentMap = {
@@ -28,7 +29,9 @@ const NavItems = ({ toggleItem, item, close }) => {
 					height='30'
 				/>
 			</div>
-			{content}
+			<div className={`${item.toLowerCase()}-container`}>
+				{content}
+			</div>
 		</div>
 	);
 };
