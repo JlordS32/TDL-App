@@ -8,7 +8,8 @@ import rootReducer from './components/store/TodoReducer';
 const store = configureStore({
    reducer: {
       todoReducer: rootReducer.todos,
-      filteredReducer: rootReducer.filteredTodo
+      filteredReducer: rootReducer.filteredTodo,
+      groupLabelReducer: rootReducer.groupLabel
    }
 });
 
