@@ -84,7 +84,7 @@
 .nav-icons-container {
    z-index: 1;
    box-shadow: 30px 0px 56px 0px rgba(0,0,0,0.15);
-   width: 3.5rem;
+   width: 3.4rem;
    gap: 1rem;
    overflow: hidden;
    transition: width 200ms ease;
@@ -183,6 +183,7 @@
    margin-left: 10px;
    margin-top: 7rem;
    height: 83%;
+   overflow-y: scroll;
 }
 
 .groups-container > h3 {

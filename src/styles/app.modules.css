@@ -14,6 +14,8 @@
 
    --default-font:'Montserrat', sans-serif;
    --ysabeau-infant: 'Ysabeau Infant', sans-serif;
+
+   font-size: 17px;
 }
 
 * {

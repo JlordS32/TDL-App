@@ -4,6 +4,7 @@ const initialStateValue = {
 	id: '',
 	title: '',
 	content: '',
+   group: '',
 	complete: false,
 };
 

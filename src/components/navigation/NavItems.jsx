@@ -1,6 +1,6 @@
 import React from 'react';
 import XIcon from '../../assets/icons/XIcon';
-import Groups from './navItems/Groups';
+import Groups from './navItems/groups/Groups';
 import Test from './navItems/Test';
 import '../../styles/nav.modules.css';
 

@@ -174,11 +174,10 @@
 
 .todo-icons {
    z-index: 2;
-   display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   grid-template-rows: 1fr;
+   display: flex;
    align-items: center;
    justify-content: center;
+   gap: 3rem;
 }
 
 .todo-icon-item {
