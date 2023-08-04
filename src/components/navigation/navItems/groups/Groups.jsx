@@ -121,7 +121,7 @@ const Groups = () => {
 							</div>
 						</div>
 					));
-				}, [groupRedux])}
+				})}
 			</div>
 		</>
 	);

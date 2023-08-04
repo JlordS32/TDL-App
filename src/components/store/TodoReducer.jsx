@@ -23,7 +23,10 @@ const todoSlice = createSlice({
 const filteredSlice = createSlice({
 	name: 'filteredReducer',
 	initialState: {
-		value: [initialStateValue],
+		value: [{
+			...initialStateValue,
+			searchQuery: '',
+		}],
 	},
 	reducers: {
 		updateFilteredTodo: (state, action) => {

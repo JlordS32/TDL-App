@@ -15,7 +15,7 @@ const Todo = () => {
    const todoRedux = useSelector(state => state.todoReducer.value);
    const filteredTodoRedux = useSelector(state => state.filteredReducer.value);
    const dispatch = useDispatch();
-
+   
    // State to handle the focus and blur events of the todo input
    const [onBlur, setOnBlur] = useState(true);
 
@@ -135,7 +135,7 @@ const Todo = () => {
                      />
                   ))
                )
-            }, [todoRedux])}
+            })}
          </div>
       </>
    );
