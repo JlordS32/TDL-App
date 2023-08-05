@@ -1,22 +1,27 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
 import '../../styles/todo.dialog.modules.css';
 
-const Dialog = ({ onClose, isDialogOpen }) => {
+const Dialog = ({ isDialogOpen, onClose }) => {
+	const dialogRef = useRef();
+
+	const handleBlur = () => {
+		onClose();
+	};
+
+	useEffect(() => {
+		dialogRef.current.focus();
+	}, []);
+
 	return (
 		<dialog
 			open
 			className={`dialog ${isDialogOpen ? 'dialog-open' : 'dialog-closed'}`}
+			onBlur={handleBlur}
+			ref={dialogRef}
 		>
-			<button
-				className='close-button'
-				onClick={onClose}
-			>
-				Close
-			</button>
-			<div>List 1</div>
-			<div>List 2</div>
-			<div>List 3</div>
+			<div>Groups</div>
+			<div>Favourite</div>
+			<div>Delete</div>
 		</dialog>
 	);
 };
