@@ -1,24 +1,22 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import '../../styles/todo.dialog.modules.css';
 
-const Dialog = ({ dialogRef, dialogPosition }) => {
+const Dialog = ({ onClose, isDialogOpen }) => {
 	return (
 		<dialog
-			ref={dialogRef}
-			className='dialog-overlay'
-			style={{
-				position: 'absolute',
-				top: dialogPosition.top + 'px',
-				left: dialogPosition.left + 'px',
-			}}
+			open
+			className={`dialog ${isDialogOpen ? 'dialog-open' : 'dialog-closed'}`}
 		>
-			<ul>
-				<li>List 1</li>
-				<li>List 2</li>
-				<li>List 3</li>
-				<li>List 4</li>
-			</ul>
+			<button
+				className='close-button'
+				onClick={onClose}
+			>
+				Close
+			</button>
+			<div>List 1</div>
+			<div>List 2</div>
+			<div>List 3</div>
 		</dialog>
 	);
 };

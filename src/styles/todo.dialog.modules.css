@@ -13,15 +13,61 @@
    --tertiary-color: #7631D4;
 
    /* FONTS */
-   --default-font:'Montserrat', sans-serif;
+   --default-font: 'Montserrat', sans-serif;
    --ysabeau-infant: 'Ysabeau Infant', sans-serif;
 }
 
-.dialog-overlay {
-   outline: 1px red solid;
-   z-index: 100;
-
-   & ul > li {
-      color: var(--black);
+@keyframes scaleIn {
+   from {
+      transform: scale(0);
    }
+
+   to {
+      transform: scale(1);
+   }
+}
+
+@keyframes scaleOut {
+   from {
+      transform: scale(1);
+   }
+
+   to {
+      transform: scale(0);
+   }
+}
+
+.dialog {
+   position: absolute;
+   top: 180px;
+   /* Position the dialog below the button */
+   left: 125px;
+   padding: 10px;
+   background-color: #ffffff;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+   z-index: 1000;
+   width: 5rem;
+   animation-duration: 0.2s;
+   animation-timing-function: ease-in-out;
+   animation-fill-mode: forwards;
+   display: none;
+}
+
+.dialog div {
+   color: var(--black);
+}
+
+.dialog-open {
+   display: block;
+   /* Show the dialog when the class is applied */
+   animation-name: scaleIn;
+   /* Apply the opening animation */
+}
+
+/* Apply the closing animation */
+.dialog-closed {
+   display: block;
+   animation-name: scaleOut;
 }

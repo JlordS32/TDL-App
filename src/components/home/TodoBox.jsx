@@ -1,60 +1,57 @@
-import '../../styles/todo.modules.css';
-import { useContext, useState, useRef, useEffect } from 'react';
-
-import { motion } from 'framer-motion';
-
-// SVG Imports
+import React, { useContext, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import DeleteIcon from '../../assets/icons/DeleteIcon';
 import MoreIcon from '../../assets/icons/MoreIcon';
 import LabelIcon from '../../assets/icons/LabelIcon';
 import Dialog from './TodoDialog';
-
-// Importing context
 import { ModalContext } from '../App';
+import '../../styles/todo.modules.css'; // Import your CSS file
 
 const Todobox = ({ todo, onDelete }) => {
-	// Using context to access state from Todo component
-	// const { setTodos, todos } = useContext(TodoContext);
-
+	// Accessing context to manage modal state
 	const { modalOpen, open, close, setSelectedTodo } = useContext(ModalContext);
 
 	const { id, content, title } = todo;
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
-	const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
-	const itemRef = useRef(null);
 
-	const dialogRef = useRef();
-
+	// Function to open the dialog
 	const openDialog = () => {
-		setIsDialogOpen(isDialogOpen ? false : true);
-
-		switch (isDialogOpen) {
-			case true:
-				dialogRef.current.show();
-				break;
-			case false:
-				dialogRef.current.close();
-			default:
-				break;
-		}
-
-		const rect = itemRef.current.getBoundingClientRect();
-		setDialogPosition({
-			top: rect.top + rect.height, // Position below the item
-			left: rect.left, // Align with the left edge of the item
-		});
+		setIsDialogOpen(true);
 	};
 
+	// Function to close the dialog
+	const closeDialog = () => {
+		setIsDialogOpen(false);
+	};
+
+	// Function to handle todo item click
 	const handleClick = () => {
-		// Sets Todo for the current selected modal.
 		setSelectedTodo(todo);
 
-		// A conditional statement whether modal is opened or not.
+		// Toggle modal based on its current state
 		if (!modalOpen) {
 			open();
 		} else {
 			close();
 		}
+	};
+
+	// Function to toggle the dialog's open/close state
+	const toggleDialog = () => {
+		if (isDialogOpen) {
+			closeDialog();
+		} else {
+			closeAllDialogs();
+			openDialog();
+		}
+	};
+
+	// Function to close all dialogs
+	const closeAllDialogs = () => {
+		const allDialogs = document.querySelectorAll('.dialog');
+		allDialogs.forEach((dialog) => {
+			dialog.close();
+		});
 	};
 
 	const white = '#F0E8F0';
@@ -75,11 +72,8 @@ const Todobox = ({ todo, onDelete }) => {
 					duration: 0.1,
 					ease: 'linear',
 				}}
-				whileHover={{
-					scale: 1.02,
-				}}
-				ref={itemRef}
 			>
+				{/* Content of the todo */}
 				<div
 					onClick={handleClick}
 					className='todo-content-wrapper'
@@ -88,6 +82,7 @@ const Todobox = ({ todo, onDelete }) => {
 					<div className='todo-content'>{content}</div>
 				</div>
 
+				{/* Icon buttons */}
 				<div className='todo-icons'>
 					<div
 						className='todo-icon-item label-btn'
@@ -109,7 +104,7 @@ const Todobox = ({ todo, onDelete }) => {
 					</div>
 					<div
 						className='todo-icon-item more-btn'
-						onClick={() => openDialog()}
+						onClick={toggleDialog}
 					>
 						<MoreIcon
 							width='17'
@@ -117,8 +112,17 @@ const Todobox = ({ todo, onDelete }) => {
 						/>
 					</div>
 				</div>
+
+				{/* Render the dialog when it's open */}
+				<AnimatePresence>
+					{isDialogOpen && (
+						<Dialog
+							onClose={closeDialog}
+							isDialogOpen={isDialogOpen}
+						/>
+					)}
+				</AnimatePresence>
 			</motion.div>
-			<Dialog dialogRef={dialogRef} dialogPosition={dialogPosition}/>
 		</>
 	);
 };
