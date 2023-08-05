@@ -19,8 +19,9 @@
 
 .dialog-overlay {
    outline: 1px red solid;
-   position: absolute;
-   bottom: 0;
-   right: 0;
-   transform: translateX(-100px);
+   z-index: 100;
+
+   & ul > li {
+      color: var(--black);
+   }
 }

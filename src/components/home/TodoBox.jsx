@@ -1,5 +1,5 @@
 import '../../styles/todo.modules.css';
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef, useEffect } from 'react';
 
 import { motion } from 'framer-motion';
 
@@ -19,11 +19,30 @@ const Todobox = ({ todo, onDelete }) => {
 	const { modalOpen, open, close, setSelectedTodo } = useContext(ModalContext);
 
 	const { id, content, title } = todo;
-
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
+	const [dialogPosition, setDialogPosition] = useState({ top: 0, left: 0 });
+	const itemRef = useRef(null);
 
-	const handleToggleDialog = () => {
+	const dialogRef = useRef();
+
+	const openDialog = () => {
 		setIsDialogOpen(isDialogOpen ? false : true);
+
+		switch (isDialogOpen) {
+			case true:
+				dialogRef.current.show();
+				break;
+			case false:
+				dialogRef.current.close();
+			default:
+				break;
+		}
+
+		const rect = itemRef.current.getBoundingClientRect();
+		setDialogPosition({
+			top: rect.top + rect.height, // Position below the item
+			left: rect.left, // Align with the left edge of the item
+		});
 	};
 
 	const handleClick = () => {
@@ -59,6 +78,7 @@ const Todobox = ({ todo, onDelete }) => {
 				whileHover={{
 					scale: 1.02,
 				}}
+				ref={itemRef}
 			>
 				<div
 					onClick={handleClick}
@@ -89,7 +109,7 @@ const Todobox = ({ todo, onDelete }) => {
 					</div>
 					<div
 						className='todo-icon-item more-btn'
-						onClick={handleToggleDialog}
+						onClick={() => openDialog()}
 					>
 						<MoreIcon
 							width='17'
@@ -97,11 +117,8 @@ const Todobox = ({ todo, onDelete }) => {
 						/>
 					</div>
 				</div>
-				<Dialog
-					isOpen={isDialogOpen}
-					onClose={handleToggleDialog}
-				/>
 			</motion.div>
+			<Dialog dialogRef={dialogRef} dialogPosition={dialogPosition}/>
 		</>
 	);
 };
