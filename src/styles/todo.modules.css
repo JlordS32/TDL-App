@@ -118,7 +118,6 @@
    height: 250px;
    margin: 10px;
    padding: 0.75em;
-   overflow-x: hidden;
    position: relative;
 
    /* Display */
@@ -131,7 +130,6 @@
    background-color: var(--mid-gray);
    border-radius: 15px;
    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-   overflow: hidden;
    box-sizing: border-box;
 }
 
@@ -148,6 +146,7 @@
    height: 100px;
    opacity: 30%;
    background: linear-gradient(to bottom, rgba(240, 240, 240, 0), rgb(0, 0, 0));
+   border-radius: inherit;
 }
 
 .title,
@@ -177,7 +176,7 @@
    display: flex;
    align-items: center;
    justify-content: center;
-   gap: 3rem;
+   gap: 2rem;
 }
 
 .todo-icon-item {

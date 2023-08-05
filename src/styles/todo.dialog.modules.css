@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&family=Ysabeau+Infant:wght@200;300&display=swap');
+
+:root {
+   --black: #1A191A;
+   --white: #F0E8F0;
+   --dark-gray: #242424;
+   --mid-gray: #302F30;
+   --gray: #757275;
+   --light-grey: #969296;
+
+   --primary-color: #B941EB;
+   --secondary-color: #CF31D4;
+   --tertiary-color: #7631D4;
+
+   /* FONTS */
+   --default-font:'Montserrat', sans-serif;
+   --ysabeau-infant: 'Ysabeau Infant', sans-serif;
+}
+
+.dialog-overlay {
+   outline: 1px red solid;
+   position: absolute;
+   bottom: 0;
+   right: 0;
+   transform: translateX(-100px);
+}

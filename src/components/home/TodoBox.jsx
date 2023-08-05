@@ -1,15 +1,16 @@
 import '../../styles/todo.modules.css';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import { motion } from 'framer-motion';
 
 // SVG Imports
 import DeleteIcon from '../../assets/icons/DeleteIcon';
 import MoreIcon from '../../assets/icons/MoreIcon';
+import LabelIcon from '../../assets/icons/LabelIcon';
+import Dialog from './TodoDialog';
 
 // Importing context
 import { ModalContext } from '../App';
-import LabelIcon from '../../assets/icons/LabelIcon';
 
 const Todobox = ({ todo, onDelete }) => {
 	// Using context to access state from Todo component
@@ -18,6 +19,12 @@ const Todobox = ({ todo, onDelete }) => {
 	const { modalOpen, open, close, setSelectedTodo } = useContext(ModalContext);
 
 	const { id, content, title } = todo;
+
+	const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+	const handleToggleDialog = () => {
+		setIsDialogOpen(isDialogOpen ? false : true);
+	};
 
 	const handleClick = () => {
 		// Sets Todo for the current selected modal.
@@ -34,62 +41,68 @@ const Todobox = ({ todo, onDelete }) => {
 	const white = '#F0E8F0';
 
 	return (
-		<motion.div
-			className='todo-container'
-			initial={{
-				opacity: 0,
-				scale: 0.7,
-			}}
-			animate={{
-				opacity: 1,
-				scale: 1,
-			}}
-			transition={{
-				duration: 0.1,
-				ease: 'linear',
-			}}
-			whileHover={{
-				scale: 1.02,
-			}}
-		>
-			<div
-				onClick={handleClick}
-				className='todo-content-wrapper'
+		<>
+			<motion.div
+				className='todo-container'
+				initial={{
+					opacity: 0,
+					scale: 0.7,
+				}}
+				animate={{
+					opacity: 1,
+					scale: 1,
+				}}
+				transition={{
+					duration: 0.1,
+					ease: 'linear',
+				}}
+				whileHover={{
+					scale: 1.02,
+				}}
 			>
-				<div className='title'>{title}</div>
-				<div className='todo-content'>{content}</div>
-			</div>
+				<div
+					onClick={handleClick}
+					className='todo-content-wrapper'
+				>
+					<div className='title'>{title}</div>
+					<div className='todo-content'>{content}</div>
+				</div>
 
-			<div className='todo-icons'>
-				{/* <div
-					className='todo-icon-item more-btn'
-					onClick={() => alert('hello world')}
-				>
-					<MoreIcon
-						width='17'
-						color={white}
-					/>
-				</div> */}
-				<div
-					className='todo-icon-item label-btn'
-					onClick={() => alert('hello world')}
-				>
-					<LabelIcon
-						width='17'
-						color={white}
-					/>
+				<div className='todo-icons'>
+					<div
+						className='todo-icon-item label-btn'
+						onClick={() => alert('hello world')}
+					>
+						<LabelIcon
+							width='17'
+							color={white}
+						/>
+					</div>
+					<div
+						className='todo-icon-item delete-btn'
+						onClick={() => onDelete(id)}
+					>
+						<DeleteIcon
+							color={white}
+							width='17'
+						/>
+					</div>
+					<div
+						className='todo-icon-item more-btn'
+						onClick={handleToggleDialog}
+					>
+						<MoreIcon
+							width='17'
+							color={white}
+						/>
+					</div>
 				</div>
-				<div
-					className='todo-icon-item delete-btn'
-					onClick={() => onDelete(id)}
-				>
-					<DeleteIcon
-						color={white}
-						width='17'
-					/>
-				</div>
-			</div>
-		</motion.div>
+				<Dialog
+					isOpen={isDialogOpen}
+					onClose={handleToggleDialog}
+				/>
+			</motion.div>
+		</>
 	);
 };
 

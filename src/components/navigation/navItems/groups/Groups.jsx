@@ -36,7 +36,7 @@ const Groups = () => {
 			const updatedGroups = [
 				...groupRedux,
 				{
-					group: newGroup,
+					name: newGroup,
 					id: uuidv4(),
 				},
 			];
@@ -101,7 +101,7 @@ const Groups = () => {
 							className='group-label'
 							key={group.id}
 						>
-							<h4>{group.group}</h4>
+							<h4>{group.name}</h4>
 							<div className='icon'>
 								<div className='edit'>
 									<EditIcon

@@ -11,7 +11,13 @@ const initialStateValue = {
 const todoSlice = createSlice({
 	name: 'todoReducer',
 	initialState: {
-		value: [initialStateValue],
+		value: [{
+			...initialStateValue,
+			group: {
+				name: '',
+				id: ''
+			}
+		}],
 	},
 	reducers: {
 		updateTodo: (state, action) => {
@@ -41,7 +47,7 @@ const groupLabelSlice = createSlice({
 		value: [
 			{
 				id: '',
-				group: '',
+				name: '',
 			},
 		],
 	},
