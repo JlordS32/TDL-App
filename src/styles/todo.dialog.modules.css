@@ -19,21 +19,13 @@
 
 @keyframes scaleIn {
    from {
-      transform: scale(0);
+      transform: scale(0) translateX(-100%);
+      opacity: 0;
    }
 
    to {
-      transform: scale(1);
-   }
-}
-
-@keyframes scaleOut {
-   from {
-      transform: scale(1);
-   }
-
-   to {
-      transform: scale(0);
+      transform: scale(1) translateX(0%);
+      opacity: 1;
    }
 }
 
@@ -42,32 +34,49 @@
    top: 180px;
    /* Position the dialog below the button */
    left: 125px;
-   padding: 10px;
-   background-color: #ffffff;
-   border: 1px solid #ccc;
+   background-color: var(--dark-gray);
+   color: var(--white);
    border-radius: 5px;
    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
    z-index: 1000;
-   width: 5rem;
-   animation-duration: 0.2s;
+   width: 7.5rem;
+   font-family: var(--default-font);
+   border: 0;
+   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+   font-size: 0.8rem;
+   animation-duration: 0.23s;
    animation-timing-function: ease-in-out;
    animation-fill-mode: forwards;
-   display: none;
+   padding: 0.7em 0;
 }
 
-.dialog div {
-   color: var(--black);
+.dialog:focus {
+   border: 0;
+   outline: 0;
+}
+
+.dialog > .icons {
+   color: var(--white);
+   padding: 5px;
+
+   & .option {
+      display: flex;
+      text-align: center;
+      align-items: center;
+      margin: 0 0.4rem;
+   }
+}
+
+.dialog > .icons:hover {
+   cursor: pointer;
+}
+
+.dialog > .icons:nth-child(1n):hover {
+   background-color: var(--gray);
 }
 
 .dialog-open {
-   display: block;
-   /* Show the dialog when the class is applied */
    animation-name: scaleIn;
-   /* Apply the opening animation */
-}
-
-/* Apply the closing animation */
-.dialog-closed {
-   display: block;
-   animation-name: scaleOut;
+   display: flex;
+   flex-direction: column;
 }

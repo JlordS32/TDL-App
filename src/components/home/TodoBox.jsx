@@ -119,6 +119,7 @@ const Todobox = ({ todo, onDelete }) => {
 						<Dialog
 							onClose={closeDialog}
 							isDialogOpen={isDialogOpen}
+							onDelete={() => onDelete(id)}
 						/>
 					)}
 				</AnimatePresence>

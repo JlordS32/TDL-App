@@ -1,5 +1,6 @@
 import '../../styles/nav.modules.css';
 import LabelIcon from '../../assets/icons/LabelIcon';
+import SettingsIcon from '../../assets/icons/SettingsIcon';
 import { useEffect, useState, createContext } from 'react';
 import NavItems from './NavItems';
 
@@ -16,7 +17,7 @@ const Nav = () => {
 
 	const handleCloseItem = () => {
 		setToggleItem(false);
-	}
+	};
 
 	return (
 		<div className='nav-container'>
@@ -53,7 +54,7 @@ const Nav = () => {
 					onClick={() => handleToggleItem('test 2')}
 				>
 					<div>
-						<LabelIcon width='25' />
+						<SettingsIcon />
 					</div>
 					<div className='nav-icons-text'>Settings</div>
 				</div>
