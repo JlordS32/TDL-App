@@ -12,8 +12,8 @@ const Dialog = ({ isDialogOpen, onDelete, onClose }) => {
 	};
 
 	useEffect(() => {
-		dialogRef.current.focus();
-	}, []);
+		if (isDialogOpen) dialogRef.current.focus();
+	}, [isDialogOpen]);
 
 	const dialogTitles = {
 		delete: 'Delete',

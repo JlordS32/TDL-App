@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { stringify, v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateGroupLabels } from '../../../store/TodoReducer';
@@ -6,10 +6,13 @@ import '../../../../styles/groups.modules.css';
 import EditIcon from '../../../../assets/icons/EditIcon';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import GroupsModal from './GroupsModal';
 
 const Groups = () => {
 	// Local state to hold the value of the input field
 	const [newGroup, setNewGroup] = useState('');
+	
+	const dialogRef = useRef();
 
 	// Auto-Animate
 	const [parent] = useAutoAnimate();
@@ -70,6 +73,11 @@ const Groups = () => {
 		setNewGroup(e.target.value);
 	};
 
+	const handleGroupModal = (e) => {
+		e.preventDefault();
+		dialogRef.current.showModal();
+	}
+
 	return (
 		<>
 			<div className='groups-search-wrapper'>
@@ -103,7 +111,7 @@ const Groups = () => {
 						>
 							<h4>{group.name}</h4>
 							<div className='icon'>
-								<div className='edit'>
+								<div className='edit' onClick={handleGroupModal}>
 									<EditIcon
 										width='17'
 										height='17'
@@ -123,6 +131,7 @@ const Groups = () => {
 					));
 				})}
 			</div>
+			<GroupsModal dialogRef={dialogRef} />
 		</>
 	);
 };

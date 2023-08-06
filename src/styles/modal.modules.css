@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400;1,500&family=Ysabeau+Infant:wght@200;300&display=swap');
+
+:root {
+   --black: #1A191A;
+   --white: #F0E8F0;
+   --dark-gray: #242424;
+   --mid-gray: #302F30;
+   --gray: #757275;
+   --light-grey: #969296;
+
+   --primary-color: #B941EB;
+   --secondary-color: #CF31D4;
+   --tertiary-color: #7631D4;
+
+   --default-font:'Montserrat', sans-serif;
+   --ysabeau-infant: 'Ysabeau Infant', sans-serif;
+   --header-height: 2rem;
+}
+
+@keyframes modalAnimation {
+   0% {
+      transform: translateX(-50%) scale(0.5);
+      opacity: 0.5;
+   }
+
+   70% {
+      transform: translateX(3%) scale(1);
+   }
+
+   100% {
+      transform: translateY(0%) translateX(0%)scale(1);
+      opacity: 1;
+   }
+}
+
+.dialog-modal-container {
+   animation: modalAnimation 200ms ease-in;
+   border: 0;
+   outline: 0;
+   background-color: var(--dark-gray);
+   position: relative;
+   padding: 0;
+   border-radius: 20px;
+}
+
+.dialog-modal-container > .close-btn {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
+   right: 0;
+   margin: 20px;
+   transition: transform 0.1s ease-in;
+}
+
+.dialog-modal-container > .close-btn:hover {
+   cursor: pointer;
+   transform: scale(1.1);
+}

@@ -1,16 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import Todobox from './TodoBox';
 import '../../styles/todo.modules.css';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateTodo } from '../store/TodoReducer';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import Dialog from './TodoDialog';
+import Modal from '../dialog/Modal';
+import GroupsModal from '../navigation/navItems/groups/GroupsModal';
 
 const Todo = () => {
 	// State to hold the new todo input values
 	const [newTodo, setNewTodo] = useState('');
 	const [newTodoTitle, setNewTodoTitle] = useState('');
+
+	// dialog reference
+	const dialogRef = useRef();
 
 	// Access the todos array from the Redux store
 	const todoRedux = useSelector((state) => state.todoReducer.value);
@@ -55,7 +59,7 @@ const Todo = () => {
 	// Add a new todo when the input is blurred and not empty
 	useEffect(() => {
 		if (onBlur) {
-			if (newTodo.trim() !== '') {
+			if (newTodo.trim() !== '' || newTodoTitle.trim() !== '') {
 				const updatedTodos = [
 					...todoRedux,
 					{
@@ -86,7 +90,7 @@ const Todo = () => {
 		// Update localStorage with the updated todos
 		localStorage.setItem('todos', JSON.stringify(updatedItems));
 
-		// Dispatch the updateTodo action to update the Redux store
+		// Dispatch th e updateTodo action to update the Redux store
 		dispatch(updateTodo(updatedItems));
 	};
 
@@ -138,10 +142,12 @@ const Todo = () => {
 							key={todo.id}
 							todo={todo}
 							onDelete={handleDelete}
+							dialogRef={dialogRef}
 						/>
 					));
 				})}
 			</div>
+			<GroupsModal dialogRef={dialogRef}/>
 		</>
 	);
 };

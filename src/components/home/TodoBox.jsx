@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import DeleteIcon from '../../assets/icons/DeleteIcon';
 import MoreIcon from '../../assets/icons/MoreIcon';
@@ -6,22 +6,19 @@ import LabelIcon from '../../assets/icons/LabelIcon';
 import Dialog from './TodoDialog';
 import { ModalContext } from '../App';
 import '../../styles/todo.modules.css'; // Import your CSS file
+import Modal from '../dialog/Modal';
 
-const Todobox = ({ todo, onDelete }) => {
+const Todobox = ({ todo, onDelete, dialogRef }) => {
 	// Accessing context to manage modal state
 	const { modalOpen, open, close, setSelectedTodo } = useContext(ModalContext);
 
 	const { id, content, title } = todo;
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
+	const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
 
 	// Function to open the dialog
 	const openDialog = () => {
-		setIsDialogOpen(true);
-	};
-
-	// Function to close the dialog
-	const closeDialog = () => {
-		setIsDialogOpen(false);
+		setIsDialogOpen(isDialogOpen ? false : true);
 	};
 
 	// Function to handle todo item click
@@ -36,22 +33,8 @@ const Todobox = ({ todo, onDelete }) => {
 		}
 	};
 
-	// Function to toggle the dialog's open/close state
-	const toggleDialog = () => {
-		if (isDialogOpen) {
-			closeDialog();
-		} else {
-			closeAllDialogs();
-			openDialog();
-		}
-	};
-
-	// Function to close all dialogs
-	const closeAllDialogs = () => {
-		const allDialogs = document.querySelectorAll('.dialog');
-		allDialogs.forEach((dialog) => {
-			dialog.close();
-		});
+	const handleGroupModal = () => {
+		dialogRef.current.showModal();
 	};
 
 	const white = '#F0E8F0';
@@ -86,7 +69,7 @@ const Todobox = ({ todo, onDelete }) => {
 				<div className='todo-icons'>
 					<div
 						className='todo-icon-item label-btn'
-						onClick={() => alert('hello world')}
+						onClick={handleGroupModal}
 					>
 						<LabelIcon
 							width='17'
@@ -104,7 +87,7 @@ const Todobox = ({ todo, onDelete }) => {
 					</div>
 					<div
 						className='todo-icon-item more-btn'
-						onClick={toggleDialog}
+						onClick={openDialog}
 					>
 						<MoreIcon
 							width='17'
@@ -117,7 +100,7 @@ const Todobox = ({ todo, onDelete }) => {
 				<AnimatePresence>
 					{isDialogOpen && (
 						<Dialog
-							onClose={closeDialog}
+							onClose={() => setIsDialogOpen(false)}
 							isDialogOpen={isDialogOpen}
 							onDelete={() => onDelete(id)}
 						/>
