@@ -5,7 +5,7 @@ import { ModalContext } from '../App';
 import Todo from './Todo';
 import Nav from '../navigation/Nav';
 import Search from './Search';
-import Modal from '../dialog/Modal';
+import TodoModal from '../dialog/TodaModal';
 import '../../styles/todo.modules.css';
 
 const Home = () => {
@@ -20,7 +20,7 @@ const Home = () => {
 			</div>
 			{modalOpen && (
 				<div>
-					<Modal
+					<TodoModal
 						modalOpen={modalOpen}
 						handleClose={close}
 						selectedTodo={selectedTodo}
