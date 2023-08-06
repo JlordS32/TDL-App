@@ -71,6 +71,8 @@
    cursor: pointer;
 }
 
+/* Comments */
+
 .dialog > .icons:nth-child(1n):hover {
    background-color: var(--gray);
 }
