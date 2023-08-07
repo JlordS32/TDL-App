@@ -4,6 +4,7 @@ import XIcon from '../../assets/icons/XIcon';
 
 const Modal = ({ dialogRef, children, width, height }) => {
 	const parentType = children.parentElement;
+	//shit
 
 	useEffect(() => {
 		console.log(parentType);
