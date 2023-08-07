@@ -3,6 +3,7 @@ import React from 'react';
 import XIcon from '../../assets/icons/XIcon';
 
 const Modal = ({ dialogRef, children, width, height }) => {
+	// test
 	return (
 		<dialog
 			style={{
