@@ -1,8 +1,14 @@
-import '../../styles/modal.modules.css';
-import React from 'react';
+import styles from '../../styles/modal.module.css';
+import React, { useEffect } from 'react';
 import XIcon from '../../assets/icons/XIcon';
 
 const Modal = ({ dialogRef, children, width, height }) => {
+	const parentType = children.parentElement;
+
+	useEffect(() => {
+		console.log(parentType);
+	}, [parentType]);
+	
 	return (
 		<dialog
 			style={{
@@ -12,15 +18,18 @@ const Modal = ({ dialogRef, children, width, height }) => {
 				height: `${height}px`,
 			}}
 			ref={dialogRef}
-			className='dialog-modal-container'
+			className={styles['dialog-modal-container']}
 		>
 			<div
 				onClick={() => {
 					dialogRef.current.close();
 				}}
-				className='close-btn'
+				className={styles['close-btn']}
 			>
-				<XIcon width='24' height='24'/>
+				<XIcon
+					width='24'
+					height='24'
+				/>
 			</div>
 			{children}
 		</dialog>

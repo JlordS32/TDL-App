@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 import Modal from '../../../dialog/Modal';
-import '../../../../styles/groups.modules.css';
+import styles from '../../../../styles/groups.modal.module.css';
 
 const GroupsModal = ({dialogRef}) => {
 	return (
@@ -9,7 +9,7 @@ const GroupsModal = ({dialogRef}) => {
 			width={800}
 			height={800}
 		>
-			<div>GroupsModal</div>
+			<div className={styles['groups-modal']}>GroupsModal</div>
 		</Modal>
 	);
 };

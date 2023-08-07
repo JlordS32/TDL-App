@@ -146,8 +146,8 @@ const Todo = () => {
 						/>
 					));
 				})}
+				<GroupsModal dialogRef={dialogRef}/>
 			</div>
-			<GroupsModal dialogRef={dialogRef}/>
 		</>
 	);
 };
