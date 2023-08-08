@@ -6,6 +6,7 @@ import '../../../../styles/groups.modules.css';
 import EditIcon from '../../../../assets/icons/EditIcon';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import SearchICon from '../../../../assets/icons/SearchIcon';
 
 const Groups = ({ dialogRef }) => {
 	// Local state to hold the value of the input field
@@ -87,14 +88,16 @@ const Groups = ({ dialogRef }) => {
 							color: 'black',
 						}}
 					/>
-					<button
+					<div
 						onClick={handleClick}
 						style={{
 							color: 'black',
 						}}
 					>
-						Add
-					</button>
+						<div className='search'>
+							<SearchICon width='20'/>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div

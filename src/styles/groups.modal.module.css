@@ -1,9 +1,6 @@
 .groups-modal {
-   color: red;
-   outline: 1px red solid ;
    width: 80%;
    margin: 0 auto;
    height: 90%;
-   margin-top: 10rem;
-   overflow: hidden;
+   margin-top: 4rem;
 }

@@ -56,8 +56,27 @@
 }
 
 .groups-search-wrapper {
-   outline: 1px red solid;
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+.groups-search {
+   gap: 10px;
+}
+
+.groups-search > input {
+   border-radius: 20px;
+   height: 1.9rem;
+   background-color: var(--mid-gray);
+   border: 0;
+}
+
+.groups-search > div {
+   display: flex;
+
+   & .search {
+      margin-left: auto;
+      transform: translate(-15px, -29px);
+   }
 }
