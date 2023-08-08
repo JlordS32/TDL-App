@@ -5,16 +5,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateTodo } from '../store/TodoReducer';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import Modal from '../dialog/Modal';
-import GroupsModal from '../navigation/navItems/groups/GroupsModal';
 
-const Todo = () => {
+const Todo = ({dialogRef}) => {
 	// State to hold the new todo input values
 	const [newTodo, setNewTodo] = useState('');
 	const [newTodoTitle, setNewTodoTitle] = useState('');
-
-	// dialog reference
-	const dialogRef = useRef();
 
 	// Access the todos array from the Redux store
 	const todoRedux = useSelector((state) => state.todoReducer.value);
@@ -146,7 +141,6 @@ const Todo = () => {
 						/>
 					));
 				})}
-				<GroupsModal dialogRef={dialogRef}/>
 			</div>
 		</>
 	);

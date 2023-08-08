@@ -6,13 +6,10 @@ import '../../../../styles/groups.modules.css';
 import EditIcon from '../../../../assets/icons/EditIcon';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import GroupsModal from './GroupsModal';
 
-const Groups = () => {
+const Groups = ({ dialogRef }) => {
 	// Local state to hold the value of the input field
 	const [newGroup, setNewGroup] = useState('');
-	
-	const dialogRef = useRef();
 
 	// Auto-Animate
 	const [parent] = useAutoAnimate();
@@ -76,27 +73,29 @@ const Groups = () => {
 	const handleGroupModal = (e) => {
 		e.preventDefault();
 		dialogRef.current.showModal();
-	}
+	};
 
 	return (
 		<>
 			<div className='groups-search-wrapper'>
-				<input
-					type='text'
-					onChange={handleOnChange}
-					value={newGroup} // Bind the input field to the local state
-					style={{
-						color: 'black',
-					}}
-				/>
-				<button
-					onClick={handleClick}
-					style={{
-						color: 'black',
-					}}
-				>
-					Add
-				</button>
+				<div className='groups-search'>
+					<input
+						type='text'
+						onChange={handleOnChange}
+						value={newGroup} // Bind the input field to the local state
+						style={{
+							color: 'black',
+						}}
+					/>
+					<button
+						onClick={handleClick}
+						style={{
+							color: 'black',
+						}}
+					>
+						Add
+					</button>
+				</div>
 			</div>
 			<div
 				className='group-labels'
@@ -111,7 +110,10 @@ const Groups = () => {
 						>
 							<h4>{group.name}</h4>
 							<div className='icon'>
-								<div className='edit' onClick={handleGroupModal}>
+								<div
+									className='edit'
+									onClick={handleGroupModal}
+								>
 									<EditIcon
 										width='17'
 										height='17'
@@ -131,7 +133,6 @@ const Groups = () => {
 					));
 				})}
 			</div>
-			<GroupsModal dialogRef={dialogRef} />
 		</>
 	);
 };

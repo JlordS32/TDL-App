@@ -4,9 +4,9 @@ import Groups from './navItems/groups/Groups';
 import Test from './navItems/Test';
 import '../../styles/nav.modules.css';
 
-const NavItems = ({ toggleItem, item, close }) => {
+const NavItems = ({ toggleItem, item, close, dialogRef }) => {
 	const componentMap = {
-		groups: <Groups />,
+		groups: <Groups dialogRef={dialogRef} />,
 		test: <Test />,
 	};
 
@@ -29,9 +29,7 @@ const NavItems = ({ toggleItem, item, close }) => {
 					height='30'
 				/>
 			</div>
-			<div className={`${item.toLowerCase()}-container`}>
-				{content}
-			</div>
+			<div className={`${item.toLowerCase()}-container`}>{content}</div>
 		</div>
 	);
 };

@@ -6,7 +6,6 @@ import LabelIcon from '../../assets/icons/LabelIcon';
 import Dialog from './TodoDialog';
 import { ModalContext } from '../App';
 import '../../styles/todo.modules.css'; // Import your CSS file
-import Modal from '../dialog/Modal';
 
 const Todobox = ({ todo, onDelete, dialogRef }) => {
 	// Accessing context to manage modal state
@@ -14,7 +13,6 @@ const Todobox = ({ todo, onDelete, dialogRef }) => {
 
 	const { id, content, title } = todo;
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
-	const [isMoreModalOpen, setIsMoreModalOpen] = useState(false);
 
 	// Function to open the dialog
 	const openDialog = () => {

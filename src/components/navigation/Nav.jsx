@@ -6,7 +6,7 @@ import NavItems from './NavItems';
 
 export const NavContext = createContext();
 
-const Nav = () => {
+const Nav = ({ dialogRef }) => {
 	const [toggleItem, setToggleItem] = useState(false);
 	const [item, setItem] = useState('No Item');
 
@@ -65,6 +65,7 @@ const Nav = () => {
 					toggleItem={toggleItem}
 					item={item}
 					close={handleCloseItem}
+					dialogRef={dialogRef}
 				/>
 			)}
 		</div>

@@ -1,5 +1,6 @@
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { ModalContext } from '../App';
+import GroupsModal from '../navigation/navItems/groups/GroupsModal';
 
 // Components
 import Todo from './Todo';
@@ -11,12 +12,14 @@ import '../../styles/todo.modules.css';
 const Home = () => {
 	const { selectedTodo, close, modalOpen } = useContext(ModalContext);
 
+	const dialogRef = useRef();
+
 	return (
 		<>
 			<div className='home-container'>
-				<Nav />
+				<Nav dialogRef={dialogRef}/>
 				<Search />
-				<Todo />
+				<Todo dialogRef={dialogRef}/>
 			</div>
 			{modalOpen && (
 				<div>
@@ -27,6 +30,7 @@ const Home = () => {
 					/>
 				</div>
 			)}
+			<GroupsModal dialogRef={dialogRef}/>
 		</>
 	);
 };

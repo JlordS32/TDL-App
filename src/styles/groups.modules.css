@@ -54,3 +54,10 @@
    transform: scale(1.2);
    cursor: pointer;
 }
+
+.groups-search-wrapper {
+   outline: 1px red solid;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
