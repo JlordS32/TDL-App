@@ -6,7 +6,7 @@ import '../../../../styles/groups.modules.css';
 import EditIcon from '../../../../assets/icons/EditIcon';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import SearchICon from '../../../../assets/icons/SearchIcon';
+import PlusIcon from '../../../../assets/icons/PlusIcon';
 
 const Groups = ({ dialogRef }) => {
 	// Local state to hold the value of the input field
@@ -78,15 +78,13 @@ const Groups = ({ dialogRef }) => {
 
 	return (
 		<>
-			<div className='groups-search-wrapper'>
-				<div className='groups-search'>
+			<div className='groups-add-wrapper'>
+				<div className='groups-add'>
 					<input
 						type='text'
 						onChange={handleOnChange}
 						value={newGroup} // Bind the input field to the local state
-						style={{
-							color: 'black',
-						}}
+						className='add-input'
 					/>
 					<div
 						onClick={handleClick}
@@ -94,9 +92,7 @@ const Groups = ({ dialogRef }) => {
 							color: 'black',
 						}}
 					>
-						<div className='search'>
-							<SearchICon width='20'/>
-						</div>
+						<PlusIcon width='22' />
 					</div>
 				</div>
 			</div>

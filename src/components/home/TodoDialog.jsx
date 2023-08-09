@@ -4,7 +4,7 @@ import DeleteIcon from '../../assets/icons/DeleteIcon';
 import LabelIcon from '../../assets/icons/LabelIcon';
 import StarIcon from '../../assets/icons/StarIcon';
 
-const Dialog = ({ isDialogOpen, onDelete, onClose }) => {
+const Dialog = ({ isDialogOpen, onDelete, onClose, handleGroupModal }) => {
 	const dialogRef = useRef();
 
 	const handleBlur = () => {
@@ -29,7 +29,10 @@ const Dialog = ({ isDialogOpen, onDelete, onClose }) => {
 			ref={dialogRef}
 		>
 			<div className='icons'>
-				<div className='option'>
+				<div
+					className='option'
+					onClick={handleGroupModal}
+				>
 					<div
 						style={{
 							marginRight: '10px',

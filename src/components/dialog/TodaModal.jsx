@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import Backdrop from './Backdrop';
 
-import '../../styles/dialog.modules.css';
+import '../../styles/todo.modal.modules.css';
 
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';

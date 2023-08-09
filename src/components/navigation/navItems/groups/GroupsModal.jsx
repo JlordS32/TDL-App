@@ -8,7 +8,7 @@ const GroupsModal = ({ dialogRef }) => {
 		<Modal
 			dialogRef={dialogRef}
 			width={600}
-			height={900}
+			height={700}
 		>
 			<div className={styles['groups-modal']}>
 				<Groups />

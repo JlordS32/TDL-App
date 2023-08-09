@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../styles/dialog.modules.css';
+import '../../styles/todo.modal.modules.css';
 
 import { motion } from 'framer-motion';
 

@@ -16,6 +16,8 @@
    --ysabeau-infant: 'Ysabeau Infant', sans-serif;
 
    font-size: 17px;
+   font-style: var(--default-font);
+   color: var(--white);
 }
 
 * {

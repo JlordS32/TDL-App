@@ -115,7 +115,7 @@
 .todo-container {
    outline: var(--mid-gray) 1px solid;
    width: 15%;
-   height: 250px;
+   height: 210px;
    margin: 10px;
    padding: 0.75em;
    position: relative;
@@ -175,8 +175,8 @@
    z-index: 2;
    display: flex;
    align-items: center;
-   justify-content: center;
-   gap: 2rem;
+   justify-content: space-around;
+   transform: translateY(6px);
 }
 
 .todo-icon-item {

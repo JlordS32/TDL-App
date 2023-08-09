@@ -3,4 +3,5 @@
    margin: 0 auto;
    height: 90%;
    margin-top: 4rem;
+   font-style: var(--default-font);
 }

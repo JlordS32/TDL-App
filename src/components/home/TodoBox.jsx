@@ -101,6 +101,7 @@ const Todobox = ({ todo, onDelete, dialogRef }) => {
 							onClose={() => setIsDialogOpen(false)}
 							isDialogOpen={isDialogOpen}
 							onDelete={() => onDelete(id)}
+							handleGroupModal={handleGroupModal}
 						/>
 					)}
 				</AnimatePresence>
