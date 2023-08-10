@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, useRef } from 'react';
-import { stringify, v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateGroupLabels } from '../../../store/TodoReducer';
 import '../../../../styles/groups.modules.css';
@@ -7,6 +7,7 @@ import EditIcon from '../../../../assets/icons/EditIcon';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import PlusIcon from '../../../../assets/icons/PlusIcon';
+import EditGroups from './EditGroups';
 
 const Groups = ({ dialogRef }) => {
 	// Local state to hold the value of the input field
@@ -71,10 +72,48 @@ const Groups = ({ dialogRef }) => {
 		setNewGroup(e.target.value);
 	};
 
-	const handleGroupModal = (e) => {
-		e.preventDefault();
-		dialogRef.current.showModal();
+	const handleEdit = (newGroupName, id) => {
+		if (newGroupName.trim() !== '') {
+			const updatedGroupName = groupRedux.map((group) => {
+				if (group.id === id) {
+					return {
+						...group,
+						name: newGroupName,
+					};
+				}
+
+				return group;
+			});
+
+			dispatch(updateGroupLabels(updatedGroupName));
+
+			localStorage.setItem('groups', JSON.stringify(updatedGroupName));
+		}
 	};
+
+	const toggleEdit = (groupId) => {
+		// Filter out the group to be deleted from the groupRedux array
+		const updatedGroups = groupRedux.map((group) => {
+			if (group.id === groupId) {
+				return {
+					...group,
+					isEditing: true,
+				};
+
+				return group;
+			}
+		});
+
+		// Dispatch the action to update the group labels in Redux store
+		dispatch(updateGroupLabels(updatedGroups));
+
+		// Update localStorage
+		localStorage.setItem('groups', JSON.stringify(updatedGroups));
+	};
+
+	useEffect(() => {
+		console.log(groupRedux);
+	});
 
 	return (
 		<>
@@ -102,34 +141,41 @@ const Groups = ({ dialogRef }) => {
 			>
 				{/* Use useMemo to optimize rendering of mapped group labels */}
 				{useMemo(() => {
-					return groupRedux.map((group) => (
-						<div
-							className='group-label'
-							key={group.id}
-						>
-							<h4>{group.name}</h4>
-							<div className='icon'>
-								<div
-									className='edit'
-									onClick={handleGroupModal}
-								>
-									<EditIcon
-										width='17'
-										height='17'
-									/>
-								</div>
-								<div
-									onClick={() => handleDelete(group.id)}
-									className='delete'
-								>
-									<DeleteIcon
-										width='17'
-										height='17'
-									/>
+					return groupRedux.map((group) =>
+						group.isEditing ? (
+							<EditGroups
+								edit={handleEdit}
+								id={group.id}
+								close={() => setIsEdit(false)}
+							/>
+						) : (
+							<div
+								className='group-label'
+								key={group.id}
+							>
+								<h4>{group.name}</h4>
+								<div className='icon'>
+									<div
+										className='edit'
+									>
+										<EditIcon
+											width='17'
+											height='17'
+										/>
+									</div>
+									<div
+										onClick={() => handleDelete(group.id)}
+										className='delete'
+									>
+										<DeleteIcon
+											width='17'
+											height='17'
+										/>
+									</div>
 								</div>
 							</div>
-						</div>
-					));
+						)
+					);
 				})}
 			</div>
 		</>

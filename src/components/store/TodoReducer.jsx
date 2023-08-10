@@ -4,20 +4,17 @@ const initialStateValue = {
 	id: '',
 	title: '',
 	content: '',
-   group: '',
+	group: {
+		name: '',
+		id: '',
+	},
 	complete: false,
 };
 
 const todoSlice = createSlice({
 	name: 'todoReducer',
 	initialState: {
-		value: [{
-			...initialStateValue,
-			group: {
-				name: '',
-				id: ''
-			}
-		}],
+		value: [initialStateValue],
 	},
 	reducers: {
 		updateTodo: (state, action) => {
@@ -29,10 +26,12 @@ const todoSlice = createSlice({
 const filteredSlice = createSlice({
 	name: 'filteredReducer',
 	initialState: {
-		value: [{
-			...initialStateValue,
-			searchQuery: '',
-		}],
+		value: [
+			{
+				...initialStateValue,
+				searchQuery: '',
+			},
+		],
 	},
 	reducers: {
 		updateFilteredTodo: (state, action) => {
@@ -48,6 +47,7 @@ const groupLabelSlice = createSlice({
 			{
 				id: '',
 				name: '',
+				isEditing: false
 			},
 		],
 	},

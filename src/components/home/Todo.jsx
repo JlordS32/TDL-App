@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateTodo } from '../store/TodoReducer';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 
-const Todo = ({dialogRef}) => {
+const Todo = ({ dialogRef }) => {
 	// State to hold the new todo input values
 	const [newTodo, setNewTodo] = useState('');
 	const [newTodoTitle, setNewTodoTitle] = useState('');
@@ -96,6 +96,10 @@ const Todo = ({dialogRef}) => {
 		// Dispatch the updateTodo action with the todos from localStorage
 		dispatch(updateTodo(storedTodos ? JSON.parse(storedTodos) : []));
 	}, []);
+
+	useEffect(() => {
+		console.log(todoRedux);
+	}, [todoRedux]);
 
 	return (
 		<>
