@@ -62,6 +62,10 @@ const Todo = ({ dialogRef }) => {
 						title: newTodoTitle,
 						content: newTodo,
 						complete: false,
+						group: {
+							name: '',
+							id: ''
+						}
 					},
 				];
 
@@ -96,10 +100,6 @@ const Todo = ({ dialogRef }) => {
 		// Dispatch the updateTodo action with the todos from localStorage
 		dispatch(updateTodo(storedTodos ? JSON.parse(storedTodos) : []));
 	}, []);
-
-	useEffect(() => {
-		console.log(todoRedux);
-	}, [todoRedux]);
 
 	return (
 		<>

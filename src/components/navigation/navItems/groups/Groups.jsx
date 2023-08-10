@@ -8,6 +8,7 @@ import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import PlusIcon from '../../../../assets/icons/PlusIcon';
 import EditGroups from './EditGroups';
+import { update } from 'react-spring';
 
 const Groups = ({ dialogRef }) => {
 	// Local state to hold the value of the input field
@@ -21,15 +22,14 @@ const Groups = ({ dialogRef }) => {
 	const groupRedux = useSelector((state) => state.groupLabelReducer.value);
 	const dispatch = useDispatch();
 
-	// UseEffect Hook used for localising the redux states
-	useEffect(() => {
-		const savedGroups = localStorage.getItem('groups'); // Get localStorage
+	// Function made to update groups.
+	const updateGroup = (updatedGroups) => {
+		// Dispatch the action to update the group labels in Redux store
+		dispatch(updateGroupLabels(updatedGroups));
 
-		// use useDispatch hook for rendering
-		if (savedGroups) {
-			dispatch(updateGroupLabels(JSON.parse(savedGroups)));
-		}
-	}, [dispatch]);
+		// creates localStorage
+		localStorage.setItem('groups', JSON.stringify(updatedGroups));
+	};
 
 	// Function to handle the 'Submit' button click
 	const handleClick = () => {
@@ -40,14 +40,11 @@ const Groups = ({ dialogRef }) => {
 				{
 					name: newGroup,
 					id: uuidv4(),
+					isEditing: false,
 				},
 			];
 
-			// Dispatch the action to update the group labels in Redux store
-			dispatch(updateGroupLabels(updatedGroups));
-
-			// creates localStorage
-			localStorage.setItem('groups', JSON.stringify(updatedGroups));
+			updateGroup(updatedGroups);
 
 			// Clear the input field value after adding the new group
 			setNewGroup('');
@@ -59,11 +56,7 @@ const Groups = ({ dialogRef }) => {
 		// Filter out the group to be deleted from the groupRedux array
 		const updatedGroups = groupRedux.filter((group) => group.id !== groupId);
 
-		// Dispatch the action to update the group labels in Redux store
-		dispatch(updateGroupLabels(updatedGroups));
-
-		// Update localStorage
-		localStorage.setItem('groups', JSON.stringify(updatedGroups));
+		updateGroup(updatedGroups);
 	};
 
 	// Function to handle input field value change
@@ -72,24 +65,24 @@ const Groups = ({ dialogRef }) => {
 		setNewGroup(e.target.value);
 	};
 
-	const handleEdit = (newGroupName, id) => {
-		if (newGroupName.trim() !== '') {
-			const updatedGroupName = groupRedux.map((group) => {
-				if (group.id === id) {
-					return {
+	const handleEdit = (newGroupName, groupId) => {
+		// Map over the groups and update the one with the matching ID
+		const updatedGroups = groupRedux.map((group) => {
+			 if (group.id === groupId) {
+				  return {
 						...group,
 						name: newGroupName,
-					};
-				}
+				  };
+			 }
+			 return group;
+		});
 
-				return group;
-			});
+		// Dispatch the action to update the Redux store
+		dispatch(updateGroupLabels(updatedGroups));
 
-			dispatch(updateGroupLabels(updatedGroupName));
-
-			localStorage.setItem('groups', JSON.stringify(updatedGroupName));
-		}
-	};
+		// Update localStorage
+		localStorage.setItem('groups', JSON.stringify(updatedGroups));
+  };
 
 	const toggleEdit = (groupId) => {
 		// Filter out the group to be deleted from the groupRedux array
@@ -97,22 +90,28 @@ const Groups = ({ dialogRef }) => {
 			if (group.id === groupId) {
 				return {
 					...group,
-					isEditing: true,
+					isEditing: group.isEditing ? false : true,
 				};
-
-				return group;
 			}
+
+			return group;
 		});
 
-		// Dispatch the action to update the group labels in Redux store
-		dispatch(updateGroupLabels(updatedGroups));
-
-		// Update localStorage
-		localStorage.setItem('groups', JSON.stringify(updatedGroups));
+		updateGroup(updatedGroups);
 	};
 
+	// UseEffect Hook used for localising the redux states
 	useEffect(() => {
-		console.log(groupRedux);
+		const savedGroups = localStorage.getItem('groups'); // Get localStorage
+
+		// use useDispatch hook for rendering
+		if (savedGroups) {
+			dispatch(updateGroupLabels(JSON.parse(savedGroups)));
+		}
+	}, [dispatch]);
+
+	useEffect(() => {
+		console.log('Group Redux: ', groupRedux);
 	});
 
 	return (
@@ -144,9 +143,11 @@ const Groups = ({ dialogRef }) => {
 					return groupRedux.map((group) =>
 						group.isEditing ? (
 							<EditGroups
-								edit={handleEdit}
+								edit={(newGroupName) =>
+									handleEdit(newGroupName, group.id)
+								}
 								id={group.id}
-								close={() => setIsEdit(false)}
+								close={() => toggleEdit(group.id)}
 							/>
 						) : (
 							<div
@@ -154,9 +155,10 @@ const Groups = ({ dialogRef }) => {
 								key={group.id}
 							>
 								<h4>{group.name}</h4>
-								<div className='icon'>
+								<div className='icons'>
 									<div
 										className='edit'
+										onClick={() => toggleEdit(group.id)}
 									>
 										<EditIcon
 											width='17'
