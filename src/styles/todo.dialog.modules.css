@@ -55,25 +55,27 @@
    outline: 0;
 }
 
-.dialog > .icons {
+.dialog>.icons {
    color: var(--white);
    padding: 5px;
-
-   & .option {
-      display: flex;
-      text-align: center;
-      align-items: center;
-      margin: 0 0.4rem;
-   }
+   display: flex;
+   flex-direction: row;
 }
 
-.dialog > .icons:hover {
+.dialog>.icons>.option {
+   display: flex;
+   text-align: center;
+   align-items: center;
+   margin: 0 0.4rem
+}
+
+.dialog>.icons:hover {
    cursor: pointer;
 }
 
 /* Comments */
 
-.dialog > .icons:nth-child(1n):hover {
+.dialog>.icons:nth-child(1n):hover {
    background-color: var(--gray);
 }
 
