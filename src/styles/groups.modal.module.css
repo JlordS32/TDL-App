@@ -23,3 +23,7 @@
    margin-top: 4rem;
    font-style: var(--default-font);
 }
+
+.groups-modal > .groups-add > .add-input {
+   outline: 1px red solid;
+}

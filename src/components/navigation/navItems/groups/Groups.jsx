@@ -1,33 +1,39 @@
-import { useEffect, useMemo, useState, useRef, useLayoutEffect } from 'react';
+// Import necessary hooks and components
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateGroupLabels } from '../../../store/TodoReducer';
 import '../../../../styles/groups.modules.css';
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { EditGroup } from './Edit';
+
+// Import icons
 import EditIcon from '../../../../assets/icons/EditIcon';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon';
-import { useAutoAnimate } from '@formkit/auto-animate/react';
 import PlusIcon from '../../../../assets/icons/PlusIcon';
-import XIcon from '../../../../assets/icons/XIcon';
-import CheckIcon from '../../../../assets/icons/CheckIcon';
 
+// Define the 'Groups' component
 const Groups = () => {
 	// Local state to hold the value of the input field
 	const [newGroup, setNewGroup] = useState('');
-	const [newGroupName, setNewGroupName] = useState('');
-	const [updatedGroup, setUpdatedGroup] = useState([]);
+	const [newGroupName, setNewGroupName] = useState(''); // Auto-Animate
 
-	// Auto-Animate
+	// Auto-animate parent reference
 	const [parent] = useAutoAnimate();
 
-	// Redux
-	// Access the 'value' property from the groupLabelReducer in Redux store
+	// Redux: Access the 'value' property from the groupLabelReducer in Redux store
 	const groupRedux = useSelector((state) => state.groupLabelReducer.value);
 	const dispatch = useDispatch();
 
-	// Function to handle the 'Submit' button click
-	const handleClick = () => {
+	// Function to update Redux state and localStorage
+	const updateGroup = (updatedGroups) => {
+		localStorage.setItem('groups', JSON.stringify(updatedGroups));
+		dispatch(updateGroupLabels(updatedGroups));
+	};
+
+	// Event handler for the 'Submit' button click
+	const handleClick = useCallback(() => {
 		if (newGroup.trim() !== '') {
-			// Create a new array by adding the new group to the existing groupRedux array
 			const updatedGroups = [
 				...groupRedux,
 				{
@@ -36,27 +42,25 @@ const Groups = () => {
 					isEditing: false,
 				},
 			];
-
-			setUpdatedGroup(updatedGroups);
-
-			// Clear the input field value after adding the new group
+			updateGroup(updatedGroups);
 			setNewGroup('');
 		}
-	};
+	}, [groupRedux, newGroup, updateGroup]);
 
-	// Inside your 'Groups' component
-	const handleDelete = (groupId) => {
-		// Filter out the group to be deleted from the groupRedux array
-		const updatedGroups = groupRedux.filter((group) => group.id !== groupId);
+	// Event handler for deleting a group
+	const handleDelete = useCallback(
+		(groupId) => {
+			const updatedGroups = groupRedux.filter(
+				(group) => group.id !== groupId
+			);
+			updateGroup(updatedGroups);
+		},
+		[groupRedux, updateGroup]
+	);
 
-		setUpdatedGroup(updatedGroups);
-	};
-
-	// Function to handle input field value change
+	// Event handler for input field value change
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
-
-		// Update the corresponding state based on the input name
 		switch (name) {
 			case 'add-group':
 				setNewGroup(value);
@@ -69,67 +73,100 @@ const Groups = () => {
 		}
 	};
 
-	// Handle the editing process
-	const handleEdit = (groupId) => {
-		// Map over the groups and update the one with the matching ID
-		const updatedGroups = groupRedux.map((group) => {
-			if (group.id === groupId) {
-				return {
-					...group,
-					name: newGroupName,
-					isEditing: false
-				};
+	// Event handler for editing a group
+	const handleEdit = useCallback(
+		(groupId) => {
+			if (newGroupName.trim() !== '') {
+				const updatedGroups = groupRedux.map((group) => {
+					if (group.id === groupId) {
+						return {
+							...group,
+							name: newGroupName,
+							isEditing: false,
+						};
+					}
+					return group;
+				});
+				updateGroup(updatedGroups);
+				setNewGroupName('');
 			}
-			return group;
-		});
+		},
+		[groupRedux, newGroupName, updateGroup]
+	);
 
-		setUpdatedGroup(updatedGroups);
-	};
-
-	const toggleEdit = (groupId) => {
-		// Filter out the group to be deleted from the groupRedux array
-		const updatedGroups = groupRedux.map((group) => {
-			if (group.id === groupId) {
-				return {
-					...group,
-					isEditing: group.isEditing ? false : true,
-				};
-			}
-
-			return group;
-		});
-
-		setUpdatedGroup(updatedGroups);
-	};
-
-	// Use effect for updating redux and localStorage
+	// Log the trimmed value of newGroupName whenever it changes
 	useEffect(() => {
-		dispatch(updateGroupLabels(updatedGroup));
+		console.log(newGroupName.trim());
+	}, [newGroupName]);
 
-		// creates localStorage
-		localStorage.setItem('groups', JSON.stringify(updatedGroup));
-	}, [updatedGroup]);
+	// Event handler for toggling editing mode of a group
+	const toggleEdit = useCallback(
+		(groupId) => {
+			const updatedGroups = groupRedux.map((group) =>
+				group.id === groupId
+					? { ...group, isEditing: !group.isEditing }
+					: group
+			);
+			updateGroup(updatedGroups);
+		},
+		[groupRedux, updateGroup]
+	);
 
-	// UseEffect Hook used for localising the redux states
-	useEffect(() => {
-		const savedGroups = localStorage.getItem('groups'); // Get localStorage
+	// Optimize rendering of mapped group labels using useMemo
+	const memoizedGroupLabels = useMemo(() => {
+		return groupRedux.map((group) =>
+			group.isEditing ? (
+				<EditGroup
+					handleOnChange={handleOnChange}
+					handleEdit={handleEdit}
+					close={() => toggleEdit(group.id)}
+					key={group.id}
+					id={group.id}
+					defaultName={group.name}
+				/>
+			) : (
+				<div
+					className='group-label'
+					key={group.id}
+				>
+					<h4>{group.name}</h4>
+					<div className='icons'>
+						<div
+							className='edit'
+							onClick={() => {
+								toggleEdit(group.id);
+							}}
+						>
+							<EditIcon
+								width='17'
+								height='17'
+							/>
+						</div>
+						<div
+							onClick={() => handleDelete(group.id)}
+							className='delete'
+						>
+							<DeleteIcon
+								width='17'
+								height='17'
+							/>
+						</div>
+					</div>
+				</div>
+			)
+		);
+	}, [groupRedux, handleEdit, handleOnChange]);
 
-		console.log('i am running, localising...')
-
-		// use useDispatch hook for rendering
-		if (savedGroups) {
-			dispatch(updateGroupLabels(JSON.parse(savedGroups)));
-		}
-	}, [updatedGroup]);
-
+	// Return JSX for rendering the component
 	return (
 		<>
+			{/* Input field for adding new groups */}
 			<div className='groups-add-wrapper'>
 				<div className='groups-add'>
 					<input
 						type='text'
 						onChange={handleOnChange}
-						value={newGroup} // Bind the input field to the local state
+						value={newGroup}
 						className='add-input'
 						name='add-group'
 					/>
@@ -143,69 +180,16 @@ const Groups = () => {
 					</div>
 				</div>
 			</div>
+			{/* Render the group labels */}
 			<div
 				className='group-labels'
 				ref={parent}
 			>
-				{/* Use useMemo to optimize rendering of mapped group labels */}
-				{useMemo(() => {
-					return groupRedux.map((group) =>
-						group.isEditing ? (
-							<div
-								className='edit-container'
-								key={group.id}
-							>
-								{/* Input field for editing group name */}
-								<input
-									type='text'
-									onChange={handleOnChange}
-									name='change-group'
-									value={newGroupName}
-								/>
-								<div className='icons'>
-									{/* Save edited group name */}
-									<div onClick={() => handleEdit(group.id)}>
-										<CheckIcon />
-									</div>
-									{/* Cancel editing */}
-									<div onClick={() => toggleEdit(group.id)}>
-										<XIcon />
-									</div>
-								</div>
-							</div>
-						) : (
-							<div
-								className='group-label'
-								key={group.id}
-							>
-								<h4>{group.name}</h4>
-								<div className='icons'>
-									<div
-										className='edit'
-										onClick={() => toggleEdit(group.id)}
-									>
-										<EditIcon
-											width='17'
-											height='17'
-										/>
-									</div>
-									<div
-										onClick={() => handleDelete(group.id)}
-										className='delete'
-									>
-										<DeleteIcon
-											width='17'
-											height='17'
-										/>
-									</div>
-								</div>
-							</div>
-						)
-					);
-				})}
+				{memoizedGroupLabels}
 			</div>
 		</>
 	);
 };
 
+// Export the 'Groups' component
 export default Groups;
