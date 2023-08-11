@@ -66,6 +66,7 @@ const TodoModal = ({ handleClose, selectedTodo }) => {
 		return todo;
 	});
 
+	// This is causing some unnecessary rendering.
 	useEffect(() => {
 		dispatch(updateTodo(updatedTodo));
 	}, [modalTitle, modalContent]);
