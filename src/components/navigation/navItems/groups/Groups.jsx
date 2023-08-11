@@ -76,40 +76,20 @@ const Groups = () => {
 	// Event handler for editing a group
 	const handleEdit = useCallback(
 		(groupId) => {
-			if (newGroupName.trim() !== '') {
-				const updatedGroups = groupRedux.map((group) => {
-					if (group.id === groupId) {
-						return {
-							...group,
-							name: newGroupName,
-							isEditing: false,
-						};
-					}
-					return group;
-				});
-				updateGroup(updatedGroups);
-				setNewGroupName('');
-			}
+			const updatedGroups = groupRedux.map((group) => {
+				if (group.id === groupId) {
+					return {
+						...group,
+						name: newGroupName.trim() !== '' ? newGroupName : group.name,
+						isEditing: group.isEditing ? false : true,
+					};
+				}
+				return group;
+			});
+			updateGroup(updatedGroups);
+			setNewGroupName('');
 		},
 		[groupRedux, newGroupName, updateGroup]
-	);
-
-	// Log the trimmed value of newGroupName whenever it changes
-	useEffect(() => {
-		console.log(newGroupName.trim());
-	}, [newGroupName]);
-
-	// Event handler for toggling editing mode of a group
-	const toggleEdit = useCallback(
-		(groupId) => {
-			const updatedGroups = groupRedux.map((group) =>
-				group.id === groupId
-					? { ...group, isEditing: !group.isEditing }
-					: group
-			);
-			updateGroup(updatedGroups);
-		},
-		[groupRedux, updateGroup]
 	);
 
 	// Optimize rendering of mapped group labels using useMemo
@@ -119,7 +99,7 @@ const Groups = () => {
 				<EditGroup
 					handleOnChange={handleOnChange}
 					handleEdit={handleEdit}
-					close={() => toggleEdit(group.id)}
+					close={() => handleEdit(group.id)}
 					key={group.id}
 					id={group.id}
 					defaultName={group.name}
@@ -134,7 +114,7 @@ const Groups = () => {
 						<div
 							className='edit'
 							onClick={() => {
-								toggleEdit(group.id);
+								handleEdit(group.id);
 							}}
 						>
 							<EditIcon
