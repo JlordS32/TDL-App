@@ -29,6 +29,7 @@
    justify-content: center;
    gap: 1rem;
    margin-top: 0.5rem;
+   align-items: center;
 }
 
 .groups-modal .search-bar > input {
@@ -39,6 +40,24 @@
    border: 0;
    text-indent: 1rem;
    font-size: 0.9rem;
+}
+
+.groups-modal > .search-bar > div {
+   border-radius: 100px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding: 0.2rem;
+}
+
+.groups-modal > .search-bar > div:hover {
+   background-color: var(--mid-gray);
+   transform: scale(1.1);
+}
+
+.groups-modal > .search-bar > div:active {
+   transform: scale(1);
+   background: none;
 }
 
 .groups-modal > .labels {
@@ -52,20 +71,20 @@
 
 .groups-modal > .labels > .label {
    display: flex;
-   padding: 0.3rem 4rem;
-   height: 30%;
+   padding: 0.3rem 2rem;
+   height: 30px;
    font-family: var(--default-font);
    font-size: 1rem;
    font-weight: 100;
    align-items: center;
    width: 50%;
    margin: 0.3rem 0;
-   border-radius: 20px;
+   border-radius: 50px;
+   width: 70%;
 }
 
 .groups-modal > .labels > .label:hover {
    background-color: var(--mid-gray);
-   cursor: pointer;
 }
 
 .groups-modal > .labels > .label > h4 {
@@ -81,8 +100,18 @@
    margin-left: auto;
 }
 
+.groups-modal > .labels > .label > .icons:hover {
+   cursor: pointer;
+}
+
+.groups-modal > .labels > .label > .icons > div:nth-child(1n):hover {
+
+   transform: scale(1.2);
+}
+
 .groups-modal > .labels > .label > .icons > .edit,
-.groups-modal > .labels > .label > .icons > .delete {
+.groups-modal > .labels > .label > .icons > .delete,
+.groups-modal > .labels > .label > .icons > .add-to-group {
    width: 30px; 
    height: 30px;
    display: flex;

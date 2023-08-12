@@ -12,7 +12,7 @@
    --secondary-color: #CF31D4;
    --tertiary-color: #7631D4;
 
-   --default-font:'Montserrat', sans-serif;
+   --default-font: 'Montserrat', sans-serif;
    --ysabeau-infant: 'Ysabeau Infant', sans-serif;
 
    --default-text-indent: 10px;
@@ -131,27 +131,4 @@
    font-size: 0.9rem;
    height: 85%;
    margin-top: 20px;
-}
-
-/* ADJUSTING SCROLLBAR */
-
-::-webkit-scrollbar {
-   width: 7px;
-   opacity: 0;
-   transition: opacity 0.5s;
-}
-
-:hover::-webkit-scrollbar {
-   opacity: 1;
-   cursor: pointer;
-}
-
-::-webkit-scrollbar-thumb {
-   background-color: #555;
-   border-radius: 5px;
-   transition: background-color 0.5s;
-}
-
-::-webkit-scrollbar-thumb:hover {
-   background-color: #696969;
 }

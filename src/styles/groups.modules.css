@@ -28,7 +28,7 @@
 }
 
 .groups-container{
-   overflow: hidden;
+   overflow: auto;
 }
 
 .group-labels {
@@ -37,16 +37,14 @@
    gap: 0.5rem;
    font-size: 1.2rem;
    margin-top: 1.25rem;
-   height: 90%;
-   overflow-y: auto;
+   outline: 1px red solid;
 }
 
 .group-label,
 .edit-container {
    border-radius: 100px;
-   padding: 0.5rem 0;
    font-family: var(--default-font);
-   height: 2rem;
+   height: 3rem;
 }
 
 .group-label {
@@ -78,7 +76,6 @@
    transform: scale(1.2);
    cursor: pointer;
 }
-
 .groups-add-wrapper {
    margin-top: 1.25rem;
 }
@@ -116,6 +113,7 @@
 .edit-container {
    display: flex;
    flex-direction: row;
+   align-items: center;
    justify-content: space-around;
 }
 

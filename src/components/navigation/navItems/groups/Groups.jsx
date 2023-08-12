@@ -1,6 +1,5 @@
 // Import necessary hooks and components
 import { useEffect, useMemo, useState, useCallback } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateGroupLabels } from '../../../store/TodoReducer';
 import '../../../../styles/groups.modules.css';
@@ -113,13 +112,13 @@ const Groups = () => {
 				</div>
 			)
 		);
-	}, [groupRedux, handleEdit, handleOnChange]); // TODO test
+	}, [groupRedux, handleEdit, handleOnChange]);
 
 	// Return JSX for rendering the component
 	return (
 		<>
 			{/* Input field for adding new groups */}
-			<div className='groups-add-wrapper'>
+			<div className='groups-add-wrapper' ref={parent}>
 				<div className='groups-add'>
 					<input
 						type='text'
@@ -141,7 +140,7 @@ const Groups = () => {
 			{/* Render the group labels */}
 			<div
 				className='group-labels'
-				ref={parent}
+				ref={parent} // TODO we better fucking fix this animation too...
 			>
 				{memoizedGroupLabels}
 			</div>

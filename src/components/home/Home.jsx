@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useRef, useEffect } from 'react';
 import { ModalContext } from '../App';
 import GroupsModal from '../navigation/navItems/groups/GroupsModal';
 
@@ -14,12 +14,16 @@ const Home = () => {
 
 	const dialogRef = useRef();
 
+	useEffect(() => {
+		console.log(selectedTodo);
+	}, [selectedTodo]);
+
 	return (
 		<>
 			<div className='home-container'>
-				<Nav dialogRef={dialogRef}/>
+				<Nav dialogRef={dialogRef} />
 				<Search />
-				<Todo dialogRef={dialogRef}/>
+				<Todo dialogRef={dialogRef} />
 			</div>
 			{modalOpen && (
 				<div>
@@ -30,7 +34,7 @@ const Home = () => {
 					/>
 				</div>
 			)}
-			<GroupsModal dialogRef={dialogRef}/>
+			<GroupsModal dialogRef={dialogRef} />
 		</>
 	);
 };

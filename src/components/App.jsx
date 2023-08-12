@@ -1,5 +1,4 @@
 import '../styles/app.modules.css';
-
 // React
 import { createContext, useEffect, useState } from 'react';
 
@@ -9,9 +8,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // Components
 import Header from './header/Header';
 import Home from './home/Home';
-import PageNotFound from './pagenotfound/PageNotFound';
+import PageNotFound from './pagenotfound/PageNotFound';]
+import Todobox from './home/TodoBox';
 import { useDispatch } from 'react-redux';
 import { updateGroupLabels } from './store/TodoReducer';
+import Todo from './home/Todo';
 
 // Context
 export const ModalContext = createContext();
@@ -31,8 +32,6 @@ const App = () => {
 	// For re-rendering localised group names
 	useEffect(() => {
 		const savedGroups = localStorage.getItem('groups'); // Get localStorage
-
-		console.log(savedGroups); // use useDispatch hook for rendering
 
 		dispatch(updateGroupLabels(savedGroups ? JSON.parse(savedGroups) : []));
 	}, []);
@@ -58,6 +57,10 @@ const App = () => {
 						<Route
 							path='/note/*'
 							element={<Home />}
+						/>
+						<Route
+							path='/todo/:todoId'
+							component={<Todo />}
 						/>
 						<Route
 							path='/*'
