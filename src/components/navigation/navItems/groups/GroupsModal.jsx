@@ -21,42 +21,42 @@ const GroupsModal = ({ dialogRef }) => {
 			height={700}
 		>
 			<div className={styles['groups-modal']}>
-				<div className='search-bar'>
-					<input
-						className='add-btn'
-					/>
+				<div className={styles['search-bar']}>
+					<input className='add-btn' />
 					<div
 						style={{
 							color: 'black',
 						}}
 					>
-						<PlusIcon width='22' />
+						<PlusIcon width='30' />
 					</div>
 				</div>
-				{useMemo(() => {
-					return groupRedux.map((group) => (
-						<div
-							className='label'
-							key={group.id}
-						>
-							<h4>{group.name}</h4>
-							<div className='icons'>
-								<div className='edit'>
-									<EditIcon
-										width='17'
-										height='17'
-									/>
-								</div>
-								<div className='delete'>
-									<DeleteIcon
-										width='17'
-										height='17'
-									/>
+				<div className={styles['labels']}>
+					{useMemo(() => {
+						return groupRedux.map((group) => (
+							<div
+								className={styles['label']}
+								key={group.id}
+							>
+								<h4>{group.name}</h4>
+								<div className={styles['icons']}>
+									<div className='edit'>
+										<EditIcon
+											width='17'
+											height='17'
+										/>
+									</div>
+									<div className='delete'>
+										<DeleteIcon
+											width='17'
+											height='17'
+										/>
+									</div>
 								</div>
 							</div>
-						</div>
-					));
-				})}
+						));
+					})}
+				</div>
 			</div>
 		</Modal>
 	);
