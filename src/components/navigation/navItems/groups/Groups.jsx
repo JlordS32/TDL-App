@@ -12,6 +12,9 @@ import EditIcon from '../../../../assets/icons/EditIcon';
 import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import PlusIcon from '../../../../assets/icons/PlusIcon';
 
+// Utility functions
+import { addGroup, deleteGroup, editGroup } from './groupUtils';
+
 // Define the 'Groups' component
 const Groups = () => {
 	// Local state to hold the value of the input field
@@ -32,31 +35,21 @@ const Groups = () => {
 	};
 
 	// Event handler for the 'Submit' button click
-	const handleClick = useCallback(() => {
-		if (newGroup.trim() !== '') {
-			const updatedGroups = [
-				...groupRedux,
-				{
-					name: newGroup,
-					id: uuidv4(),
-					isEditing: false,
-				},
-			];
-			updateGroup(updatedGroups);
-			setNewGroup('');
-		}
-	}, [groupRedux, newGroup, updateGroup]);
+	const handleClick = () => {
+		addGroup(newGroup, groupRedux, updateGroup);
+		setNewGroup('');
+	};
 
 	// Event handler for deleting a group
-	const handleDelete = useCallback(
-		(groupId) => {
-			const updatedGroups = groupRedux.filter(
-				(group) => group.id !== groupId
-			);
-			updateGroup(updatedGroups);
-		},
-		[groupRedux, updateGroup]
-	);
+	const handleDelete = (groupId) => {
+		deleteGroup(groupId, groupRedux, updateGroup);
+	};
+
+	// Event handler for editing a group
+	const handleEdit = (groupId) => {
+		editGroup(groupId, groupRedux, newGroupName, updateGroup);
+		setNewGroupName('');
+	};
 
 	// Event handler for input field value change
 	const handleOnChange = (e) => {
@@ -73,24 +66,9 @@ const Groups = () => {
 		}
 	};
 
-	// Event handler for editing a group
-	const handleEdit = useCallback(
-		(groupId) => {
-			const updatedGroups = groupRedux.map((group) => {
-				if (group.id === groupId) {
-					return {
-						...group,
-						name: newGroupName.trim() !== '' ? newGroupName : group.name,
-						isEditing: group.isEditing ? false : true,
-					};
-				}
-				return group;
-			});
-			updateGroup(updatedGroups);
-			setNewGroupName('');
-		},
-		[groupRedux, newGroupName, updateGroup]
-	);
+	useEffect(() => {
+		console.log(groupRedux)
+	}, [groupRedux])
 
 	// Optimize rendering of mapped group labels using useMemo
 	const memoizedGroupLabels = useMemo(() => {
@@ -135,7 +113,7 @@ const Groups = () => {
 				</div>
 			)
 		);
-	}, [groupRedux, handleEdit, handleOnChange]);
+	}, [groupRedux, handleEdit, handleOnChange]); // TODO test
 
 	// Return JSX for rendering the component
 	return (

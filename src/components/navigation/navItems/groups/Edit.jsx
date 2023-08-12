@@ -22,15 +22,15 @@ export function EditGroup({
 				{/* Save edited group name */}
 				<div onClick={() => handleEdit(id)}>
 					<CheckIcon
-						width='30'
-						height='30'
+						width='17'
+						height='17'
 					/>
 				</div>
 				{/* Cancel editing */}
 				<div onClick={close}>
 					<XIcon
-						width='30'
-						height='30'
+						width='17'
+						height='17'
 					/>
 				</div>
 			</div>
