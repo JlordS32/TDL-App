@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import Modal from '../../../dialog/Modal';
 import styles from '../../../../styles/groups.modal.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateGroupLabels } from '../../../store/TodoReducer';
+import { updateGroupLabels, updateTodo } from '../../../store/TodoReducer';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { EditGroup } from './Edit';
 
@@ -14,12 +14,14 @@ import PlusIcon from '../../../../assets/icons/PlusIcon';
 // Utility functions
 import { addGroup, deleteGroup, editGroup } from './groupUtils';
 
-const GroupsModal = ({ dialogRef }) => {
+const GroupsModal = ({ dialogRef, selectedTodo }) => {
 	// local States
 	const [newGroup, setNewGroup] = useState('');
 	const [newGroupName, setNewGroupName] = useState('');
+	const [isChecked, setIsChecked] = useState(false);
 
 	const groupRedux = useSelector((state) => state.groupLabelReducer.value);
+	const todoRedux = useSelector((state) => state.todoReducer.value);
 	const dispatch = useDispatch();
 
 	const [parent] = useAutoAnimate();
@@ -28,6 +30,11 @@ const GroupsModal = ({ dialogRef }) => {
 	const updateGroup = (updatedGroups) => {
 		localStorage.setItem('groups', JSON.stringify(updatedGroups));
 		dispatch(updateGroupLabels(updatedGroups));
+	};
+
+	const updateTodos = (updatedTodo) => {
+		localStorage.setItem('todos', JSON.stringify(updatedTodo));
+		dispatch(updateTodo(updatedTodo));
 	};
 
 	// Event handler for the 'Submit' button click
@@ -61,9 +68,43 @@ const GroupsModal = ({ dialogRef }) => {
 		}
 	};
 
-	const handleAddToGroup = () => {
-		alert('hello');
+	const handleAddToGroup = (groupId, groupName) => {
+		setIsChecked(isChecked ? false : true);
+
+		if (isChecked) {
+			const updatedTodo = todoRedux.map((todo) => {
+				if (todo.id === selectedTodo.id) {
+					const groupExists = todo.group.some(
+						(existingGroup) => existingGroup.id === groupId
+					);
+
+					// Create a new group object
+					if (!groupExists) {
+						const newGroup = {
+							id: groupId,
+							name: groupName,
+						};
+
+						// Create a copy of the existing groups array and append the new group
+						const updatedGroups = [...todo.group, newGroup];
+
+						return {
+							...todo,
+							group: updatedGroups,
+						};
+					}
+				}
+
+				return todo;
+			});
+
+			updateTodos(updatedTodo);
+		}
 	};
+
+	useEffect(() => {
+		console.log(todoRedux);
+	}, [todoRedux]);
 
 	return (
 		<Modal
@@ -109,15 +150,14 @@ const GroupsModal = ({ dialogRef }) => {
 								>
 									<h4>{group.name}</h4>
 									<div className={styles['icons']}>
-										<div
+										<input
 											className={styles['add-to-group']}
-											onClick={handleAddToGroup}
-										>
-											<PlusIcon
-												width='20'
-												height='20'
-											/>
-										</div>
+											type='checkbox'
+											checked={isChecked}
+											onChange={() =>
+												handleAddToGroup(group.id, group.name)
+											}
+										/>
 										<div
 											className={styles['edit']}
 											onClick={() => handleEdit(group.id)}
@@ -148,3 +188,19 @@ const GroupsModal = ({ dialogRef }) => {
 };
 
 export default GroupsModal;
+
+    function undefined({isChecked, handleAddToGroup, handleEdit, handleDelete}) {
+      return (<div className={styles['label']} key={group.id}>
+									<h4>{group.name}</h4>
+									<div className={styles['icons']}>
+										<input className={styles['add-to-group']} type='checkbox' checked={isChecked} onChange={() => handleAddToGroup(group.id, group.name)} />
+										<div className={styles['edit']} onClick={() => handleEdit(group.id)}>
+											<EditIcon width='20' height='20' />
+										</div>
+										<div className={styles['delete']} onClick={() => handleDelete(group.id)}>
+											<DeleteIcon width='20' height='20' />
+										</div>
+									</div>
+								</div>);
+    }
+  
