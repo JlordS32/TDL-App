@@ -18,7 +18,6 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 	// local States
 	const [newGroup, setNewGroup] = useState('');
 	const [newGroupName, setNewGroupName] = useState('');
-	const [isChecked, setIsChecked] = useState(false);
 
 	const groupRedux = useSelector((state) => state.groupLabelReducer.value);
 	const todoRedux = useSelector((state) => state.todoReducer.value);
@@ -68,40 +67,6 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 		}
 	};
 
-	const handleAddToGroup = (groupId, groupName) => {
-		setIsChecked(isChecked ? false : true);
-
-		if (isChecked) {
-			const updatedTodo = todoRedux.map((todo) => {
-				if (todo.id === selectedTodo.id) {
-					const groupExists = todo.group.some(
-						(existingGroup) => existingGroup.id === groupId
-					);
-
-					// Create a new group object
-					if (!groupExists) {
-						const newGroup = {
-							id: groupId,
-							name: groupName,
-						};
-
-						// Create a copy of the existing groups array and append the new group
-						const updatedGroups = [...todo.group, newGroup];
-
-						return {
-							...todo,
-							group: updatedGroups,
-						};
-					}
-				}
-
-				return todo;
-			});
-
-			updateTodos(updatedTodo);
-		}
-	};
-
 	useEffect(() => {
 		console.log(todoRedux);
 	}, [todoRedux]);
@@ -144,40 +109,15 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 									defaultName={group.name}
 								/>
 							) : (
-								<div
-									className={styles['label']}
+								<Group
+									handleEdit={handleEdit}
+									handleDelete={handleDelete}
+									group={group}
+									updateTodos={updateTodos}
+									todoRedux={todoRedux}
+									selectedTodo={selectedTodo}
 									key={group.id}
-								>
-									<h4>{group.name}</h4>
-									<div className={styles['icons']}>
-										<input
-											className={styles['add-to-group']}
-											type='checkbox'
-											checked={isChecked}
-											onChange={() =>
-												handleAddToGroup(group.id, group.name)
-											}
-										/>
-										<div
-											className={styles['edit']}
-											onClick={() => handleEdit(group.id)}
-										>
-											<EditIcon
-												width='20'
-												height='20'
-											/>
-										</div>
-										<div
-											className={styles['delete']}
-											onClick={() => handleDelete(group.id)}
-										>
-											<DeleteIcon
-												width='20'
-												height='20'
-											/>
-										</div>
-									</div>
-								</div>
+								/>
 							)
 						);
 					})}
@@ -189,18 +129,89 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 
 export default GroupsModal;
 
-    function undefined({isChecked, handleAddToGroup, handleEdit, handleDelete}) {
-      return (<div className={styles['label']} key={group.id}>
-									<h4>{group.name}</h4>
-									<div className={styles['icons']}>
-										<input className={styles['add-to-group']} type='checkbox' checked={isChecked} onChange={() => handleAddToGroup(group.id, group.name)} />
-										<div className={styles['edit']} onClick={() => handleEdit(group.id)}>
-											<EditIcon width='20' height='20' />
-										</div>
-										<div className={styles['delete']} onClick={() => handleDelete(group.id)}>
-											<DeleteIcon width='20' height='20' />
-										</div>
-									</div>
-								</div>);
-    }
-  
+const Group = ({
+	updateTodos,
+	handleEdit,
+	handleDelete,
+	group,
+	todoRedux,
+	selectedTodo,
+}) => {
+	const [isChecked, setIsChecked] = useState(false);
+
+	const toggleCheckbox = () => {
+		setIsChecked((prevChecked) => !prevChecked);
+
+		const updatedTodo = todoRedux.map((todo) => {
+			if (todo.id === selectedTodo.id) {
+				const groupExists = todo.group.some(
+					(existingGroup) => existingGroup.id === group.id
+				);
+
+				if (isChecked) {
+					// Remove the group
+					const updatedGroups = todo.group.filter(
+						(existingGroup) => existingGroup.id !== group.id
+					);
+
+					return {
+						...todo,
+						group: updatedGroups,
+					};
+				} else if (!groupExists) {
+					// Add the group
+					const newGroup = {
+						id: group.id,
+						name: group.name,
+					};
+
+					const updatedGroups = [...todo.group, newGroup];
+
+					return {
+						...todo,
+						group: updatedGroups,
+					};
+				}
+			}
+
+			return todo;
+		});
+
+		updateTodos(updatedTodo);
+	};
+
+	return (
+		<div
+			className={styles['label']}
+			key={group.id}
+		>
+			<h4>{group.name}</h4>
+			<div className={styles['icons']}>
+				<input
+					className={styles['add-to-group']}
+					type='checkbox'
+					checked={isChecked}
+					onChange={toggleCheckbox}
+				/>
+				<div
+					className={styles['edit']}
+					onClick={() => handleEdit(group.id)}
+				>
+					<EditIcon
+						width='20'
+						height='20'
+					/>
+				</div>
+				<div
+					className={styles['delete']}
+					onClick={() => handleDelete(Group.id)}
+				>
+					<DeleteIcon
+						width='20'
+						height='20'
+					/>
+				</div>
+			</div>
+		</div>
+	);
+};
