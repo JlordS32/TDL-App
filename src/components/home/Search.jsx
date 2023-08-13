@@ -16,6 +16,8 @@ const Search = () => {
 	};
 
 	const filteredTodo = todoRedux.filter((todo) => {
+		if (!todo.content && !todo.title) return false;
+
 		const filteredContent = todo.content
 			.toLowerCase()
 			.includes(searchQuery.toLowerCase());
