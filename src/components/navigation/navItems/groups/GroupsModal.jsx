@@ -2,7 +2,12 @@ import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import Modal from '../../../dialog/Modal';
 import styles from '../../../../styles/groups.modal.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateGroupLabels, updateTodo } from '../../../store/TodoReducer';
+import {
+	updateGroupLabels,
+	updateTodo,
+	deleteGroups,
+	adjustTodosOnGroupDelete,
+} from '../../../store/TodoReducer';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { EditGroup } from './Edit';
 
@@ -12,7 +17,7 @@ import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import PlusIcon from '../../../../assets/icons/PlusIcon';
 
 // Utility functions
-import { addGroup, deleteGroup, editGroup } from './groupUtils';
+import { addGroup, updateLocalStorageOnDelete, editGroup } from './groupUtils';
 
 const GroupsModal = ({ dialogRef, selectedTodo }) => {
 	// local States
@@ -44,21 +49,9 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 
 	// Event handler for deleting a group
 	const handleDelete = (groupId) => {
-		deleteGroup(groupId, groupRedux, updateGroup);
-
-		const updatedTodo = todoRedux.map((todo) => {
-			if (todo.group && Array.isArray(todo.group)) {
-				const updatedGroups = todo.group.filter(
-					(existingGroup) => existingGroup.id !== groupId
-				);
-
-				return { ...todo, group: updatedGroups };
-			} else {
-				return todo; 
-			}
-		});
-
-		updateTodos(updatedTodo);
+		dispatch(deleteGroups(groupId));
+		dispatch(adjustTodosOnGroupDelete(groupId));
+		updateLocalStorageOnDelete(groupId, groupRedux);
 	};
 
 	// Event handler for editing a group
@@ -80,10 +73,6 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 				break;
 		}
 	};
-
-	useEffect(() => {
-		console.log(todoRedux);
-	}, [todoRedux]);
 
 	return (
 		<Modal

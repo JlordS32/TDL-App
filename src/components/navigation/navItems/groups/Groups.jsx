@@ -1,7 +1,7 @@
 // Import necessary hooks and components
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateGroupLabels } from '../../../store/TodoReducer';
+import { updateGroupLabels, deleteGroups } from '../../../store/TodoReducer';
 import '../../../../styles/groups.modules.css';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { EditGroup } from './Edit';
@@ -12,7 +12,7 @@ import DeleteIcon from '../../../../assets/icons/DeleteIcon';
 import PlusIcon from '../../../../assets/icons/PlusIcon';
 
 // Utility functions
-import { addGroup, deleteGroup, editGroup } from './groupUtils';
+import { addGroup, updateLocalStorageOnDelete, editGroup } from './groupUtils';
 
 // Define the 'Groups' component
 const Groups = () => {
@@ -41,7 +41,8 @@ const Groups = () => {
 
 	// Event handler for deleting a group
 	const handleDelete = (groupId) => {
-		deleteGroup(groupId, groupRedux, updateGroup);
+		dispatch(deleteGroups(groupId));
+		updateLocalStorageOnDelete(groupId, groupRedux);
 	};
 
 	// Event handler for editing a group

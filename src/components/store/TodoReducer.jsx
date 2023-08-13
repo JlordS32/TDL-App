@@ -4,24 +4,14 @@ const initialStateValue = {
 	id: '',
 	title: '',
 	content: '',
-	group: [{
-		name: '',
-		id: '',
-	}],
+	group: [
+		{
+			name: '',
+			id: '',
+		},
+	],
 	complete: false,
 };
-
-const todoSlice = createSlice({
-	name: 'todoReducer',
-	initialState: {
-		value: [initialStateValue],
-	},
-	reducers: {
-		updateTodo: (state, action) => {
-			state.value = action.payload;
-		},
-	},
-});
 
 const filteredSlice = createSlice({
 	name: 'filteredReducer',
@@ -40,6 +30,29 @@ const filteredSlice = createSlice({
 	},
 });
 
+const todoSlice = createSlice({
+	name: 'todoReducer',
+	initialState: {
+		value: [initialStateValue],
+	},
+	reducers: {
+		updateTodo: (state, action) => {
+			state.value = action.payload;
+		},
+		adjustTodosOnGroupDelete: (state, action) => {
+			const deletedGroupId = action.payload;
+
+			// Update the state.value array without mutating it
+			state.value = state.value.map((todo) => ({
+				...todo,
+				group: todo.group
+					? todo.group.filter((group) => group.id !== deletedGroupId)
+					: [],
+			}));
+		},
+	},
+});
+
 const groupLabelSlice = createSlice({
 	name: 'groupLabelReducer',
 	initialState: {
@@ -47,11 +60,17 @@ const groupLabelSlice = createSlice({
 			{
 				id: '',
 				name: '',
-				isEditing: false
+				isEditing: false,
 			},
 		],
 	},
 	reducers: {
+		deleteGroups: (state, action) => {
+			const deletedGroupId = action.payload;
+			state.value = state.value.filter(
+				(group) => group.id !== deletedGroupId
+			);
+		},
 		updateGroupLabels: (state, action) => {
 			state.value = action.payload;
 		},
@@ -64,8 +83,8 @@ const rootReducer = {
 	groupLabel: groupLabelSlice.reducer,
 };
 
-export const { updateTodo } = todoSlice.actions;
+export const { updateTodo, adjustTodosOnGroupDelete } = todoSlice.actions;
 export const { updateFilteredTodo } = filteredSlice.actions;
-export const { updateGroupLabels } = groupLabelSlice.actions;
+export const { updateGroupLabels, deleteGroups } = groupLabelSlice.actions;
 
 export default rootReducer;

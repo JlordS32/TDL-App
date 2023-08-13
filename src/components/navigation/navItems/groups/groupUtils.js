@@ -16,9 +16,9 @@ export const addGroup = (newGroup, groupRedux, updateGroup) => {
 	}
 };
 
-export const deleteGroup = (groupId, groupRedux, updateGroup) => {
+export const updateLocalStorageOnDelete = (groupId, groupRedux) => {
 	const updatedGroups = groupRedux.filter((group) => group.id !== groupId);
-	updateGroup(updatedGroups);
+	localStorage.setItem('groups', JSON.stringify(updatedGroups));
 };
 
 export const editGroup = (groupId, groupRedux, newGroupName, updateGroup) => {
