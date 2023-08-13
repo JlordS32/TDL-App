@@ -61,11 +61,13 @@ const Todo = ({ dialogRef }) => {
 						id: uuidv4(),
 						title: newTodoTitle,
 						content: newTodo,
+						group: [
+							{
+								name: '',
+								id: '',
+							},
+						],
 						complete: false,
-						group: {
-							name: '',
-							id: ''
-						}
 					},
 				];
 

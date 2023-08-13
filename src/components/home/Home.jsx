@@ -14,10 +14,6 @@ const Home = () => {
 
 	const dialogRef = useRef();
 
-	useEffect(() => {
-		console.log(selectedTodo);
-	}, [selectedTodo]);
-
 	return (
 		<>
 			<div className='home-container'>
@@ -34,7 +30,7 @@ const Home = () => {
 					/>
 				</div>
 			)}
-			<GroupsModal dialogRef={dialogRef} />
+			<GroupsModal dialogRef={dialogRef} selectedTodo={selectedTodo}/>
 		</>
 	);
 };

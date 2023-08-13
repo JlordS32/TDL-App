@@ -4,10 +4,10 @@ const initialStateValue = {
 	id: '',
 	title: '',
 	content: '',
-	group: {
+	group: [{
 		name: '',
 		id: '',
-	},
+	}],
 	complete: false,
 };
 

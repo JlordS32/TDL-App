@@ -6,7 +6,6 @@ import LabelIcon from '../../assets/icons/LabelIcon';
 import Dialog from './TodoDialog';
 import { ModalContext } from '../App';
 import '../../styles/todo.modules.css';
-import { useParams } from 'react-router-dom';
 
 const Todobox = ({ todo, onDelete, dialogRef }) => {
 	// Accessing context to manage modal state
@@ -15,16 +14,17 @@ const Todobox = ({ todo, onDelete, dialogRef }) => {
 	const { id, content, title } = todo;
 	const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-	// Get the todoId from the URL
-	const { todoId } = useParams();
-
 	// Function to open the dialog
 	const openDialog = () => {
 		setIsDialogOpen(!isDialogOpen);
 	};
 
 	// Function to handle todo item click
-	const handleClick = () => {
+	const handleSelectedTodo = () => {
+		setSelectedTodo(todo);
+	};
+
+	const handleTodoModal = () => {
 		setSelectedTodo(todo);
 
 		// Toggle modal based on its current state
@@ -56,11 +56,12 @@ const Todobox = ({ todo, onDelete, dialogRef }) => {
 				duration: 0.1,
 				ease: 'linear',
 			}}
+			onClick={handleSelectedTodo}
 		>
 			{/* Content of the todo */}
 			<div
-				onClick={handleClick}
 				className='todo-content-wrapper'
+				onClick={handleTodoModal}
 			>
 				<div className='title'>{title}</div>
 				<div className='todo-content'>{content}</div>
@@ -69,9 +70,7 @@ const Todobox = ({ todo, onDelete, dialogRef }) => {
 			{/* Icon buttons */}
 			<div className='todo-icons'>
 				<div
-					className={`todo-icon-item label-btn ${
-						todoId === id ? 'active' : ''
-					}`}
+					className={`todo-icon-item label-btn`}
 					onClick={handleGroupModal}
 				>
 					<LabelIcon

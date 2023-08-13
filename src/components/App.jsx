@@ -8,11 +8,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // Components
 import Header from './header/Header';
 import Home from './home/Home';
-import PageNotFound from './pagenotfound/PageNotFound';]
-import Todobox from './home/TodoBox';
+import PageNotFound from './pagenotfound/PageNotFound';
 import { useDispatch } from 'react-redux';
 import { updateGroupLabels } from './store/TodoReducer';
-import Todo from './home/Todo';
 
 // Context
 export const ModalContext = createContext();
@@ -57,10 +55,6 @@ const App = () => {
 						<Route
 							path='/note/*'
 							element={<Home />}
-						/>
-						<Route
-							path='/todo/:todoId'
-							component={<Todo />}
 						/>
 						<Route
 							path='/*'
