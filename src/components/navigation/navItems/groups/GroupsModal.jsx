@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import Modal from '../../../dialog/Modal';
 import styles from '../../../../styles/groups.modal.module.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -45,6 +45,20 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 	// Event handler for deleting a group
 	const handleDelete = (groupId) => {
 		deleteGroup(groupId, groupRedux, updateGroup);
+
+		const updatedTodo = todoRedux.map((todo) => {
+			if (todo.group && Array.isArray(todo.group)) {
+				const updatedGroups = todo.group.filter(
+					(existingGroup) => existingGroup.id !== groupId
+				);
+
+				return { ...todo, group: updatedGroups };
+			} else {
+				return todo; 
+			}
+		});
+
+		updateTodos(updatedTodo);
 	};
 
 	// Event handler for editing a group
@@ -180,6 +194,15 @@ const Group = ({
 		updateTodos(updatedTodo);
 	};
 
+	useEffect(() => {
+		if (selectedTodo && selectedTodo.group) {
+			const isGroupSelected = selectedTodo.group.some(
+				(selectedGroup) => selectedGroup.id === group.id
+			);
+			setIsChecked(isGroupSelected);
+		}
+	}, [selectedTodo, group]);
+
 	return (
 		<div
 			className={styles['label']}
@@ -204,7 +227,7 @@ const Group = ({
 				</div>
 				<div
 					className={styles['delete']}
-					onClick={() => handleDelete(Group.id)}
+					onClick={() => handleDelete(group.id)}
 				>
 					<DeleteIcon
 						width='20'

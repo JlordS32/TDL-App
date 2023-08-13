@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import DeleteIcon from '../../assets/icons/DeleteIcon';
 import MoreIcon from '../../assets/icons/MoreIcon';
