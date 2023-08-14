@@ -1,7 +1,11 @@
 // Import necessary hooks and components
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateGroupLabels, deleteGroups } from '../../../store/TodoReducer';
+import {
+	updateGroupLabels,
+	deleteGroups,
+	adjustTodosOnGroupDelete,
+} from '../../../store/TodoReducer';
 import '../../../../styles/groups.modules.css';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { EditGroup } from './Edit';
@@ -42,6 +46,7 @@ const Groups = () => {
 	// Event handler for deleting a group
 	const handleDelete = (groupId) => {
 		dispatch(deleteGroups(groupId));
+		dispatch(adjustTodosOnGroupDelete(groupId));
 		updateLocalStorageOnDelete(groupId, groupRedux);
 	};
 
@@ -65,10 +70,6 @@ const Groups = () => {
 				break;
 		}
 	};
-
-	useEffect(() => {
-		console.log(groupRedux)
-	}, [groupRedux])
 
 	// Optimize rendering of mapped group labels using useMemo
 	const memoizedGroupLabels = useMemo(() => {
@@ -119,7 +120,10 @@ const Groups = () => {
 	return (
 		<>
 			{/* Input field for adding new groups */}
-			<div className='groups-add-wrapper' ref={parent}>
+			<div
+				className='groups-add-wrapper'
+				ref={parent}
+			>
 				<div className='groups-add'>
 					<input
 						type='text'

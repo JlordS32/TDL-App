@@ -60,6 +60,11 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 		setNewGroupName('');
 	};
 
+	useEffect(() => {
+		console.log('Todo Redux: ', todoRedux);
+		console.log('Group Redux: ', groupRedux);
+	}, [todoRedux, groupRedux]);
+
 	const handleOnChange = (e) => {
 		const { name, value } = e.target;
 		switch (name) {

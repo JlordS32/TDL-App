@@ -50,12 +50,12 @@
    padding: 0.2rem;
 }
 
-.groups-modal > .search-bar > div:hover {
+.search-bar > div:hover {
    background-color: var(--mid-gray);
    transform: scale(1.1);
 }
 
-.groups-modal > .search-bar > div:active {
+.search-bar > div:active {
    transform: scale(1);
    background: none;
 }
@@ -83,11 +83,11 @@
    width: 70%;
 }
 
-.groups-modal > .labels > .label:hover {
+.labels > .label:hover {
    background-color: var(--mid-gray);
 }
 
-.groups-modal > .labels > .label > h4 {
+.label > h4 {
    font-weight: 500;
    text-align: center;
    margin: 0; 
@@ -95,26 +95,30 @@
    border: 0;
 }
 
-.groups-modal > .labels > .label > .icons {
+.icons {
    display: flex;
    margin-left: auto;
 }
 
-.groups-modal > .labels > .label > .icons:hover {
+.icons:hover {
    cursor: pointer;
 }
 
-.groups-modal > .labels > .label > .icons > div:nth-child(1n):hover {
+.icons > div:nth-child(1n):hover {
 
    transform: scale(1.2);
 }
 
-.groups-modal > .labels > .label > .icons > .edit,
-.groups-modal > .labels > .label > .icons > .delete,
-.groups-modal > .labels > .label > .icons > .add-to-group {
+.edit,
+.delete,
+.add-to-group {
    width: 30px; 
    height: 30px;
    display: flex;
    justify-content: center;
    align-items: center;
+}
+
+.add-to-group {
+   width: 1rem;
 }
