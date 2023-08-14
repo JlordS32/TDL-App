@@ -51,14 +51,21 @@ const todoSlice = createSlice({
 			}));
 		},
 		adjustTodosOnGroupEdit: (state, action) => {
-			const editedGroupId = action.payload;
+			const selectedGroup = action.payload;
 
 			// Update the state.value array without mutating it
 			state.value = state.value.map((todo) => ({
 				...todo,
-				group: todo.group
-					? todo.group.filter((group) => group.id !== deletedGroupId)
-					: [],
+				group: todo.group.map((group) => {
+					if (selectedGroup.id === group.id) {
+						return {
+							...group,
+							name: selectedGroup.name,
+						};
+					}
+
+					return group;
+				}),
 			}));
 		},
 	},
@@ -94,7 +101,8 @@ const rootReducer = {
 	groupLabel: groupLabelSlice.reducer,
 };
 
-export const { updateTodo, adjustTodosOnGroupDelete } = todoSlice.actions;
+export const { updateTodo, adjustTodosOnGroupDelete, adjustTodosOnGroupEdit } =
+	todoSlice.actions;
 export const { updateFilteredTodo } = filteredSlice.actions;
 export const { updateGroupLabels, deleteGroups } = groupLabelSlice.actions;
 

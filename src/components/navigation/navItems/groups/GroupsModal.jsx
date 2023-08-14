@@ -7,6 +7,7 @@ import {
 	updateTodo,
 	deleteGroups,
 	adjustTodosOnGroupDelete,
+	adjustTodosOnGroupEdit,
 } from '../../../store/TodoReducer';
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { EditGroup } from './Edit';
@@ -57,6 +58,13 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 	// Event handler for editing a group
 	const handleEdit = (groupId) => {
 		editGroup(groupId, groupRedux, newGroupName, updateGroup);
+
+		const updatedTodoGroup = {
+			id: groupId,
+			name: newGroupName,
+		};
+
+		dispatch(adjustTodosOnGroupEdit(updatedTodoGroup));
 		setNewGroupName('');
 	};
 
