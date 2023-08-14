@@ -50,6 +50,17 @@ const todoSlice = createSlice({
 					: [],
 			}));
 		},
+		adjustTodosOnGroupEdit: (state, action) => {
+			const editedGroupId = action.payload;
+
+			// Update the state.value array without mutating it
+			state.value = state.value.map((todo) => ({
+				...todo,
+				group: todo.group
+					? todo.group.filter((group) => group.id !== deletedGroupId)
+					: [],
+			}));
+		},
 	},
 });
 
