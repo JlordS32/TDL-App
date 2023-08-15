@@ -24,6 +24,10 @@
    overflow: hidden;
 }
 
+.groups-modal > .edit-container {
+   outline: 1px red solid;
+}
+
 .groups-modal .search-bar {
    display: flex;
    justify-content: center;
@@ -85,6 +89,10 @@
 
 .labels > .label:hover {
    background-color: var(--mid-gray);
+}
+
+.label {
+   outline: 1px red solid;
 }
 
 .label > h4 {

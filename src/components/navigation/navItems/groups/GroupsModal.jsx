@@ -99,6 +99,7 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 						className={styles['add-btn']}
 						onChange={handleOnChange}
 						name='add-btn'
+						value={newGroup}						
 					/>
 					<div
 						style={{
@@ -119,6 +120,7 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 								<EditGroup
 									handleOnChange={handleOnChange}
 									handleEdit={handleEdit}
+									// TODO fix for unsaving group name change
 									close={() => handleEdit(group.id)}
 									key={group.id}
 									id={group.id}
@@ -159,38 +161,44 @@ const Group = ({
 		setIsChecked((prevChecked) => !prevChecked);
 
 		const updatedTodo = todoRedux.map((todo) => {
-			if (todo.id === selectedTodo.id) {
-				const groupExists = todo.group.some(
+			if (todo.id && selectedTodo.id) {
+				const groupArray = Array.isArray(todo.group) ? todo.group : [];
+
+				const groupExists = groupArray.some(
 					(existingGroup) => existingGroup.id === group.id
 				);
 
 				if (isChecked) {
-					// Remove the group
-					const updatedGroups = todo.group.filter(
-						(existingGroup) => existingGroup.id !== group.id
-					);
+					// Remove the group if it exists
+					if (groupExists) {
+						const updatedGroups = todo.group.filter(
+							(existingGroup) => existingGroup.id !== group.id
+						);
 
-					return {
-						...todo,
-						group: updatedGroups,
-					};
-				} else if (!groupExists) {
-					// Add the group
-					const newGroup = {
-						id: group.id,
-						name: group.name,
-					};
+						return {
+							...todo,
+							group: updatedGroups,
+						};
+					}
+				} else {
+					// Add the group if it doesn't exist
+					if (!groupExists) {
+						const newGroup = {
+							id: group.id,
+							name: group.name,
+						};
 
-					const updatedGroups = [...todo.group, newGroup];
+						const updatedGroups = [...todo.group, newGroup];
 
-					return {
-						...todo,
-						group: updatedGroups,
-					};
+						return {
+							...todo,
+							group: updatedGroups,
+						};
+					}
 				}
-			}
 
-			return todo;
+				return todo;
+			}
 		});
 
 		updateTodos(updatedTodo);
