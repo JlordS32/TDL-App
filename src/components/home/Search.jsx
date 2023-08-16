@@ -13,18 +13,18 @@ const Search = () => {
 		if (e.key === 'Enter') {
 			setSearchQuery(e.target.value);
 		}
-	};
+	}; 
 
 	const filteredTodo = todoRedux.filter((todo) => {
 		if (!todo.content && !todo.title) return false;
 
 		const filteredContent = todo.content
-			.toLowerCase()
-			.includes(searchQuery.toLowerCase());
+			? todo.content.toLowerCase().includes(searchQuery.toLowerCase())
+			: false;
 
 		const filteredTitle = todo.title
-			.toLowerCase()
-			.includes(searchQuery.toLowerCase());
+			? todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+			: false;
 
 		return filteredContent || filteredTitle;
 	});
