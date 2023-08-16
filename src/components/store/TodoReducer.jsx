@@ -30,6 +30,8 @@ const filteredSlice = createSlice({
 	},
 });
 
+
+// TODO empty arrays on load. Have to fix.
 const todoSlice = createSlice({
 	name: 'todoReducer',
 	initialState: {

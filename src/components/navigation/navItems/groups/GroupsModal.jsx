@@ -55,6 +55,8 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 		updateLocalStorageOnDelete(groupId, groupRedux);
 	};
 
+
+	// TODO clean the code up
 	// Event handler for editing a group
 	const handleEdit = (groupId) => {
 		editGroup(groupId, groupRedux, newGroupName, updateGroup);
@@ -65,6 +67,28 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 		};
 
 		dispatch(adjustTodosOnGroupEdit(updatedTodoGroup));
+
+		// Fetches the current todo data for localisation.
+		const updateLocalTodo = todoRedux.map((todo) => {
+			const updatedGroup = todo.group.map((group) => {
+				if (group.id === groupId) {
+					return {
+						id: groupId,
+						name: newGroupName,
+					};
+				}
+
+				return group;
+			});
+
+			return {
+				...todo,
+				group: updatedGroup,
+			};
+		});
+
+		localStorage.setItem('todos', JSON.stringify(updateLocalTodo));
+
 		setNewGroupName('');
 	};
 
@@ -99,7 +123,7 @@ const GroupsModal = ({ dialogRef, selectedTodo }) => {
 						className={styles['add-btn']}
 						onChange={handleOnChange}
 						name='add-btn'
-						value={newGroup}						
+						value={newGroup}
 					/>
 					<div
 						style={{
